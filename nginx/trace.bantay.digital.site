@@ -1,0 +1,49 @@
+# Trace Bantay Digital
+
+upstream trace.bantay.digital {
+    server 127.0.0.1:8000 fail_timeout=2s;
+}
+
+server {
+    # port to listen on. Can also be set to an IP:PORT
+    listen 443 ssl;
+    server_name trace.bantay.digital;
+    ssl_certificate /etc/letsencrypt/live/trace.bantay.digital/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/trace.bantay.digital/privkey.pem;
+    location / {
+        # Private Site
+        auth_basic "You Need Authorization To View This Site";
+        auth_basic_user_file /var/www/wyvern/nginx/trace/.htpasswd;
+        proxy_pass http://trace.bantay.digital;
+    }
+    
+    location /static {
+        # autoindex on;
+        alias /var/www/wyvern/static/;
+    }
+            
+    location /media {
+        # autoindex on;
+        alias /var/www/wyvern/media/;
+    }
+}
+
+# Trace Redirections
+
+server { 
+    listen 80;
+    server_name trace.bantay.digital; 
+    return 301 https://trace.bantay.digital$request_uri; 
+}
+
+server { 
+   listen 443 ssl;
+   server_name trace.bantay.digital; 
+   return 301 https://trace.bantay.digital$request_uri; 
+}
+
+server {
+    listen 80;
+    server_name trace.bantay.digital;
+    return 301 https://trace.bantay.digital$request_uri;
+}

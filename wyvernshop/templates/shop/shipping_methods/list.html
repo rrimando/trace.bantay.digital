@@ -1,0 +1,14 @@
+{% load static %}
+<div class="mt-3">
+    <!-- This will be an API heavy portion -->
+    <h2>Shipping Methods</h2>
+    {% if shipping_methods %}
+         {% for shipping_method in shipping_methods %}
+            {{ shipping_method.shipping_method_name }}
+         {% endfor %}
+         <hr/>
+         <a href="{% url 'shipping-method-create' site=site %}" class="btn btn-primary create-an-app-button">Create a Shipping Method</a>
+    {% else %}
+        <small>There are no payment methods for this site</small>
+    {% endif %}  
+</div>

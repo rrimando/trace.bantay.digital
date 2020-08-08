@@ -1,0 +1,123 @@
+{% load static compress %}<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% include 'themes/basic/includes/favicon.html' %}
+
+  <meta name="description" content="{{ site.description }}">
+  <meta name="author" content="{{ site.site_owner }}">
+
+  <!-- Site Title-->
+  {% if page == 'post' %}
+  <title>
+    {{ site.site_name }}
+    {% if post.post_title %} 
+      | {{ post.post_title }}
+    {% endif %} 
+    {% if site.site_subtitle %} 
+      | {{ site.site_subtitle }}
+    {% endif %}
+  </title>
+  {% else %}
+  <title>
+    {{ site.site_name }}
+    {% if site.site_subtitle %} 
+    | {{ site.site_subtitle }}
+    {% endif %}
+  </title>
+  {% endif %}
+
+  {% if page == 'post' %}
+  {% include 'themes/basic/includes/post-meta.html' %}
+  {% else %}
+  {% include 'themes/basic/includes/meta.html' %}
+  {% endif %}
+
+  <link rel="preconnect" href="//fonts.gstatic.com/" crossorigin>
+
+  {% if theme_config.wyverntheme_google_fonts %}
+  <!-- Google Fonts -->
+  <link href="{{ theme_config.wyverntheme_google_fonts }}" rel="stylesheet">
+  {% endif %}
+
+  {% block css %}  
+  <!-- Your stuff: Third-party CSS libraries go here -->
+  {% compress css %}
+  <!-- This file stores project-specific CSS -->
+
+    <link href="{% static 'themes/basic/css/classic.css' %}" rel="stylesheet">
+
+  {% endcompress %}
+  {% endblock %}
+
+  <!-- Font Awesome -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  {% include 'themes/basic/includes/partials/custom-css.html' with theme_config=theme_config %}
+
+</head>
+
+{% if page %}
+ <body class="{{page}}">
+{% else %}
+<body>
+{% endif %}
+
+  <!-- Page Header-->
+  {% if theme_config.wyverntheme_header_template %}
+    {% include theme_config.wyverntheme_header_template with theme_config=theme_config site=site %}
+  {% else %}
+    {% include 'themes/basic/includes/header.html' %}
+  {% endif %}
+  
+    <!-- Page Content -->
+    <!-- TODO - if demo -->
+    {# comment #}
+        {# include 'themes/basic/partials/demo-alert.html' #}
+    {# endcomment #}
+
+    {% block content %}
+  
+    {% endblock %}
+
+  <!-- Page Footer-->
+  {% if theme_config.wyverntheme_footer_template %}
+    {% include theme_config.wyverntheme_footer_template with theme_config=theme_config site=site %}
+  {% else %}
+    {% include 'themes/basic/includes/footer.html' %}
+  {% endif %}
+
+  <!-- Page Back To Top Button-->
+  {% include 'themes/basic/includes/back-to-top.html' %}
+
+  {% include 'themes/basic/includes/google-analytics.html' %}
+
+  {% if site.site_recaptcha %}
+  <!-- Re Captcha -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  {% endif %}
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  {% include 'themes/basic/includes/gdpr.html' %}
+
+  {% block javascript %}
+
+  {% include 'themes/basic/includes/partials/custom-js.html' with theme_config=theme_config %}
+
+  {% compress js %}
+  <script src="{% static 'js/app.js' %}"></script>
+  <script src="{% static '/js/wyvern.js' %}"></script>
+  <script src="{% static 'themes/basic/js/basic.js' %}"></script>
+  <script src="{% static 'themes/kerplunk/js/main.js' %}"></script>
+  {% endcompress %}
+
+  {% endblock javascript %}
+
+</body>
+
+</html>

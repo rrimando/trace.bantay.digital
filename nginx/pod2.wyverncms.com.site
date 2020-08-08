@@ -1,0 +1,49 @@
+# THE ALMIGHTY WYVERN! HAIL!
+
+upstream pod2.wyverncms.com {
+    server 127.0.0.1:8000 fail_timeout=2s;
+}
+
+server {
+    # port to listen on. Can also be set to an IP:PORT
+    listen 443 ssl;
+    server_name pod2.wyverncms.com;
+    ssl_certificate /etc/letsencrypt/live/pod2.wyverncms.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pod2.wyverncms.com/privkey.pem;
+    location / {
+        # Private Site
+        auth_basic "You Need Authorization To View This Site";
+        auth_basic_user_file /var/www/wyvern/nginx/pod2/.htpasswd;
+        proxy_pass http://pod2.wyverncms.com;
+    }
+    
+    location /static {
+        # autoindex on;
+        alias /var/www/wyvern/static/;
+    }
+            
+    location /media {
+        # autoindex on;
+        alias /var/www/wyvern/media/;
+    }
+}
+
+# POD 2 Wyvern Administration
+
+server { 
+    listen 80;
+    server_name pod2.wyverncms.com; 
+    return 301 https://pod2.wyverncms.com$request_uri; 
+}
+
+server { 
+   listen 443 ssl;
+   server_name pod2.wyverncms.com; 
+   return 301 https://pod2.wyverncms.com$request_uri; 
+}
+
+server {
+    listen 80;
+    server_name pod2.wyverncms.com;
+    return 301 https://pod2.wyverncms.com$request_uri;
+}

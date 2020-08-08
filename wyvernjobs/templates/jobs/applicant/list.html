@@ -1,0 +1,84 @@
+{% load static %}
+<div class="mt-3">
+    <!-- This will be an API heavy portion -->
+    <h2>{{ job.job_title }} Applicant List</h2> 
+	<hr />
+    {{ job.job_description }}
+    <br/><br/>
+
+    {% if applicants %}
+    	<table class="table">
+		  <thead>
+		    <tr>
+				<th scope="col">#</th>
+				<th scope="col">Name</th>
+				<th scope="col">Title</th>
+				<th scope="col">Email</th>
+				<th scope="col">Number</th>
+				<th scope="col">Introduction</th>
+				<th scope="col">Cover Letter</th>
+				<th scope="col">Resume</th>
+				<th scope="col">Attachments</th>
+				<th scope="col">Actions</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	{% for applicant in applicants %}
+	        	<tr>
+			      <th scope="row">{{ forloop.counter }}</th>
+
+			      {% if applicant.applicant.job_application_applicant.job_applicant_firstname %}
+
+			      <td>
+			      	{{ applicant.applicant.job_application_applicant.job_applicant_firstname }} 
+			      	{{ applicant.applicant.job_application_applicant.job_applicant_lastname }}
+			      </td>
+
+			      {% else %}
+
+			      <td>{{ applicant.wyvernuser.job_application_applicant.first_name }} {{ applicant.wyvernuser.job_application_applicant.last_name }} </td>
+
+			      {% endif %}
+
+
+			      <td>
+			      	{{ applicant.applicant.job_application_applicant.job_applicant_title }}
+			      </td>
+			      <td>
+			      	<a href="mailto:{{ applicant.applicant.job_application_applicant.job_applicant_email }}">
+			      		{{ applicant.applicant.job_application_applicant.job_applicant_email }}
+				    </a>
+			      </td>
+			      <td>{{ applicant.applicant.job_application_applicant.job_applicant_number }}</td>
+			      <td><!-- {{ applicant.applicant.job_applicant_introduction }} --></td>
+			      <td><!-- {{ applicant.applicant.job_applicant_cover_letter }} --></td>
+			      <td>
+			      	{% if applicant.applicant.job_application_applicant.job_applicant_resume %}
+			      	<a href="/media/{{ applicant.applicant.job_application_applicant.job_applicant_resume }}" target="_blank">
+			      		Download
+			      	</a>
+			      	{% else %}
+			      	No Resume
+			      	{% endif %}
+			      </td>
+			      <td>
+			      	{% if applicant.applicant.job_application_applicant.job_applicant_additional_form %}
+			      	<a href="/media/{{ applicant.applicant.job_application_applicant.job_applicant_additional_form }}" target="_blank">
+			      		Download
+			      	</a>
+			      	{% else %}
+			      	No Attachments
+			      	{% endif %}
+			      </td>
+			      <td>
+			      	--
+			      </td>
+			    </tr>
+	        {% endfor %}
+		  </tbody>
+		</table>
+       
+    {% else %}
+        <small>There are no applicants for this job</small>
+    {% endif %}  
+</div>

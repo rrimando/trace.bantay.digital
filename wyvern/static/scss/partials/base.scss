@@ -1,0 +1,24 @@
+body {
+    font-family: $primary-font;
+    font-size: $primary-font-size;
+    font-weight: $primary-font-weight;
+    color: $primary-font-color;
+
+    width: 100%;
+    height: 100%;   
+
+    background: rgb(112,106,185);
+    background: radial-gradient(circle, rgba(112,106,185,1) 0%, rgba(83,83,140,1) 35%, rgba(7,6,107,1) 100%);
+    
+    overflow: auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+    .logo {
+        margin: 20% auto 0 auto;
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}

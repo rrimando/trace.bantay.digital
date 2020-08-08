@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" type="image/png" href="https://pixeljumpstudios.com/images/favicon.ico"/>
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Exo:200,200i,300,300i,400,700&display=swap" rel="stylesheet">
+
+        <title>
+            {% block title %}
+                {{ page_title|default:"Wyvern" }}
+            {% endblock title %}
+        </title>
+        <meta name="description" content="The HTML5 Herald">
+        <meta name="author" content="Pixeljump">
+
+        <meta name="description" content="Manage multiple applications from one dashboard. Build applications lightning fast so you can focus on what matters." />
+
+        <!-- Twitter Card data -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@pixeljumpstudios">
+        <meta name="twitter:title" content="Pixeljump - Wyvern">
+        <meta name="twitter:description" content="Manage multiple applications from one dashboard. Build your applications lightning fast so you can focus on what matters.">
+        <meta name="twitter:creator" content="@pixeljumpstudios">
+        <!-- Twitter Summary card images must be at least 120x120px -->
+        <meta name="twitter:image" content="http://pixeljumpstudios.com/images/wyvern.jpg">
+
+        <!-- Open Graph data -->
+        <meta property="og:title" content="Pixeljump - Wyvern" />
+        <meta property="og:image" content="http://pixeljumpstudios.com/images/wyvern.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.pixeljumpstudios.com/" />
+        <meta property="og:description" content="Manage multiple applications from one dashboard. Build your applications lightning fast so you can focus on what matters." /> 
+        <meta property="og:site_name" content="Pixeljump Studios" />
+        <meta property="fb:admins" content="10157395687851558" />
+
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Wyvern Core CSS -->
+        <link rel="stylesheet" href="{% static 'css/main.css' %}?v=1.0">
+
+        <!-- TODO:Dynamically Load Module CSS -->
+
+        <!-- Wyvern Site Management CSS -->
+        <link rel="stylesheet" href="{% static 'css/site.css' %}?v=1.0">
+    </head>
+    <body {% if message %}class="{{ message }}"{% endif %}>
+        <div class="container">
+            {% block content %}
+            
+            {% endblock %}
+        </div> <!-- End of Main Container -->
+    </body> <!-- End of Body -->
+    <!-- jQuery JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Wyvern Core JS -->
+    <script src="{% static 'js/wyvern.js' %}" crossorigin="anonymous"></script>
+</html>

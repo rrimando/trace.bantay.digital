@@ -1,0 +1,269 @@
+{% extends theme_config.wyverntheme_base_layout %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    #map {
+        width: 100%;
+        height: 100vh;
+    }
+</style>
+
+<div class="container">
+
+    <h2>Activity</h2>
+    <div id="map"></div>
+
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKOqPfW1FWIN-LIPz60sGHlX648NXAmtc"></script>
+<script>
+/* Google Maps */
+var marker;
+var markerLocations;
+
+(function() {
+   initMap();
+})();
+
+
+function initMap(locations) {
+    if (locations) markerLocations = locations;
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 14,
+        center: {lat: 16.405565, lng: 120.5931093},
+        disableDefaultUI: true,
+        // styles: [
+        // {
+        //     'elementType': 'geometry',
+        //     'stylers': [
+        //     {
+        //         'color': 'blue'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'elementType': 'labels.text.fill',
+        //     'stylers': [
+        //     {
+        //         'color': 'white'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'elementType': 'labels.text.stroke',
+        //     'stylers': [
+        //     {
+        //         'color': '#242f3e'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'administrative.locality',
+        //     'elementType': 'labels.text.fill',
+        //     'stylers': [
+        //     {
+        //         'color': 'white'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'administrative.country',
+        //     'elementType': 'labels',
+        //     'stylers': [
+        //     {
+        //         'visibility': 'off'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'administrative.province',
+        //     'elementType': 'labels',
+        //     'stylers': [
+        //     {
+        //         'visibility': 'off'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'poi',
+        //     'elementType': 'labels',
+        //     'stylers': [
+        //     {
+        //         'visibility': 'off'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'poi.park',
+        //     'elementType': 'geometry',
+        //     'stylers': [
+        //     {
+        //         'display': 'none'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'poi.park',
+        //     'elementType': 'labels.text.fill',
+        //     'stylers': [
+        //     {
+        //         'display': 'none'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'road',
+        //     'elementType': 'geometry',
+        //     'stylers': [
+        //     {
+        //         'display': 'none'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'road',
+        //     'elementType': 'geometry.stroke',
+        //     'stylers': [
+        //     {
+        //         'display': 'none'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'road',
+        //     'elementType': 'labels.text.fill',
+        //     'stylers': [
+        //     {
+        //         'display': 'none'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'road.highway',
+        //     'elementType': 'geometry',
+        //     'stylers': [
+        //     {
+        //         'display': 'none'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'road.highway',
+        //     'elementType': 'geometry.stroke',
+        //     'stylers': [
+        //     {
+        //         'display': 'none'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'road.highway',
+        //     'elementType': 'labels.text.fill',
+        //     'stylers': [
+        //     {
+        //         'display': 'none'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'transit',
+        //     'elementType': 'geometry',
+        //     'stylers': [
+        //     {
+        //         'display': 'none'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'transit.station',
+        //     'elementType': 'labels.text.fill',
+        //     'stylers': [
+        //     {
+        //         'display': 'none'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'water',
+        //     'elementType': 'geometry',
+        //     'stylers': [
+        //     {
+        //         'color': '#394347'
+        //     }
+        //     ]
+        // },
+        // {
+        //     'featureType': 'water',
+        //     'elementType': 'labels',
+        //     'stylers': [
+        //     {
+        //         'visibility': 'off'
+        //     }
+        //     ]
+        // },
+        // ]
+    });
+
+    // markerLocations.forEach(function(row, index) {
+
+
+    //     if(row[0] != '0.000000' && row[1] != '0.000000') {
+
+    //         if(index == 0) {
+    //             parent_size = row[2];
+    //         }
+
+    //         // console.log(row, index);
+
+    //         // 24px
+    //         var ratio = 15; // Adjust for max width
+    //         var wh = ((row[2]/parent_size) * 15).toFixed(0) * 24
+
+    //         if(wh > 50) {
+    //             wh = 50;
+    //         }
+
+    //         var icon = {
+    //             url: '/images/google-maps-marker-transparent.png', // url
+    //             scaledSize: new google.maps.Size(wh, wh), // scaled size
+    //             origin: new google.maps.Point(0,0), // origin
+    //             anchor: new google.maps.Point(0,0) // anchor
+    //         };
+
+    //         var markeroverlay = new google.maps.OverlayView();
+    //         markeroverlay.draw = function () {
+    //             this.getPanes().markerLayer.id='markerLayer';
+    //         };
+    //         markeroverlay.setMap(map);
+
+    //         setTimeout(function() {
+    //                 marker = new google.maps.Marker({
+    //                     map: map,
+    //                     draggable: true,
+    //                     animation: google.maps.Animation.DROP,
+    //                     position: {lat: parseFloat(row[0]), lng: parseFloat(row[1])},
+    //                         icon: icon,
+    //                     optimized: false
+    //                 });
+    //                 marker.addListener('click', toggleBounce);
+    //         }, 1000 + index * 100);
+
+    //     }
+
+    // });
+}
+
+function toggleBounce() {
+    if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+    } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+}
+
+</script>
+
+{% endblock %}

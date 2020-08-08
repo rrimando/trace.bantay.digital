@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-10 offset-1">
+        <img src="{% static 'images/wyvern-logo.png' %}" class="logo img-fluid" alt="Wyvern"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-8 offset-2">
+        <h1 class="text-light text-center">Hmmmn, there is nothing here at the moment, perhaps you are lost? Here let's head <a href="#" onclick="window.history.back()" class="text-light">back</a>.</h1>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% load crispy_forms_tags %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">
+            {% if not request.user.is_authenticated %}
+                Register
+            {% else %}
+                Update your details
+            {% endif %}
+            <img src="https://{{ site.site_url }}{{ site.site_favicon.url }}" class="float-right" width="20" height="20"/>
+        </h5>
+        <hr />
+        {% if form.errors %}
+            <div class="alert alert-danger mt-1" role="alert">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                There are errors in your submission
+            </div>
+            <hr/>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.first_name|as_crispy_field }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.last_name|as_crispy_field }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.email|as_crispy_field }}
+                </div>
+                {% if not request.user.is_authenticated %}
+                <div class="col-md-6">
+                    {{ form.password|as_crispy_field }}
+                </div>
+                {% endif %}
+                <div class="col-md-6">
+                    {{ form.phone|as_crispy_field }}
+                </div>
+                 <div class="col-md-12">
+                    {{ form.address|as_crispy_field }}
+                </div>
+                {{ form.username.as_hidden }}
+                {{ form.site_id.as_hidden }}
+            </div>
+            <hr/>
+            <input type="hidden" name="next" value="/dashboard" />
+            {% if not request.user.is_authenticated %}
+            <a href="{% url 'login' %}" class="card-link float-left">Login</a>
+            <button type="submit" class="btn btn-success float-right">Sign up</button>
+            {% else %}
+            <button type="submit" class="btn btn-success float-right">Update</button>
+            {% endif %}
+            
+        </form>
+    </div>
+</div>

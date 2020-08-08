@@ -1,0 +1,14 @@
+{% load static %}
+<div class="mt-3">
+    <!-- This will be an API heavy portion -->
+    <h2>Payment Methods</h2>
+    {% if payment_methods %}
+         {% for payment_method in payment_methods %}
+            {{ payment_methods.payment_method_name }}
+         {% endfor %}
+         <hr/>
+         <a href="{% url 'payment-method-create' site=site %}" class="btn btn-primary create-an-app-button">Create a Payment Method</a>
+    {% else %}
+        <small>There are no payment methods for this site</small>
+    {% endif %}  
+</div>

@@ -1,0 +1,31 @@
+<meta name="description" content="{{ post.post_description }}">
+<meta name="keywords" content="{{ post.post_keywords }}">
+<meta name="author" content="{{ site.site_name }}">
+
+<meta itemprop="name" content="{{ post.post_title }}">
+<meta itemprop="description" content="{{ post.post_description | striptags | safe | truncatewords:50 }}">
+<meta itemprop="image" content="https://{{ site.site_url }}{{ post.get_thumb_url }}">
+
+<meta itemprop="name" content="{{ post.post_title }}">
+<meta itemprop="description" content="{{ post.post_description | striptags | safe | truncatewords:50 }}">
+<meta itemprop="image" content="https://{{ site.site_url }}{{ post.get_thumb_url }}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@{{ site.site_name }}">
+<meta name="twitter:title" content="{{ post.post_title }}">
+<meta name="twitter:description" content="{{ post.post_description | striptags | safe | truncatewords:50 }}">
+<meta name="twitter:creator" content="@{{ site.site_name }}">
+
+<meta name="twitter:image:src" content="https://{{ site.site_url }}{{ post.get_thumb_url }}">
+
+<meta property="og:title" content="{{ post.post_title }}" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://{{ site.site_url }}/post/{{ post.post_slug}}" />
+<meta property="og:image" content="https://{{ site.site_url }}{{ post.get_thumb_url }}" />
+<meta property="og:description" content="{{ post.post_description | striptags | safe | truncatewords:50 }}" />
+<meta property="og:site_name" content="{{ site.site_name }}" />
+<meta property="article:published_time" content="2019-12-01T12:00:00+01:00" />
+<meta property="article:modified_time" content="2019-12-01T12:00:00+01:00" />
+<meta property="article:section" content="Article Section" />
+<meta property="article:tag" content="{{ post.post_keywords }}, News, Articles" />
+<meta property="fb:admins" content="" />

@@ -1,0 +1,13 @@
+{% load static %} 
+{% if theme_config.wyverntheme_gdpr %}
+<!-- GDPR -->
+<script src="{% static 'themes/basic/js/jquery.ihavecookies.js' %}"></script>
+<script>
+    $('body').ihavecookies({
+        title: "Cookies & Privacy",
+        message: "This website uses cookies to ensure you get the best experience on our website.",
+        link: $(".privacy-policy").attr('href'),
+        delay: 800,
+    });
+</script>
+{% endif %}

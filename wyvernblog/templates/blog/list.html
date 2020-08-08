@@ -1,0 +1,23 @@
+{% load static %}
+<div class="mt-3">
+    <!-- This will be an API heavy portion -->
+    <h2>Blog Posts</h2>
+    {% if blogs %}
+         {% for blog in blogs %}
+            <div class="list-group-item list-group-item-action site-item">
+            	{{ site.site_url }}
+            	| 
+                <!-- TODO: Fix protocol -->
+            	<a href="#" target="_blank">Preview</a>
+            	| 
+            	<a href="{% url 'blog-edit' post=post.post_slug %}">Manage</a>
+                | 
+                <a href="{% url 'blog-delete' post=post.post_slug %}" class="delete-confirm">Delete</a>
+            </div>
+         {% endfor %}
+         <hr/>
+         <a href="{% url 'site-create' %}" class="btn btn-primary create-an-app-button">Create an new app</a>
+    {% else %}
+        <small>You have not created an app yet</small>
+    {% endif %}  
+</div>

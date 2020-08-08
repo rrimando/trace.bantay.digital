@@ -1,0 +1,23 @@
+<hr/>
+<h4>Payment Methods</h4>
+{% if payment_methods %}
+     {% for payment_method in payment_methods %}
+        <div class="list-group-item list-group-item-action site-item">
+            <div class="row">
+                <div class="col-12">
+                    <strong>{{ payment_method.payment_method_name }}</strong>
+                    | 
+                    <!-- TODO: Fix protocol -->
+                    <a href="{% url 'payment-method-edit' id=payment_method.id  %}">Edit</a>
+                    | 
+                    <a href="http://{{ site.site_url }}/payment-method/view/{{ payment_method.id }}/" target="_blank">View</a>
+                    | 
+                    <a href="{% url 'payment-method-delete' id=payment_method.id %}" class="delete-confirm">Delete</a>
+                </div>
+            </div>
+        </div>
+     {% endfor %}
+{% else %}
+<small>No payment methods available</small>
+{% endif %}
+<hr/>

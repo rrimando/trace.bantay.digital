@@ -1,0 +1,22 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if not site.site_logo %}
+<div class="col-6 offset-3">
+    <img src="{% static 'images/wyvern-logo.png' %}" class="logo img-fluid" alt="Wyvern"/>
+</div>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+
+    {% include 'themes/trace/pages/dashboard.html' %}
+
+{% else %}
+
+    <div class="col-md-6 offset-md-3">
+        {% include 'themes/trace/pages/signup.html' with form=form %}
+    </div>
+
+{% endif %}
+
+{% endblock %}

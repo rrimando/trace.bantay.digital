@@ -1,0 +1,11 @@
+{% load static %}
+<div class="card">
+  
+	<img class="card-img-top img-responsive" src="{% static 'images/default.jpg' %}" alt="{{ job.job_title }}">
+	<div class="card-body">
+		<h5 class="card-title">{{ job.job_title }}</h5>
+		<p class="card-text">{{ job.job_subtitle }}</p>
+		<a href="#" class="btn btn-success" data-toggle="modal" data-target="#applyModal">Apply Now</a>
+	</div>
+
+</div>

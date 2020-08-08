@@ -1,0 +1,48 @@
+.dashboard {
+
+    font-size: $dashboard-font-size;
+    margin: 0;
+    padding: 0;
+
+    #nav-top {
+
+        nav {
+        
+            width: 100%;
+
+            .brand {
+                width: 180px;
+            }
+
+        }
+    }
+
+    #sidebar {
+
+        .sidebar-heading {
+
+            margin: 20px 0; 
+
+        }
+
+        .sidebar-nav {
+        
+            small {
+                margin-top: 10px;
+                text-indent: 20px;
+            }
+
+            .create-an-app-button {
+                margin-top: 10px;
+                font-size: 1em;
+                color: $white;
+            }
+        
+        }
+
+    }
+
+    #main {
+
+    }
+}

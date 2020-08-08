@@ -1,0 +1,14 @@
+{% load static %}
+<div class="mt-3">
+    <!-- This will be an API heavy portion -->
+    <h2>Product Lists</h2>
+    {% if jobs %}
+         {% for job in jobs %}
+            {{ job.job_title }}
+         {% endfor %}
+         <hr/>
+         <a href="{% url 'job-create' site=site %}" class="btn btn-primary create-an-app-button">Create a new job</a>
+    {% else %}
+        <small>There are no jobs for this site</small>
+    {% endif %}  
+</div>

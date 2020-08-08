@@ -1,0 +1,29 @@
+{% load static %}
+<!-- Sidebar -->
+<div class="margin-med-top">
+    <div class="sidebar-heading">
+      	<h5>
+            <span class="oi oi-home" title="home" aria-hidden="true"></span>
+            Dashboard
+        </h5>
+    </div>
+    <div class="list-group list-group-flush sidebar-nav">
+        <a href="{% url 'core-index' %}" class="list-group-item list-group-item-action">Dashboard</a>
+        <a href="{% url 'site-index' %}" class="list-group-item list-group-item-action">Sites</a>
+        {% if sites %}
+            {% for site in sites %}
+                <strong>
+                    <a href="{% url 'site-manage' site=site.site_url %}" class="list-group-item list-group-item-action site-item">
+                        {{ site.site_name }}
+                        <small>({{ site.site_url }})</small>
+                    </a>
+                </strong>
+            {% endfor %}
+        {% else %}
+            {# TODO: Translations/i18n/l8n #}
+            <small>You have no apps</small>
+            <a href="{% url 'site-create' %}" class="btn btn-primary create-an-app-button">Create an app</a>
+        {% endif %}
+    </div>
+</div>
+<!-- /#sidebar-wrapper -->

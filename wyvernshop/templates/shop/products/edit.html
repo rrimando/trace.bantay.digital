@@ -1,0 +1,15 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<div class="container mt-3 shop-management">
+    <!-- This will be an API heavy portion -->
+    <h2>Edit Product</h2>
+    <hr />
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | crispy }}
+        {{ product_category_form | crispy }}
+        <button type="submit" class="btn btn-success float-right m-1">Update Product</button>
+        <a href="{% url 'product-delete' slug=form.product_slug.value %}" class="btn btn-warning float-right m-1 delete-confirm">Delete</a>
+        <button type="submit" class="btn btn-info float-right btn-cancel m-1" onclick="historyBack();">Cancel</button>
+    </form>
+</div>

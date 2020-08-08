@@ -1,0 +1,21 @@
+.shop-management .product-image {
+  max-width: 100%;
+}
+
+.widget-recent-products .product-image-container {
+  height: 150px;
+  min-height: 150px;
+  overflow: hidden;
+  background-color: #cecece;
+}
+.widget-recent-products .product-image-container p {
+  font-weight: 600;
+  text-align: center;
+  margin-top: 60px;
+  color: #fff;
+}
+.widget-recent-products .product-image-container img {
+  margin-top: -25%;
+}
+
+/*# sourceMappingURL=shop.css.map */

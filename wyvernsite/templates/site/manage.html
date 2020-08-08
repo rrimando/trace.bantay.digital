@@ -1,0 +1,296 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<div class="mt-3">
+    <!-- This will be an API heavy portion -->
+    <h2>Site Management<small class="float-right">{{ site.site_name }}</small></h2>
+    
+    {# PULL MANAGEMENT TEMPLATES FROM MODULES #} 
+
+    <div class="clearfix">
+        <p class="float-left">1,223 Views since 10/10/2019</p>
+        <p class="float-right">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            <strong>{{ site.site_url }}</strong>
+            | 
+            <!-- TODO: Fix protocol -->
+            <a href="http://{{ site.site_url }}" target="_blank">Preview</a>
+            | 
+            <a href="{% url 'site-configure' site=site.site_url %}">Configure</a>
+            |
+            <a href="{% url 'theme-configure' site=site.site_url %}">Theme</a>
+            | 
+            <a href="{% url 'site-delete' site=site.site_url %}" class="delete-confirm">Delete</a>
+        </p>
+    </div>
+    
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <nav class="mb-4">
+                <div class="nav nav-tabs" role="tablist">
+                    
+                    {# Possible Sections #}
+
+                        {# Posts and Pages #}
+
+                            {% if 'pages_section' in sections %}
+
+                                <a class="nav-item nav-link active" data-toggle="tab" href="#pages_section">Pages/Posts</a>
+
+                            {% endif %}
+
+                        {# Posts and Pages #}
+
+                        {# Job Listing #}
+
+                            {% if 'jobs_section' in sections %}
+
+                                <a class="nav-item nav-link" data-toggle="tab" href="#jobs_section">Jobs</a>
+
+                            {% endif %}
+
+                        {# Posts and Pages #}
+
+                        {# Subscriptions #}
+
+                            {% if 'subscriptions_section' in sections %}
+
+                                <a class="nav-item nav-link" data-toggle="tab" href="#subscriptions_section">Subscriptions</a>
+
+                            {% endif %}
+
+                        {# End Subscriptions #}
+
+                        {% if 'products_section' in sections %}
+
+                            <a class="nav-item nav-link" data-toggle="tab" href="#products_section">Products</a>
+
+                        {% endif %}
+
+                        {# Orders #}
+
+                            {% if 'orders_section' in sections %}
+
+                                <a class="nav-item nav-link" data-toggle="tab" href="#orders_section">Orders</a>
+
+                            {% endif %}
+
+                        {# End Orders #}
+
+                        {# Inventory #}
+
+                            {% if 'inventory_section' in sections %}
+
+                                <a class="nav-item nav-link" data-toggle="tab" href="#inventory_section">Inventory</a>
+
+                            {% endif %}
+
+                        {# End Inventory #}
+
+                        {# Shipping Methods #}
+
+                            {% if 'shipping_methods_section' in sections %}
+
+                                <a class="nav-item nav-link" data-toggle="tab" href="#shipping_methods_section">Shipping Methods</a>
+
+                            {% endif %}
+
+                        {# End Shipping Methods #}
+
+                        {# Payment Methods #}
+
+                            {% if 'payment_methods_section' in sections %}
+
+                                <a class="nav-item nav-link" data-toggle="tab" href="#payment_methods_section">Payment Methods</a>
+
+                            {% endif %}
+
+                        {# End Payment Methods #}
+
+                        {# Reports #}
+
+                            {% if 'reports_section' in sections %}
+
+                                <a class="nav-item nav-link" data-toggle="tab" href="#reports_section">Reports</a>
+
+                            {% endif %}
+
+                        {# End Reports #}
+
+                    {# End Possible Sections #}
+                </div>
+            </nav>
+
+            <div class="tab-content">
+
+                {# Possible Sections #}
+
+                    {# Posts and Pages #}
+
+                        <!-- By default the pages/post section is active -->
+                        {% if 'pages_section' in sections %}
+
+                            <div id="pages_section" class="tab-pane fade show active">
+
+                                {% include "blog/widgets/create.html" with site=site %}
+
+                                {% include "blog/widgets/recent.html" with site=site posts=posts pages=pages %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {# Posts and Pages #}
+
+                    {# Job Listing #}
+
+                        {% if 'jobs_section' in sections %}
+
+                            <div id="jobs_section" class="tab-pane fade">
+
+                                {% include "jobs/job/widgets/recent.html" with site=site jobs=jobs %}
+
+                                {% include "jobs/job/widgets/create.html" with site=site %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {# Jobs Listing #}
+
+                    {# Subscriptions #}
+
+                        {% if 'subscriptions_section' in sections %}
+
+                            <div id="subscriptions_section" class="tab-pane fade">
+
+                                <a href="{% url "sub_list" %}" class="btn btn-primary">View Subscriptions</a>
+
+                                <a href="#" class="btn btn-primary" onclick="alert('This functionality will be available shortly')">Send An Email</a>
+
+                                <a href="#" class="btn btn-primary" onclick="alert('This functionality will be available shortly')">Scheduled Emails/Campaign</a>
+
+                            </div>
+
+                        {% endif %}
+
+                    {# End Subscriptions #}
+
+                    {# Products #}
+
+                        {% if 'products_section' in sections %}
+
+                            <div id="products_section" class="tab-pane fade">
+
+                                {% include "shop/products/widgets/create.html" with site=site products=products %}
+
+                                <hr/>
+
+                                {% include "shop/products/widgets/recent.html" with site=site products=products %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {# End Products #}
+
+                    {# Product Categories #}
+
+                        {% if 'product_categories_section' in sections %}
+
+                            <div id="product_categories_section" class="tab-pane fade">
+
+                                {% include "shop/product_category/widgets/recent.html" with site=site products=products %}
+
+                                {% include "shop/product_category/widgets/create.html" with site=site products=products %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {# End Product Categories #}
+
+                    {# Orders #}
+
+                        {% if 'orders_section' in sections %}
+
+                            <div id="orders_section" class="tab-pane fade">
+
+                                {% include "shop/orders/widgets/list.html" with site=site products=products %} 
+
+                            </div>
+
+                        {% endif %}
+
+                    {# End Orders #}
+
+                    {# Inventory #}
+
+                        {% if 'inventory_section' in sections %}
+
+                            <div id="inventory_section" class="tab-pane fade">
+
+                                Inventory
+
+                             </div>
+
+                        {% endif %}
+
+                    {# End Inventory #}
+
+                    {# Shipping Methods #}
+
+                        {% if 'shipping_methods_section' in sections %}
+
+                            <div id="shipping_methods_section" class="tab-pane fade">
+
+                                {% include "shop/shipping_methods/widgets/list.html" with site=site products=products %}
+
+                                {% include "shop/shipping_methods/widgets/create.html" with site=site products=products %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {# End Shipping Methods #}
+
+                    {# Payment Methods #}
+
+                        {% if 'payment_methods_section' in sections %}
+
+                            <div id="payment_methods_section" class="tab-pane fade">
+
+                                {% include "shop/payment_methods/widgets/list.html" with site=site products=products %}
+
+                                {% include "shop/payment_methods/widgets/create.html" with site=site products=products %}
+
+                            <div/>
+
+                        {% endif %}
+
+                    {# End Payment Methods #}
+
+                    {# Reports #}
+
+                        {% if 'reports_section' in sections %}
+
+                            <div id="reports_section" class="tab-pane fade">
+
+                                Reports
+
+                            </div>
+
+                        {% endif %}
+
+                    {# End Reports #}
+
+                {# End Possible Sections #}
+
+            </div><!-- Close Tab Pill Content -->
+
+        </div><!-- End Col -->
+
+    </div><!-- End Row-->
+
+</div>

@@ -1,0 +1,109 @@
+{% load static %}
+
+<div class="nav nav-tabs mb-4">    
+    <a class="nav-item nav-link active" data-toggle="tab" href="#inner_pages_section">Pages</a>
+    <a class="nav-item nav-link" data-toggle="tab" href="#inner_posts_section">Posts</a>
+    {% if job_posts %}
+        <a class="nav-item nav-link" data-toggle="tab" href="#inner_job_posts_section">Job Posts</a>
+    {% endif %}
+</div>
+<div class="tab-content">
+    <!-- Posts -->
+    <div id="inner_posts_section" class="tab-pane fade">
+        <h4> Posts</h4>
+        {% if posts %}
+             {% for post in posts %}
+                <div class="list-group-item list-group-item-action site-item">
+                    <div class="row">
+                        <div class="col-md-2">
+                            {% if post.get_thumb_url %}
+                                <img src="http://{{ site.site_url }}{{ post.get_thumb_url }}" class="img-fluid" />
+                            {% else %}
+                                <img src="{% static 'images/default.jpg' %}" class="img-fluid" />
+                            {% endif %}
+                        </div>
+                        <div class="col-md-10">
+                            <strong>{{ post.post_title }}</strong>
+                            | 
+                            <!-- TODO: Fix protocol -->
+                            <a href="{% url 'blog-edit' slug=post.post_slug site=post.post_site.site_url %}">Edit</a>
+                            | 
+                            <a href="http://{{ site.site_url }}/post/{{ post.post_slug }}/" target="_blank">View</a>
+                            | 
+                            <a href="{% url 'blog-delete' slug=post.post_slug site=post.post_site.site_url %}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+             {% endfor %}
+        {% else %}
+            <small>You have no posts yet</small>
+            <hr/>
+        {% endif %}
+    </div>
+    <!-- End Posts -->
+
+    <!-- Pages -->
+    <div id="inner_pages_section" class="tab-pane fade show active">
+        <h4>Pages</h4>
+        {% if pages %}
+             {% for page in pages %}
+                <div class="list-group-item list-group-item-action site-item"> 
+                    <div class="row">
+                        <div class="col-md-2">
+                            {% if page.get_thumb_url %}
+                                <img src="http://{{ site.site_url }}{{ page.get_thumb_url }}" class="img-fluid" />
+                            {% else %}
+                                <img src="{% static 'images/default.jpg' %}" class="img-fluid" />
+                            {% endif %}
+                        </div>
+                        <div class="col-md-10">
+                            <strong>{{ page.post_title }}</strong>
+                            | 
+                            <!-- TODO: Fix protocol -->
+                            <a href="{% url 'blog-edit' slug=page.post_slug site=page.post_site.site_url %}">Edit</a>
+                            | 
+                            <a href="http://{{ site.site_url }}/page/{{ page.post_slug }}/" target="_blank">View</a>
+                            | 
+                            <a href="{% url 'blog-delete' slug=page.post_slug site=page.post_site.site_url %}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+             {% endfor %}
+        {% else %}
+            <small>You have no pages yet</small>
+            <hr/>
+        {% endif %}
+    </div>
+    <!-- End Pages -->
+
+    <!-- Custom Posts -->
+    {% if job_posts %}
+    <div id="inner_job_posts_section" class="tab-pane fade">
+        <h4>Job Posts</h4>
+        {% for post in job_posts %}
+            <div class="list-group-item list-group-item-action site-item">
+                <div class="row">
+                    <div class="col-md-2">
+                        {% if post.get_thumb_url %}
+                            <img src="http://{{ site.site_url }}{{ post.get_thumb_url }}" class="img-fluid" />
+                        {% else %}
+                            <img src="{% static 'images/default.jpg' %}" class="img-fluid" />
+                        {% endif %}
+                    </div>
+                    <div class="col-md-10">
+                        <strong>{{ post.post_title }}</strong>
+                        | 
+                        <!-- TODO: Fix protocol -->
+                        <a href="{% url 'blog-edit' slug=post.post_slug site=post.post_site.site_url %}">Edit</a>
+                        | 
+                        <a href="http://{{ site.site_url }}/post/{{ post.post_slug }}/" target="_blank">View</a>
+                        | 
+                        <a href="{% url 'blog-delete' slug=post.post_slug site=post.post_site.site_url %}">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <!-- End Custom Posts -->
+
+</div>

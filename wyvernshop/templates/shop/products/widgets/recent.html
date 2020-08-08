@@ -1,0 +1,42 @@
+{% load static %}
+{% load djmoney %}
+<div class="widget-recent-products">
+<h4>Recently Created Products</h4>
+{% if products %}
+    <div class="row product-management mt-3">
+    {% for product in products %}
+        <div class="col-md-2 list-group-item list-group-item-action ml-3 mt-3">
+            <div class="product-item">
+                <strong class="pull-left">
+                    {{ product.product_name|truncatechars:20 }} 
+                </strong>
+                <small class="pull-right">{% money_localize product.product_price %}</small>
+                <div class="clearfix"></div>
+                {% if product.product_image %}
+                <div class="product-image-container" style="background-image: url({{ product.product_image.url }}); background-size: cover">
+                </div>
+                {% else %}
+                <div class="product-image-container">
+                    <p>No Image Provided</p>
+                </div>
+                {% endif %}
+
+                <p class="mt-2">
+                    Product Code: <strong>{{ product.product_code }}</strong> 
+                    <br/>
+                    Product SKU: <strong>{{ product.product_sku }}</strong>
+                </p>
+                <hr/>
+                <a href="{% url 'product-edit' slug=product.product_slug %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'product-delete' slug=product.product_slug %}" class="btn btn-warning delete-confirm">Delete</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <br/>
+{% else %}
+<small>You have not created any products yet</small>
+<hr/>
+{% endif %}
+
+</div>

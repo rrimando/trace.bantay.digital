@@ -1,0 +1,36 @@
+{% extends 'base-full-width.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="row" id="nav-top">
+        {% include 'partials/dashboard/nav.html' %}
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-sm-12" id="sidebar">
+            {% include 'partials/dashboard/sidebar.html' with sites=sites %}
+        </div>
+        <div class="col-md-10 col-sm-12" id="main-content">
+                        
+            <div class="mt-3">
+                <!-- This will be an API heavy portion -->
+
+                <h4>Delete Subsciption</h4>
+
+                <form method="post">
+                    {% csrf_token %}
+                    Are you sure you want to delete "{{ object.sub_fullname }}" ?
+                    <hr/>
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    &nbsp;
+                    <a href="{% url "sub_list" %}" class="btn btn-primary">Back to List</a>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

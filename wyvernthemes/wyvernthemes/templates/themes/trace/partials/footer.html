@@ -1,0 +1,50 @@
+{% load static %}
+<footer id="footer" class="footer">
+    <div class="w-container">
+        <div class="footer-flex-container">
+            <a href="#" class="footer-logo-link w-inline-block">
+                <img 
+                    src="{% static 'themes/trace/images/Bantay-Logo_1.png' %}" 
+                    srcset="{% static 'themes/trace/images/Bantay-Logo_1-p-500.png' %} 500w, 
+                            {% static 'themes/trace/images/Bantay-Logo_1-p-800.png'  %} 800w, 
+                            {% static 'themes/trace/images/Bantay-Logo_1.png' %} 968w" 
+                    sizes="(max-width: 479px) 192px, (max-width: 767px) 36vw, 192px" 
+                    alt="Bantay Digital" 
+                    class="footer-image">
+                <div class="adress">
+                    BANTAY<br>
+                    <strong>‍Ilocano</strong>
+                    <br>n. mountains, forest<br><br>
+                    <strong>Filipino</strong>
+                    <br>n. guard, watcher, sentinel
+                </div>
+            </a>
+            <div>
+                <h2 class="footer-heading">FAQ</h2>
+                <ul role="list" class="w-list-unstyled">
+                    <li><a href="/page/about-us" class="footer-link">About Us</a></li>
+                    <li><a href="https://bantay.digital/our-services" class="footer-link">Our Services</a></li>
+                    <li><a href="https://bantay.digital/portfolio" class="footer-link">Portfolio</a></li>
+                    <li><a href="https://bantay.digital/blog" class="footer-link">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="footer-heading">Follow us</h2>
+                <ul role="list" class="w-list-unstyled">
+                    <li><a href="https://facebook.com/bantaydigital" target="_blank" class="footer-link">Facebook</a></li>
+                    <li><a href="https://instagram.com/bantaydigital" target="_blank" class="footer-link">Instagram</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="footer-heading">Contact</h2>
+                <div class="adress">Gelo: 09177030470</div>
+                <div class="adress">info@bantay.digital</div>
+                <div class="adress">Bakakeng, Baguio City</div>
+            </div>
+        </div>
+        <a href="#top" class="up-button w-inline-block">
+            <img src="{% static 'themes/trace/images/e9a6.svg' %}" alt="" class="up-img">
+        </a>
+        <div class="text-block-2">Copyright © 2020 Bantay Digital. All rights reserved.</div>
+    </div>
+</footer>

@@ -1,0 +1,67 @@
+body {
+  font-family: "Exo", sans-serif;
+  font-size: 0.9em;
+  font-weight: 100;
+  color: #676767;
+  width: 100%;
+  height: 100%;
+  background: #706ab9;
+  background: radial-gradient(circle, #706ab9 0%, #53538c 35%, #07066b 100%);
+  overflow: auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+body .logo {
+  margin: 20% auto 0 auto;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+body .login-container card {
+  margin: 0 auto;
+  width: 22rem;
+}
+
+.dashboard {
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0;
+}
+.dashboard #nav-top nav {
+  width: 100%;
+}
+.dashboard #nav-top nav .brand {
+  width: 180px;
+}
+.dashboard #sidebar .sidebar-heading {
+  margin: 20px 0;
+}
+.dashboard #sidebar .sidebar-nav small {
+  margin-top: 10px;
+  text-indent: 20px;
+}
+.dashboard #sidebar .sidebar-nav .create-an-app-button {
+  margin-top: 10px;
+  font-size: 1em;
+  color: #fefefe;
+}
+body.full-width {
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  color: #676767;
+  width: 100%;
+  height: 100%;
+  background: none;
+  background-color: #ffffff;
+  overflow: auto;
+}
+body.full-width .logo {
+  margin: 20% auto 0 auto;
+  display: block;
+  width: 517px;
+  height: 187px;
+}
+
+/*# sourceMappingURL=main.css.map */

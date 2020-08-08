@@ -1,0 +1,34 @@
+{% load static %}
+<div class="widget-recent-products">
+<h4>Recently Created Products Categories</h4>
+{% if product_categories %}
+    <div class="row product-management mt-3">
+    {% for product_category in product_categories %}
+        <div class="col-md-5 list-group-item list-group-item-action mt-3 ml-3">
+            <div class="product-item">
+                <h6>
+                    {{ product_category.product_category_name }} 
+                </h6>
+                {% if product_category.product_category_image %}
+                <div class="product-image-container" style="background-image: url({{ product_category.product_category_image.url }}); background-size: cover">
+                </div>
+                {% else %}
+                <div class="product-image-container">
+                    <p>No Image Provided</p>
+                </div>
+                {% endif %}
+
+                <hr/>
+                <a href="{% url 'product-category-edit' slug=product_category.product_category_slug %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'product-category-delete' slug=product_category.product_category_slug %}" class="btn btn-warning delete-confirm">Delete</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <br/>
+{% else %}
+<small>You have not created any product categories yet</small>
+<hr/>
+{% endif %}
+
+</div>

@@ -1,0 +1,38 @@
+{% load static %}
+{% load djmoney %}
+<hr/>
+<div class="widget-recent-products">
+<h4>Recently Created Jobs</h4>
+{% if jobs %}
+    <div class="row product-management mt-3">
+    {% for job in jobs %}
+        <div class="col-md-2 list-group-item list-group-item-action ml-3 mt-3">
+            <div class="product-item">
+                <strong class="pull-left">
+                    {{ job.job_title|truncatechars:20 }} 
+                </strong>
+                <div class="clearfix"></div>
+                {% if job.job_image %}
+                <div class="product-image-container" style="background-image: url({{ job.job_image.url }}); background-size: cover">
+                </div>
+                {% else %}
+                <div class="product-image-container">
+                    <p>No Image Provided</p>
+                </div>
+                {% endif %}
+
+                <hr/>
+                <a href="{% url 'job-edit' slug=job.job_slug %}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{% url 'applicant-list' pk=job.id %}" class="btn btn-sm btn-secondary">Candidates</a>
+                <a href="{% url 'job-delete' slug=job.job_slug %}" class="btn btn-sm btn-warning delete-confirm">Delete</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <br/>
+{% else %}
+<small>You have not created any jobs yet</small>
+<hr/>
+{% endif %}
+
+</div>

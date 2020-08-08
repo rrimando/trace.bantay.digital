@@ -1,0 +1,8 @@
+{% load static %}
+{% load djmoney %}
+<div class="widget-list-orders">
+    <h4>Recent Orders</h4>
+    {% for order in orders %}
+        {{ order.order_amount }}
+    {% endfor %}
+</div>

@@ -1,0 +1,25 @@
+{% load static %}
+<div class="mt-3">
+    <!-- This will be an API heavy portion -->
+    <h2>Site Lists</h2>
+    {% if sites %}
+         {% for site in sites %}
+            <div class="list-group-item list-group-item-action site-item">
+                {{ site.site_url }}
+                | 
+                <!-- TODO: Fix protocol -->
+                <a href="http://{{ site.site_url }}" target="_blank">Preview</a>
+                | 
+                <a href="{% url 'site-manage' site=site.site_url %}">Manage</a>
+                | 
+                <a href="{% url 'site-configure' site=site.site_url %}">Configure</a>
+                | 
+                <a href="{% url 'site-delete' site=site.site_url %}" class="delete-confirm">Delete</a>
+            </div>
+         {% endfor %}
+         <hr/>
+         <a href="{% url 'site-create' %}" class="btn btn-primary create-an-app-button">Create an new app</a>
+    {% else %}
+        <small>There are no posts for this site</small>
+    {% endif %}  
+</div>

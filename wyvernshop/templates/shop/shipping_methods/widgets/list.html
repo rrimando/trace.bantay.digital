@@ -1,0 +1,23 @@
+<hr/>
+<h4>Shipping Methods</h4>
+{% if shipping_methods %}
+     {% for shipping_method in shipping_methods %}
+        <div class="list-group-item list-group-item-action site-item">
+            <div class="row">
+                <div class="col-12">
+                    <strong>{{ shipping_method.shipping_method_name }}</strong>
+                    | 
+                    <!-- TODO: Fix protocol -->
+                    <a href="{% url 'shipping-method-edit' id=shipping_method.id %}">Edit</a>
+                    | 
+                    <a href="http://{{ site.site_url }}/shipping-method/view/{{ shipping_method.id }}/" target="_blank">View</a>
+                    | 
+                    <a href="{% url 'shipping-method-delete' id=shipping_method.id %}" class="delete-confirm">Delete</a>
+                </div>
+            </div>
+        </div>
+     {% endfor %}
+{% else %}
+<small>No shipping methods available</small>
+{% endif %}
+<hr/>

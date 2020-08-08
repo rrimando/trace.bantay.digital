@@ -1,0 +1,14 @@
+# sudo ln -s /etc/nginx/sites-available/lifelineunited.co.uk /etc/nginx/sites-enabled/
+
+[Unit]
+Description=gunicorn daemon
+After=network.target
+ 
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/var/www/wyvern
+ExecStart=/var/www/wyvern/env/bin/gunicorn --bind 0.0.0.0:8000 wyvern.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

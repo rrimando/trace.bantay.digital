@@ -1,0 +1,93 @@
+# LIFELINEUNITED
+
+upstream lifelineunited.co.uk {
+    server 127.0.0.1:8003 fail_timeout=2s;
+}
+server {
+    # port to listen on. Can also be set to an IP:PORT
+    listen 443;
+    server_name lifelineunited.co.uk;
+    ssl_certificate /etc/letsencrypt/live/lifelineunited.co.uk/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/lifelineunited.co.uk/privkey.pem;
+    location / {
+      proxy_pass http://lifelineunited.co.uk;
+    }
+
+    location /static {
+        # autoindex on;
+        alias /var/www/wyvern/static/;
+    }
+
+    location /media {
+        # autoindex on;
+        alias /var/www/wyvern/media/;
+    }
+}
+
+# Redirects
+
+server { 
+    listen 80;
+    server_name www.lifelineunited.co.uk; 
+    return 301 https://lifelineunited.co.uk$request_uri; 
+}
+
+server { 
+    listen 443;
+    server_name www.lifelineunited.co.uk; 
+    return 301 https://lifelineunited.co.uk$request_uri; 
+}
+
+server {
+    listen 80;
+    server_name lifelineunited.co.uk;
+    return 301 https://lifelineunited.co.uk$request_uri;
+}
+
+# ALLIED HOSPITAL SUPPLY
+
+upstream alliedhospitalsupply.com {
+    server 127.0.0.1:8002 fail_timeout=2s;
+}
+
+server {
+    # port to listen on. Can also be set to an IP:PORT
+    listen 443;
+    server_name alliedhospitalsupply.com;
+    ssl_certificate /etc/letsencrypt/live/alliedhospitalsupply.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/alliedhospitalsupply.com/privkey.pem;
+    location / {
+      proxy_pass http://alliedhospitalsupply.com;
+    }
+ 
+    location /static {
+        # autoindex on;
+        alias /var/www/wyvern/static/;
+    }
+
+    location /media {
+        # autoindex on;
+        alias /var/www/wyvern/media/;
+    }
+}
+
+# Redirects
+
+server {
+    listen 80;
+    server_name www.alliedhospitalsupply.com;
+    return 301 https://alliedhospitalsupply.com$request_uri;
+}
+
+server {
+    listen 443;
+    server_name www.alliedhospitalsupply.com;
+    return 301 https://alliedhospitalsupply.com$request_uri;
+}
+
+server {
+    listen 80;
+    server_name alliedhospitalsupply.com;
+    return 301 https://alliedhospitalsupply.com$request_uri;
+}
+

@@ -1,0 +1,33 @@
+{% extends 'base-full-width.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="row" id="nav-top">
+        {% include 'partials/dashboard/nav.html' %}
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-sm-12" id="sidebar">
+            {% include 'partials/dashboard/sidebar.html' with sites=sites %}
+        </div>
+        <div class="col-md-10 col-sm-12" id="main-content">  
+
+            <div class="mt-3">
+                <!-- This will be an API heavy portion -->
+
+                <h4>Subsciption Details</h4>
+                <hr/>
+                <strong>Name: {{object.sub_fullname}}</strong>
+                <hr/>
+                Email : {{ object.sub_email }}
+
+                <hr/>
+                <a href="{% url "sub_list" %}" class="btn btn-primary">Back to List</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
