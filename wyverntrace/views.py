@@ -30,12 +30,14 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request, site=""):
     return redirect("/")
 
+
 @wyvern_core
 def generated(request):
-    
+
     context = {}
 
     return render(request, "themes/trace/pages/generated.html", context)
+
 
 @wyvern_core
 def map(request):

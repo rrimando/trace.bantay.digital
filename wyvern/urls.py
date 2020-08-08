@@ -19,7 +19,6 @@ from wyvernshop.urls import urlpatterns as wyvernshop_urls
 from wyvernjobs.urls import urlpatterns as wyvernjobs_urls
 from wyvernthemes.urls import urlpatterns as wyvernthemes_urls
 from wyvernsearch.urls import urlpatterns as wyvernsearch_urls
-from wyvernmembers.urls import urlpatterns as wyvernmembers_urls
 from wyvernscraper.urls import urlpatterns as wyvernscraper_urls
 from wyverndatastorage.urls import urlpatterns as wyverndatastore_urls
 from wyvernsubscriptions.urls import urlpatterns as wyvernsubscriptions_urls
@@ -60,7 +59,6 @@ urlpatterns = [
     path("jobs/", include(wyvernjobs_urls)),
     path("search/", include(wyvernsearch_urls)),
     path("themes/", include(wyvernthemes_urls)),
-    path("members/", include(wyvernmembers_urls)),
     path("scraper/", include(wyvernscraper_urls)),
     path("subscriptions/", include(wyvernsubscriptions_urls)),
     # Custom Content Editor

@@ -6,18 +6,44 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wyvernjobs', '0029_merge_20200803_0432'),
+        ("wyvernjobs", "0029_merge_20200803_0432"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='wyvernjobs',
-            name='job_hours',
-            field=models.CharField(choices=[('Temporary', 'Temporary'), ('Agency Staffing', 'Agency Staffing'), ('Part Time', 'Part Time'), ('Full Time', 'Full Time'), ('Part Time / Full Time', 'Part Time / Full Time'), ('Project Based', 'Project Based')], default='Full Time', max_length=100),
+            model_name="wyvernjobs",
+            name="job_hours",
+            field=models.CharField(
+                choices=[
+                    ("Temporary", "Temporary"),
+                    ("Agency Staffing", "Agency Staffing"),
+                    ("Part Time", "Part Time"),
+                    ("Full Time", "Full Time"),
+                    ("Part Time / Full Time", "Part Time / Full Time"),
+                    ("Project Based", "Project Based"),
+                ],
+                default="Full Time",
+                max_length=100,
+            ),
         ),
         migrations.AlterField(
-            model_name='wyvernjobs',
-            name='job_type',
-            field=models.CharField(choices=[('general', 'General'), ('it', 'Information Technology and Service'), ('hr', 'Human Resources'), ('cs', 'Customer Support'), ('va', 'Virtual Assistance'), ('ck', 'Cleaning / Kitchen'), ('hca', 'Health Care Assistant'), ('nurse', 'Nurse'), ('sw', 'Support Workers'), ('marketing', 'Marketing and Advertising')], default='general', max_length=100),
+            model_name="wyvernjobs",
+            name="job_type",
+            field=models.CharField(
+                choices=[
+                    ("general", "General"),
+                    ("it", "Information Technology and Service"),
+                    ("hr", "Human Resources"),
+                    ("cs", "Customer Support"),
+                    ("va", "Virtual Assistance"),
+                    ("ck", "Cleaning / Kitchen"),
+                    ("hca", "Health Care Assistant"),
+                    ("nurse", "Nurse"),
+                    ("sw", "Support Workers"),
+                    ("marketing", "Marketing and Advertising"),
+                ],
+                default="general",
+                max_length=100,
+            ),
         ),
     ]
