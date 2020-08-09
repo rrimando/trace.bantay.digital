@@ -1,57 +1,64 @@
+{% extends theme_config.wyverntheme_base_layout %}
 {% load crispy_forms_tags %}
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">
-            {% if not request.user.is_authenticated %}
-                Register
-            {% else %}
-                Update your details
-            {% endif %}
-            <img src="https://{{ site.site_url }}{{ site.site_favicon.url }}" class="float-right" width="20" height="20"/>
-        </h5>
-        <hr />
-        {% if form.errors %}
-            <div class="alert alert-danger mt-1" role="alert">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                There are errors in your submission
-            </div>
+{% block content %}
+
+<div class="container registration mt-5 mb-5">
+  <div class="row">
+    <nav>
+      <div class="nav nav-tabs" id="nav-register" role="tablist">
+        <a class="nav-item nav-link active" id="nav-register-establishment" data-toggle="tab" href="#nav-register-establishment-content" role="tab" aria-controls="nav-register-establishment" aria-selected="true">
+          <h4>Establishment</h4>
+        </a>
+        <a class="nav-item nav-link" id="nav-register-resident" data-toggle="tab" href="#nav-register-resident-content" role="tab" aria-controls="nav-register-resident" aria-selected="false">
+          <h4>Resident</h4>
+        </a>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-registerContent">
+      <div class="tab-pane fade show active" id="nav-register-establishment-content" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">
+              Register as an Establishment
+            </h4>
             <hr/>
-        {% endif %}
-        <form method="post">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-md-6">
-                    {{ form.first_name|as_crispy_field }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.last_name|as_crispy_field }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.email|as_crispy_field }}
-                </div>
-                {% if not request.user.is_authenticated %}
-                <div class="col-md-6">
-                    {{ form.password|as_crispy_field }}
-                </div>
-                {% endif %}
-                <div class="col-md-6">
-                    {{ form.phone|as_crispy_field }}
-                </div>
-                 <div class="col-md-12">
-                    {{ form.address|as_crispy_field }}
-                </div>
-                {{ form.username.as_hidden }}
-                {{ form.site_id.as_hidden }}
-            </div>
+            <p>Help patrons log their visit with ease</p>
             <hr/>
-            <input type="hidden" name="next" value="/dashboard" />
-            {% if not request.user.is_authenticated %}
-            <a href="{% url 'login' %}" class="card-link float-left">Login</a>
-            <button type="submit" class="btn btn-success float-right">Sign up</button>
-            {% else %}
-            <button type="submit" class="btn btn-success float-right">Update</button>
+            {% if establishment_form.errors %}
+                <div class="alert alert-danger mt-1" role="alert">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    There are errors in your submission.
+                </div>
+                <hr/>
             {% endif %}
-            
-        </form>
+            {% include 'themes/trace/partials/forms/establishment-form.html'%}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-register-resident-content" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">
+              Register as a Resident
+            </h4>
+            <hr />
+            <p>Help establishments log your visits ease.</p>
+            <hr/>
+            {% if resident_form.errors %}
+                <div class="alert alert-danger mt-1" role="alert">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    There are errors in your submission
+                </div>
+                <hr/>
+            {% endif %}
+            {% include 'themes/trace/partials/forms/resident-form.html'%}
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
+
+
+
+{% endblock %}

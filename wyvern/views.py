@@ -214,7 +214,7 @@ def dashboard(request):
             request,
             site_template,
             {
-                #
+                # context
             },
         )
     else:

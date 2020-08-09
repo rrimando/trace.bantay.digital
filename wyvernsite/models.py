@@ -51,16 +51,16 @@ class WyvernSite(models.Model):
     site_analytics = models.CharField(max_length=255, null=True, blank=True)
     site_subtitle = models.CharField(max_length=255, null=True, blank=True)
     site_favicon = models.ImageField(
-        upload_to=get_file_path, null=True, blank=True
+        upload_to=get_file_path, null=True, blank=True, default=None
     )  # TODO - Pull from config
     site_logo = models.ImageField(
-        upload_to=get_file_path, null=True, blank=True
+        upload_to=get_file_path, null=True, blank=True, default=None
     )  # TODO - Pull from config
     site_logo_dark = models.ImageField(
-        upload_to=get_file_path, null=True, blank=True
+        upload_to=get_file_path, null=True, blank=True, default=None
     )  # TODO - Pull from config
     site_meta_image = models.ImageField(
-        upload_to=get_file_path, null=True, blank=True
+        upload_to=get_file_path, null=True, blank=True, default=None
     )  # TODO - Pull from config
     site_status = models.IntegerField(choices=choices(Status))
     site_owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -92,6 +92,18 @@ class WyvernSite(models.Model):
 
     # Redirection Settings
     site_redirect = models.CharField(max_length=255, null=True, blank=True)
+
+    def get_favicon_url(self):
+        try:
+            # or whatever causes the exception
+
+            if self.site_favicon:
+                return self.site_favicon.url
+            else:
+                return None
+
+        except ValueError:
+            return None
 
     def __str__(self):
         return "Site: {} ({})".format(self.site_name, self.site_url)

@@ -5,14 +5,8 @@
 
 <div class="row">
 
-    {% if not request.site.site_logo %}
-    <div class="col-6 offset-3">
-        <img src="{% static 'images/wyvern-logo.png' %}" class="logo img-fluid" alt="Wyvern"/>
-    </div>
-    {% endif %}
-
     <!-- templates/accounts/login.html -->
-    <div class="col-md-4 offset-md-4 login-container form-container">
+    <div class="col-md-4 offset-md-4 login-container form-container mt-5 mb-5">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Login</h5>
@@ -54,7 +48,7 @@
                     {% endif %}
                     <button type="submit" class="btn btn-success float-right">Login</button>
                 </form>
-                <a href="#" class="card-link">Forgot Password</a>
+                <a href="{% url 'password_reset' %}" class="card-link">Forgot Password</a>
                 <span class="divider">|</span>
                 <a href="{% url 'core-signup' %}" class="card-link">Signup</a>
             </div>

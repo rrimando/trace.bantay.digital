@@ -13,14 +13,24 @@ $(document).ready(function(){
 
 
     /* Signup Form */
-    $('#id_username').val($('#id_email').val());
-    $('#id_email').on('keyup', function(){
+    /* Establishment */
+    $('#establishment_username').val($('#establishment_email').val());
+    $('#establishment_email').on('keyup', function(){
         // Autofill Username
         var username = $(this).val();
 
-        $('#id_username').val(username);
-        $('#id_wyvernlms_email_address').val(username);
+        $('#establishment_username').val(username);
     });
+
+    /* Resident */
+    $('#resident_username').val($('#establishment_email').val());
+    $('#resident_email').on('keyup', function(){
+        // Autofill Username
+        var username = $(this).val();
+
+        $('#resident_username').val(username);
+    });
+    
     /* End Signup Form*/
 
 });

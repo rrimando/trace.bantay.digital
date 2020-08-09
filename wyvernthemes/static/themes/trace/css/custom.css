@@ -11,11 +11,6 @@ body {
     background-color: #ed1e79;
     background-image: linear-gradient(90deg, #ed1e79 25%, #fbb03b 100%);
 }    
-
-body nav a {
-    color: #FFFFFF;
-}
-
 main {
     color: #000000;
 }
@@ -28,3 +23,26 @@ main .container {
 
     padding: 25px 50px;
 }
+
+/* TOP NAV */
+.nav-container.w-container {
+    width: 100%;
+}
+/* END TOP NAV */
+
+/* REGISTRATION PAGE */
+.registration .nav.nav-tabs {
+    background: none;
+}
+
+.registration .tab-pane .card {
+    margin-top: -1px; 
+}
+/* END REGISTRATION PAGE */
+
+/* FOOTER */
+.footer .w-list-unstyled li {
+    text-align: left;
+}
+/* END FOOTER */
+

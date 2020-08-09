@@ -50,7 +50,7 @@ urlpatterns = [
     path("profile/", wyvern_views.profile, name="core-profile"),
     path("dashboard/", wyvern_views.dashboard, name="core-dashboard"),
     # Django Admin
-    path("admin/", admin.site.urls),
+    # path("admin/", admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     path("data/", include(wyverndatastore_urls)),
     path("site/", include(wyvernsite_urls)),

@@ -9,7 +9,7 @@
         {% endwith %}
     {% else %}
 
-    <div class="container main-container">
+    <div class="container main-container mt-5 mb-5">
 
         <div class="row">
 
@@ -21,13 +21,13 @@
                 {% else %}
                     <hr/>
                     {% if post.post_seo_author %}
-                        by <strong>{{ post.post_seo_author }}</strong>
+                        By <strong>{{ post.post_seo_author }}</strong>
                     {% endif %}
                     {% if post.post_seo_author and post.date_created %}
                     <br/>
                     {% endif %}
                     {% if post.date_created %}
-                        posted <strong>{{ post.date_created }}</strong>
+                        Posted <strong>{{ post.date_created }}</strong>
                     {% endif %}
                 
                     <hr/>
