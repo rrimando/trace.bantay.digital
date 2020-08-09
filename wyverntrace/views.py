@@ -53,17 +53,24 @@ def dashboard(request):
     # Load Registration Forms
     context["resident_form"] = WyvernResidentForm(
         request.POST or None,
-        instance=request.user if request.user.is_authenticated else None,
+        instance=user if request.user.is_authenticated else None,
         initial={"site": request.site.id},
         auto_id="resident_%s",
     )
 
     context["establishment_form"] = WyvernEstablishmentForm(
         request.POST or None,
-        instance=request.user if request.user.is_authenticated else None,
+        instance=user if request.user.is_authenticated else None,
         initial={"site": request.site.id},
         auto_id="establishment_%s",
     )
+
+    if request.POST:
+        if context['type'] == 'resident' and context["resident_form"].is_valid():
+            context["resident_form"].save()
+        
+        if context['type'] == 'establishment' and context["establishment_form"].is_valid():
+            context["establishment_form"].save()
     
     if request.user.is_location:
         context["logs"] = WyvernTraceLog.objects.filter(
