@@ -53,6 +53,19 @@ footer ul li {
 }
 /* End QR Code Reader */
 
+/* QR Container */
+.qr-container {
+  text-align: center;
+  align-items: center;
+}
+
+.qr-container svg {
+  min-width: 100%;
+  max-width: 100%;
+}
+/* End QR Container */
+
+
 /* GDPR */
 #gdpr-cookie-message {
 	position: fixed;

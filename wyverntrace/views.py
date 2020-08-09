@@ -204,7 +204,13 @@ def fetch(request, uuid=""):
         return JsonResponse(
             {
                 "Authentication": "True",
-                "user": serializers.serialize("json", [wyvern_user_data,]),
+                "user": {
+                    'uuid': wyvern_user_data.uuid,
+                    'first_name': wyvern_user_data.first_name,
+                    'last_name': wyvern_user_data.last_name,
+                    'address': wyvern_user_data.address,
+                    'phone': wyvern_user_data.phone
+                },
             }
         )
 
@@ -248,16 +254,22 @@ def log(request, uuid=""):
         """
             Create Location Log
         """
-        wyvern_location_id = request.POST.get("location_id")
+        wyvern_location_uuid = request.POST.get("location_uuid")
 
-        if wyvern_location_id:
-            wyvern_location_data = User.objects.get(uuid=uuid)
+        if wyvern_location_uuid:
+            wyvern_location_data = User.objects.get(uuid=wyvern_location_uuid)
 
-            trace_log = WyvernTraceLog(
-                wyvern_user=wyvern_user_data,
-                wyvern_location=wyvern_location_data,
-                wyvern_temperature=request.POST.get("temperature"),
-            )
+            if wyvern_location_data.is_location:
+
+                trace_log = WyvernTraceLog(
+                    wyvern_user=wyvern_user_data,
+                    wyvern_location=wyvern_location_data,
+                    wyvern_temperature=request.POST.get("temperature"),
+                )
+
+            else:
+
+                return JsonResponse({"Authentication": "True", "error": "Cannot log resident as location"})
 
             trace = trace_log.save()
 
@@ -271,5 +283,12 @@ def log(request, uuid=""):
 
     else:
         return JsonResponse({"Authentication": "False"})
+
+def manual_log(request):
+
+    # TODO
+
+    pass
+
 
 """ End wyvernmetamorph/views.py """

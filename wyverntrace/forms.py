@@ -29,6 +29,9 @@ class WyvernResidentForm(forms.ModelForm):
             "interests",
             "is_location",
         ]
+        labels = {
+            'accepted_terms': 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>'
+        }
         widgets = {
             "site_id": forms.HiddenInput(),
             "password": forms.PasswordInput(attrs={"placeholder": "Password"}),
@@ -66,7 +69,8 @@ class WyvernEstablishmentForm(forms.ModelForm):
         ]
         labels = {
             'first_name': 'Establishment Name',
-            'last_name': 'Contact Person'
+            'last_name': 'Contact Person',
+            'accepted_terms': 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>.'
         }
         widgets = {
             "site_id": forms.HiddenInput(),

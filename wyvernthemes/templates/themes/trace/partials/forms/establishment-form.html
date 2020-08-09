@@ -22,6 +22,9 @@
         <div class="col-md-12">
             {{ establishment_form.address|as_crispy_field }}
         </div>
+        <div class="col-md-12">
+            {{ resident_form.accepted_terms|as_crispy_field }}
+        </div>
         <input type="hidden" name="is_location" value="true" />
         {{ establishment_form.username.as_hidden }}
         {{ establishment_form.site_id.as_hidden }}

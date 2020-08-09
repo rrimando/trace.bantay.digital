@@ -25,7 +25,7 @@ urlpatterns = [
     # TODO: MOVE TO DRF
 
     # Fetch User Details
-    url(r"^fetch/<str:uuid>/", views.fetch, name="trace-fetch-user"),
+    path("fetch/<str:uuid>/", views.fetch, name="trace-fetch-user"),
     # Log User Location
-    url(r"^log/<str:uuid>/", views.log, name="trace-log-user"),
+    path("log/<str:uuid>/", views.log, name="trace-log-user"),
 ]

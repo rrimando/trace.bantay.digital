@@ -1,4 +1,4 @@
-{% load crispy_forms_tags %}s
+{% load crispy_forms_tags %}
 <form method="post">
     {% csrf_token %}
     <div class="row">
@@ -21,6 +21,9 @@
         </div>
         <div class="col-md-12">
             {{ resident_form.address|as_crispy_field }}
+        </div>
+        <div class="col-md-12">
+            {{ resident_form.accepted_terms|as_crispy_field }}
         </div>
         {{ resident_form.username.as_hidden }}
         {{ resident_form.site_id.as_hidden }}

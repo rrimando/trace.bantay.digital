@@ -36,7 +36,8 @@ class User(AbstractUser):
     site_id         = models.IntegerField(null=True, blank=True)
     address         = models.TextField(null=True, blank=True)
     is_location     = models.BooleanField(default=False)
-    uuid            = models.CharField(max_length=100,  blank=True, null=True, default=uuid.uuid4)
+    accepted_terms  = models.BooleanField(default=False)
+    uuid            = models.CharField(max_length=100, unique=True, blank=True, null=True, default=uuid.uuid4)
 
     REQUIRED_FIELDS = ["groups_id", "email"]
 

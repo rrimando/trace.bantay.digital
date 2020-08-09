@@ -44,6 +44,9 @@ DEBUG = config.get("application", "debug") == "True"
 
 ALLOWED_HOSTS = config.get("hosts", "allowed").split("\n")
 
+print(ALLOWED_HOSTS)
+
+TIME_ZONE = 'PHT'
 
 # Application definition
 

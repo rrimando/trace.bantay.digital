@@ -42,3 +42,7 @@ class WyvernTraceLog(models.Model):
     def create(cls, wyvern_user):
         trace = cls(wyvern_user=wyvern_user)
         return trace
+
+
+class WyvernMedicalForm(models.Model):
+    pass

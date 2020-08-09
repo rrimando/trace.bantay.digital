@@ -13,7 +13,7 @@
             <a href="/" aria-current="page" class="nav-link-3 w-nav-link w--current">home</a>
             <a href="/page/terms-and-conditions/" class="nav-link-3 w-nav-link">terms &amp; conditions</a>
             {% if not request.user.is_authenticated %}
-                <a href="/trace/register/resident/" class="nav-link-3 w-nav-link">signup</a>
+                <a href="/trace/register/resident/#nav-register-resident-content" class="nav-link-3 w-nav-link">signup</a>
                 <a href="/login/" class="nav-link-3 w-nav-link">login</a>
                 <a href="https://bantay.digital" target="_blank" class="nav-link-3 w-nav-link">bantay.digital</a>
             {% else %}

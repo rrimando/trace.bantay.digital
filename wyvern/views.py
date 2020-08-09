@@ -169,8 +169,10 @@ def signup(request):
     if request.user.is_authenticated:
         return redirect(reverse("core-index"))
 
+    form = WyvernUserForm(request.POST or None, {"site": request.site.id})
+
     if request.method == "POST":
-        form = WyvernUserForm(request.POST)
+        
         next_url = (
             urllib.parse.unquote(request.GET.get("next"))
             if (request.GET.get("next"))
@@ -198,9 +200,6 @@ def signup(request):
             else:
                 login(request, user)
                 return redirect(next_url)
-
-    else:
-        form = WyvernUserForm({"site": request.site.id})
 
     return render(request, "registration/signup.html", {"form": form})
 

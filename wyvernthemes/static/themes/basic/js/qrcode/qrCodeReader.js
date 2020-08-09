@@ -27,6 +27,10 @@
 
     let scanning = false;
 
+    $(document).ready(function(){
+      btnSubmitLog.hidden = true;
+    });
+    
     _qrcode.callback = res => {
       if (res) {        
         /* Fetch User Data */
@@ -34,32 +38,32 @@
         var user_type = document.getElementById("user_type").value;
 
         $.get( "/trace/fetch/" + res + "/?auth_token=bUb0uCjBTk8RAyQMRvVNYOxB8AdxDVxh", function( data ) {
-            var userData = JSON.parse(data['user']);
+            var userData = data['user'];
 
             // console.log(userData);            
 
             if(user_type == "USER") {
-              user_id = document.getElementById("user_id").value;
-              user_name = document.getElementById("user_first_name").value + " " + document.getElementById("user_last_name").value;
+              user_uuid = document.getElementById("user_uuid").value;
+              user_name = document.getElementById("user_first_name").value + " " + document.getElementById("user_last_name").value[0] + ".";
               user_address = document.getElementById("user_address").value;
               user_phone = document.getElementById("user_phone").value;
 
-              location_id = userData[0]['pk'];
-              location_name = userData[0]['fields']['first_name'] + " " + userData[0]['fields']['last_name'];
-              location_address = userData[0]['fields']['address'];
-              location_phone = userData[0]['fields']['phone'];
+              location_uuid = userData['uuid'];
+              location_name = userData['first_name'] + " " + userData['last_name'];
+              location_address = userData['address'];
+              location_phone = userData['phone'];
             }
 
             if(user_type == "LOCATION") {
-              location_id = document.getElementById("user_id").value;
+              location_uuid = document.getElementById("user_uuid").value;
               location_name = document.getElementById("user_first_name").value + " " + document.getElementById("user_last_name").value;
               location_address = document.getElementById("user_address").value;
               location_phone = document.getElementById("user_phone").value;
 
-              user_id = userData[0];
-              user_name = userData[0]['fields']['first_name'] + " " + userData[0]['fields']['last_name'];
-              user_address = userData[0]['fields']['address'];
-              user_phone = userData[0]['fields']['phone'];
+              user_uuid = userData['uuid'];
+              user_name = userData['first_name'] + " " + userData['last_name'][0] + ".";
+              user_address = userData['address'];
+              user_phone = userData['phone'];
             }
 
             var user_html = "<hr/><strong>USER: " + user_name + "</strong><hr/>(" + temperature + " C&deg;)<br/>Address: " + user_address + "<br/>Phone: " + user_phone; 
@@ -74,7 +78,8 @@
 
             qrResult.hidden = false;
             canvasElement.hidden = true;
-            btnScanQR.hidden = false;
+            btnScanQR.hidden = true;
+            btnSubmitLog.hidden = false;
         });
       }
     };
@@ -85,15 +90,21 @@
       console.log('Save');
       $.ajax({
           type: "POST",
-          url: "/trace/log/" + user_id + "/",
+          url: "/trace/log/" + user_uuid + "/",
           data: {
               'auth_token': 'bUb0uCjBTk8RAyQMRvVNYOxB8AdxDVxh',
               'csrfmiddlewaretoken': csrfmiddlewaretoken,
-              'location_id': location_id,
+              'location_uuid': location_uuid,
               'temperature': temperature
           },
           success: function(data){
               location.reload();
+
+              if(data['error']) {
+                alert(data['error']);
+                location.reload();
+              }
+
           }
       });
 
