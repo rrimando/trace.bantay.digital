@@ -37,6 +37,9 @@ def index(request, site=""):
 @wyvern_core
 def dashboard(request):
 
+    if not request.user.is_authenticated:
+        return redirect("/")
+
     user = User.objects.get(pk=request.user.id) if (request.user.id) else None
     site = WyvernSite.objects.get(pk=request.site.id) or None
 
@@ -61,19 +64,15 @@ def dashboard(request):
         initial={"site": request.site.id},
         auto_id="establishment_%s",
     )
-
-    if request.user.is_authenticated:
-        if request.user.is_location:
-            context["logs"] = WyvernTraceLog.objects.filter(
-                wyvern_location=request.user
-            ).order_by("-id")[:10]
-        else:
-            context["logs"] = WyvernTraceLog.objects.filter(
-                wyvern_user=request.user
-            ).order_by("-id")[:10]
-
+    
+    if request.user.is_location:
+        context["logs"] = WyvernTraceLog.objects.filter(
+            wyvern_location=request.user
+        ).order_by("-id")[:10]
     else:
-        return redirect("/")
+        context["logs"] = WyvernTraceLog.objects.filter(
+            wyvern_user=request.user
+        ).order_by("-id")[:10]
         
     site_template = "themes/trace/pages/dashboard.html"
     return render(request, site_template, context)
@@ -192,14 +191,14 @@ def map(request):
 
 
 @csrf_exempt
-def fetch(request, user_id=""):
+def fetch(request, uuid=""):
     if not request.GET:
         return JsonResponse({"Forbidden": "Method Not Allowed"})
 
     if not request.GET.get("auth_token") == "bUb0uCjBTk8RAyQMRvVNYOxB8AdxDVxh":
         return JsonResponse({"Forbidden": "Unauthorized"})
 
-    wyvern_user_data = User.objects.filter(pk=user_id).get()
+    wyvern_user_data = User.objects.filter(uuid=uuid).get()
 
     if wyvern_user_data:
         return JsonResponse(
@@ -236,14 +235,14 @@ def fetch_logs(request, user_id=""):
 
 
 @csrf_exempt
-def log(request, user_id=""):
+def log(request, uuid=""):
     if not request.POST:
         return JsonResponse({"Forbidden": "Method Not Allowed"})
 
     # if not request.POST.get('auth_token') == 'bUb0uCjBTk8RAyQMRvVNYOxB8AdxDVxh':
     #     return JsonResponse({'Forbidden': 'Unauthorized'})
 
-    wyvern_user_data = User.objects.get(pk=user_id)
+    wyvern_user_data = User.objects.get(uuid=uuid)
 
     if wyvern_user_data:
         """
@@ -252,7 +251,7 @@ def log(request, user_id=""):
         wyvern_location_id = request.POST.get("location_id")
 
         if wyvern_location_id:
-            wyvern_location_data = User.objects.get(pk=wyvern_location_id)
+            wyvern_location_data = User.objects.get(uuid=uuid)
 
             trace_log = WyvernTraceLog(
                 wyvern_user=wyvern_user_data,

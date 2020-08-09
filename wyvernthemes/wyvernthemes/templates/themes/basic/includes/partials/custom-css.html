@@ -1,7 +1,0 @@
-{% load static %}
-<!-- Custom CSS -->
-{% if theme_config.wyverntheme_custom_css %}
-	{% for custom_css in theme_config.custom_css %}
-		<link rel="stylesheet" href="{% static custom_css %}">
-	{% endfor %}
-{% endif %}

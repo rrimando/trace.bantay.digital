@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container dashboard">
     <div class="row">
         <input type="hidden" id="user_type" value="{% if request.user.is_location%}LOCATION{% else %}USER{% endif %}"/>
         <input type="hidden" id="user_id" value="{{ request.user.id }}"/>
@@ -13,7 +13,7 @@
         <input type="hidden" id="user_address" value="{{ request.user.address }}"/>
         <div class="container">
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-9 col-xs-12">
                     {% if request.user.is_location %}  
                     <strong>LOCATION: Test Location</strong>
                     {% else %}
@@ -24,7 +24,7 @@
                     <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#qr-code-reader">Launch QR reader</a>
                     {% include 'themes/basic/includes/qr-code/qr-code-reader-modal.html' %}
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 col-xs-12">
                     <h5 class="pt-3 pb-2">
                         Dashboard  
                     </h5>
@@ -74,7 +74,7 @@
                 
                     <h5 class="mt-4">This is your personal QR Code</h5>
                     <hr/>
-                    {% qr_from_text request.user.id size=20 border=5 %}
+                    {% qr_from_text request.user.uuid size=20 border=5 %}
                 </div>
             </div>
         </div>

@@ -1,7 +1,0 @@
-{% load static %}
-<!-- Custom JS -->
-{% if theme_config.wyverntheme_custom_js %}
-	{% for custom_js in theme_config.custom_js %}
-		<script src="{% static custom_js %}"></script>
-	{% endfor %}
-{% endif %}

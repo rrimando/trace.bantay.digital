@@ -40,6 +40,12 @@ main .container {
 }
 /* END REGISTRATION PAGE */
 
+/* DASHBOARD PAGE */
+.dashboard .nav.nav-tabs {
+    background: none;
+}
+/* END DASHBOARD PAGE */
+
 /* FOOTER */
 .footer .w-list-unstyled li {
     text-align: left;
