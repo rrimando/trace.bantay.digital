@@ -44,15 +44,11 @@ DEBUG = config.get("application", "debug") == "True"
 
 ALLOWED_HOSTS = config.get("hosts", "allowed").split("\n")
 
-print(ALLOWED_HOSTS)
-
-TIME_ZONE = 'PHT'
-
 # Application definition
 
 INSTALLED_APPS = [
     "wyvernuser",
-    # "django.contrib.admin",
+    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -244,14 +240,13 @@ LOGOUT_REDIRECT_URL = "/"
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Manila"
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
-
 
 ##################
 # Boostrap Forms #

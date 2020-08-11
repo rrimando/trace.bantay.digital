@@ -1,5 +1,6 @@
 {% extends theme_config.wyverntheme_base_layout %}
-{% load static qr_code crispy_forms_tags %}
+{% load static qr_code crispy_forms_tags tz %}
+{% timezone "Asia/Manila" %}
 
 {% block content %}
 
@@ -20,6 +21,13 @@
             </div>
             <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#qr-code-reader">Launch QR reader</a>
             {% include 'themes/basic/includes/qr-code/qr-code-reader-modal.html' %}
+            <hr/>
+            <div class="alert alert-primary" role="alert">
+                <strong>Trace.bantay.digital</strong> is a very small team of professionals and artists, volunteering time and effort to create an absolutely free log book replacement app for easy contact tracing. 
+                We would appreciate any bug reports and suggestions. Volunteers are also welcome!
+                <hr/>
+                <a href="/contact/" class="btn btn-success"><i class="fa fa-email" aria-hidden="true"></i>Contact Us</a>
+            </div>
         </div>
 
         <div class="col-md-8 col-sm-12">
@@ -57,7 +65,7 @@
                         <tbody>
                             {% for log in logs %}
                             <tr>
-                                <td>{{ log.wyvern_trace_date }}</td>
+                                <td>{{ log.wyvern_trace_date|localtime }}</td>
                                 <td>{{ log.wyvern_location.first_name }} </td>
                                 <td>{{ log.wyvern_user.first_name }} {{ log.wyvern_user.last_name|make_list|slice:':1'|join:''  }}.</td>
                                 <td>{{ log.wyvern_user.phone }}</td>
@@ -79,3 +87,4 @@
 </div>
 
 {% endblock %}
+{% endtimezone %}
