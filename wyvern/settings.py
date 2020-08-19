@@ -54,8 +54,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # QR Code,
-    "qr_code",
+    "qrcode",
     # Optimization
     "compressor",
     # User Agents - Detect Mobile
@@ -90,6 +91,8 @@ INSTALLED_APPS = [
     # 'wyvernmetamorph',
     "wyverntrace",
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -146,10 +149,16 @@ TEMPLATES = [
                 "wyvernthemes.context.theme_config",
                 # LMS
                 "wyvernlms.context.students",
+                # Bootstrap 4
+                "django-bs4",
+                "django.forms",
+
             ],
         },
     },
 ]
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
