@@ -1,5 +1,6 @@
 import urllib
 import datefinder
+import bs4
 
 from datetime import datetime
 from bs4 import BeautifulSoup as soup  # HTML data structure

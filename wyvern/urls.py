@@ -1,4 +1,4 @@
-""" 
+"""
 
 Wyvern Core - URL Configuration
 
@@ -10,7 +10,8 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 
-from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
 
 from . import views as wyvern_views
 from wyvernsite.urls import urlpatterns as wyvernsite_urls
@@ -44,8 +45,8 @@ import wyverncontact.views as wyverncontact_views
 urlpatterns = [
     path("", wyvern_views.index, name="core-index"),
     # User Pages
-    path("login/", auth_views.login, name="core-login"),
-    path("logout/", auth_views.logout, name="core-login"),
+    path("login/", LoginView.as_view(), name="core-login"),
+    path("logout/", LogoutView.as_view(), name="core-login"),
     path("account/", wyvern_views.account, name="core-account"),
     path("profile/", wyvern_views.profile, name="core-profile"),
     path("dashboard/", wyvern_views.dashboard, name="core-dashboard"),
