@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     # QR Code,
-    "qr_code",
+    "qrcode",
     # Optimization
     "compressor",
     # User Agents - Detect Mobile
@@ -152,6 +152,10 @@ TEMPLATES = [
                 "wyvernthemes.context.theme_config",
                 # LMS
                 "wyvernlms.context.students",
+                # Bootstrap 4
+                "django-bs4",
+                "django.forms",
+
             ],
         },
     },
