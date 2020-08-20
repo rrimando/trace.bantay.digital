@@ -90,6 +90,9 @@ INSTALLED_APPS = [
     # Client Specific Applications
     # 'wyvernmetamorph',
     "wyverntrace",
+    # Bootstrap 4
+    "django-bs4",
+    "django.forms",
 ]
 
 SITE_ID = 1
@@ -149,10 +152,6 @@ TEMPLATES = [
                 "wyvernthemes.context.theme_config",
                 # LMS
                 "wyvernlms.context.students",
-                # Bootstrap 4
-                "django-bs4",
-                "django.forms",
-
             ],
         },
     },

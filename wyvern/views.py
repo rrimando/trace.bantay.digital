@@ -1,7 +1,7 @@
 """
 
 Wyvern Core - Views
-    
+
 """
 import urllib
 from django.urls import reverse
@@ -172,7 +172,7 @@ def signup(request):
     form = WyvernUserForm(request.POST or None, {"site": request.site.id})
 
     if request.method == "POST":
-        
+
         next_url = (
             urllib.parse.unquote(request.GET.get("next"))
             if (request.GET.get("next"))
