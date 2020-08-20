@@ -1,6 +1,6 @@
 [application]
 server = POD1
-server_url = localhost
+server_url = 127.0.0.1:8000
 logo =
 debug = True
 
@@ -15,9 +15,9 @@ hostname = localhost
 modules = ('blog', 'shop')
 
 [hosts]
-allowed = localhost
-		  wyverncms.com
-		  site.com
+allowed = 127.0.0.1
+          127.0.0.1:8000
+
 
 # SPAM FILTER
 [filter]
@@ -39,6 +39,14 @@ folder = users/images
 # SITES IN DEVELOPMENT
 
 [site.com]
+sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=job,articles,gallery
+
+[127.0.0.1:8000]
+sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=job,articles,gallery
+
+[localhost:8000]
 sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
 post_type=job,articles,gallery
 

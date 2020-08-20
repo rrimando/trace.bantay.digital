@@ -152,10 +152,6 @@ TEMPLATES = [
                 "wyvernthemes.context.theme_config",
                 # LMS
                 "wyvernlms.context.students",
-                # Bootstrap 4
-                "django-bs4",
-                "django.forms",
-
             ],
         },
     },
