@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     # QR Code,
-    "qrcode",
+    "qr_code",
     # Optimization
     "compressor",
     # User Agents - Detect Mobile

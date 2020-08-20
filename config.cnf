@@ -17,6 +17,8 @@ modules = ('blog', 'shop')
 [hosts]
 allowed = 127.0.0.1
           127.0.0.1:8000
+					trace.local
+					trace.local:8000
 
 
 # SPAM FILTER
@@ -47,6 +49,14 @@ sections=jobs_section,orders_section,products_section,product_categories_section
 post_type=job,articles,gallery
 
 [localhost:8000]
+sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=job,articles,gallery
+
+[trace.local]
+sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=job,articles,gallery
+
+[trace.local:8000]
 sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
 post_type=job,articles,gallery
 
