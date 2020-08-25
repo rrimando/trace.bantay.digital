@@ -23,7 +23,7 @@
             {% include 'themes/basic/includes/qr-code/qr-code-reader-modal.html' %}
             <hr/>
             <div class="alert alert-primary" role="alert">
-                <strong>Trace.bantay.digital</strong> is a very small team of professionals and artists, volunteering time and effort to create an absolutely free log book replacement app for easy contact tracing. 
+                <strong>Trace.bantay.digital</strong> is a very small team of professionals and artists, volunteering time and effort to create an absolutely free log book replacement app for easy contact tracing.
                 We would appreciate any bug reports and suggestions. Volunteers are also welcome!
                 <hr/>
                 <a href="/contact/" class="btn btn-success"><i class="fa fa-email" aria-hidden="true"></i>Contact Us</a>
@@ -32,10 +32,10 @@
 
         <div class="col-md-8 col-sm-12">
             <h5 class="pt-3 pb-2">
-                Dashboard  
+                Dashboard
 
                 <span class="float-right">
-                    {% if request.user.is_location %}  
+                    {% if request.user.is_location %}
                     <strong>ESTABLISHMENT: {{ request.user.first_name }}</strong>
                     {% else %}
                     <strong>USER: {{ request.user.first_name }} {{ request.user.last_name }} </strong>
@@ -46,7 +46,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#logs">Recent Logs</a>
                 </li>
-                <li class="nav-item">   
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#details">Details</a>
                 </li>
             </ul>

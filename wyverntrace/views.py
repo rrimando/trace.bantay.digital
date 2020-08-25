@@ -68,10 +68,10 @@ def dashboard(request):
     if request.POST:
         if context['type'] == 'resident' and context["resident_form"].is_valid():
             context["resident_form"].save()
-        
+
         if context['type'] == 'establishment' and context["establishment_form"].is_valid():
             context["establishment_form"].save()
-    
+
     if request.user.is_location:
         context["logs"] = WyvernTraceLog.objects.filter(
             wyvern_location=request.user
@@ -80,7 +80,7 @@ def dashboard(request):
         context["logs"] = WyvernTraceLog.objects.filter(
             wyvern_user=request.user
         ).order_by("-id")[:10]
-        
+
     site_template = "themes/trace/pages/dashboard.html"
     return render(request, site_template, context)
 
@@ -157,7 +157,7 @@ def register(request, type="resident"):
                         ),
                     )
                     login(request, user)
-                    return redirect(next_url)            
+                    return redirect(next_url)
 
         site_template = "themes/trace/pages/signup.html"
         return render(request, site_template, context)
