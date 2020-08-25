@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # QR Code,
     "qr_code",
     # Optimization
@@ -89,7 +90,12 @@ INSTALLED_APPS = [
     # Client Specific Applications
     # 'wyvernmetamorph',
     "wyverntrace",
+    # Bootstrap 4
+    "django-bs4",
+    "django.forms",
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -150,6 +156,8 @@ TEMPLATES = [
         },
     },
 ]
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 

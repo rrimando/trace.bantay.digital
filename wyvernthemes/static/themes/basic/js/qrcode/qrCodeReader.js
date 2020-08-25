@@ -23,16 +23,18 @@
     var location_address = '';
     var location_phone = '';
 
-    var temperature = '36.7';
+
+
+
 
     let scanning = false;
 
     $(document).ready(function(){
       btnSubmitLog.hidden = true;
     });
-    
+
     _qrcode.callback = res => {
-      if (res) {        
+      if (res) {
         /* Fetch User Data */
 
         var user_type = document.getElementById("user_type").value;
@@ -40,7 +42,7 @@
         $.get( "/trace/fetch/" + res + "/?auth_token=bUb0uCjBTk8RAyQMRvVNYOxB8AdxDVxh", function( data ) {
             var userData = data['user'];
 
-            // console.log(userData);            
+            // console.log(userData);
 
             if(user_type == "USER") {
               user_uuid = document.getElementById("user_uuid").value;
@@ -66,8 +68,8 @@
               user_phone = userData['phone'];
             }
 
-            var user_html = "<hr/><strong>USER: " + user_name + "</strong><hr/>(" + temperature + " C&deg;)<br/>Address: " + user_address + "<br/>Phone: " + user_phone; 
-            var location_html = "<br/><br/><hr/><strong>LOCATION: " + location_name + "</strong><hr/><br/>Address: " + location_address + "<br/>Phone: " + location_phone; 
+            var user_html = "<hr/><strong>USER: " + user_name + "</strong><hr/><br/>Address: " + user_address + "<br/>Phone: " + user_phone;
+            var location_html = "<br/><br/><hr/><strong>LOCATION: " + location_name + "</strong><hr/><br/>Address: " + location_address + "<br/>Phone: " + location_phone;
 
             outputData.innerHTML = user_html + location_html;
             scanning = false;
@@ -85,6 +87,7 @@
     };
 
     btnSubmitLog.onclick = () => {
+      var temperature = document.getElementById("temperature").value;
       var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
       /* Save Custom Content  */
       console.log('Save');
@@ -122,7 +125,7 @@
           // video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
           video.srcObject = stream;
           video.play();
-          tick(); 
+          tick();
           scan();
         });
     };
