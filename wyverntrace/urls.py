@@ -1,4 +1,4 @@
-""" 
+"""
 Wyvern Trace - URL Configuration
 """
 from django.contrib import admin
@@ -14,7 +14,7 @@ urlpatterns = [
     path("", views.index, name="trace-index"),
     path("map/", views.map, name="trace-map"),
     path("generated/", views.generated, name="trace-generated"),
-    
+
     # Registration
     path("register/<str:type>/", views.register, name="trace-register-user"),
 
