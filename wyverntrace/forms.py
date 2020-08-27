@@ -1,14 +1,13 @@
 from django import forms
 from wyvernuser.models import User
+from wyverntrace.models import WyvernMedicalForm
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-class WyvernMedicalForm(forms.ModelForm):
+class WyvernMedicalForms(forms.ModelForm):
     class Meta:
-        model = User
-        CHOICES = [('0', 'No'), ('1', 'Yes')]
-        choice_field = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
-        
+        model = WyvernMedicalForm
+        fields = '__all__'
 
 
 class WyvernResidentForm(forms.ModelForm):
