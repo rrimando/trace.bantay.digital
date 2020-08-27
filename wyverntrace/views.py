@@ -58,6 +58,13 @@ def dashboard(request):
         auto_id="resident_%s",
     )
 
+    context["medical_form"] = WyvernMedicalForms(
+        request.POST or None,
+        instance=user if request.user.is_authenticated else None,
+        initial={"site": request.site.id},
+        auto_id="resident_%s",
+    )
+
     context["establishment_form"] = WyvernEstablishmentForm(
         request.POST or None,
         instance=user if request.user.is_authenticated else None,
@@ -68,6 +75,9 @@ def dashboard(request):
     if request.POST:
         if context['type'] == 'resident' and context["resident_form"].is_valid():
             context["resident_form"].save()
+
+        if context['type'] == 'resident' and context["medical_form"].is_valid():
+            context["medical_form"].save()
 
         if context['type'] == 'establishment' and context["establishment_form"].is_valid():
             context["establishment_form"].save()
