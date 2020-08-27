@@ -3,6 +3,13 @@ from wyvernuser.models import User
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
+class WyvernMedicalForm(forms.ModelForm):
+    class Meta:
+        model = User
+        CHOICES = [('0', 'No'), ('1', 'Yes')]
+        choice_field = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
+        
+
 
 class WyvernResidentForm(forms.ModelForm):
     class Meta:

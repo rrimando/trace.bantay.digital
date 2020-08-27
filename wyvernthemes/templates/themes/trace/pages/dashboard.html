@@ -33,7 +33,6 @@
         <div class="col-md-8 col-sm-12">
             <h5 class="pt-3 pb-2">
                 Dashboard
-
                 <span class="float-right">
                     {% if request.user.is_location %}
                     <strong>ESTABLISHMENT: {{ request.user.first_name }}</strong>
@@ -47,11 +46,14 @@
                     <a class="nav-link active" data-toggle="tab" href="#logs">Recent Logs</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#medical-form">Medical Form</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#details">Details</a>
                 </li>
             </ul>
             <div class="tab-content mt-3">
-                <div id="logs" class="tab-pane fade show active">
+                <div id="logs" class="tab-pane fade">
                     <h5>Your recent logs</h5>
                     <table class="table table-striped table-responsive">
                         <thead>
@@ -75,6 +77,59 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                </div>
+                <div id="medical-form" class="tab-pane fade" class="tab-pane fade show active">
+                  <h4>Important: Always update this medical form before going outside for medical convenience.</h4>
+                  <form action="index.html" method="post">
+                    <ol>
+                      <li>
+                        Are you experiencing : (Nakakaranas ka ba ng :)
+                        <ul>
+                          <li>Sore throat (Pananakit ng lalamunan / Masakit lumunok)</li>
+                          <label for="sore-throat" class="radio-inline">
+                            <input type="radio" name="sore-throat" value="Yes">Yes
+                            <input type="radio"  name="sore-throat" value="No">No
+                          </label>
+                          <li>Body pains (Pananakit ng katawan)</li>
+                          <label for="body-pain" class="radio-inline">
+                            <input type="radio"  name="body-pain" value="Yes">Yes
+                            <input type="radio"  name="body-pain" value="No">No
+                          </label>
+                          <li>Headache (Pananakit ng ulo) </li>
+                          <label for="head-ache" class="radio-inline">
+                            <input type="radio"  name="head-ache" value="Yes">Yes
+                            <input type="radio"  name="head-ache" value="No">No
+                          </label>
+                          <li>Fever for the past few days (Lagnat sa nakalipas na mga araw) </li>
+                          <label for="fever" class="radio-inline">
+                            <input type="radio"  name="fever" value="Yes">Yes
+                            <input type="radio"  name="fever" value="No">No
+                          </label>
+                        </ul>
+                      </li>
+                      <li>Have you worked together or stayed in the same close environment of confirmed COVID-19 case? (May nakasama ka ba o nakatrabahong kumpirmado sa COVID-19/  may impeksyon ng coronavirus?)</li>
+                      <label for="near-covid" class="radio-inline">
+                        <input type="radio"  name="near-covid" value="Yes">Yes
+                        <input type="radio"  name="near-covid" value="No">No
+                      </label>
+                      <li>Have you had any contact with anyone with fever, cough, colds and sore throat in the past 2 weeks ? (Mayroon ka bang nakasama na may lagnat , ubo, sipon o sakit ng lalamunan sa nakalipas na dalawang (2) lingo ?)</li>
+                      <label for="contact-symptoms" class="radio-inline">
+                        <input type="radio"  name="contact-symptoms" value="Yes">Yes
+                        <input type="radio"  name="contact-symptoms" value="No">No
+                      </label>
+                      <li>Have you travelled outside of the Philippines in the last 14 days? (Ikaw ba ay nagbyahe sa labas ng Pilipinas sa nakalipas na 14 na araw?)</li>
+                      <label for="outside-philippines" class="radio-inline">
+                        <input type="radio"  name="outside-philippines" value="Yes">Yes
+                        <input type="radio"  name="outside-philippines" value="No">No
+                      </label>
+                      <li>Have you travelled to any area in NCR aside from your home ? (Ikaw ba ay nagpunta sa ibang parte ng NCR o Metro Manila bukod sa iyong bahay?)</li>
+                      <label for="travelled-ncr" class="radio-inline">
+                        <input type="radio"  name="travelled-ncr" value="Yes">Yes
+                        <input type="radio"  name="travelled-ncr" value="No">No
+                      </label>
+                    </ol>
+                    <button type="submit" class="btn btn-success float-right">Update</button>
+                  </form>
                 </div>
                 <div id="details" class="tab-pane fade">
                     {% with "themes/trace/partials/forms/"|add:type|add:"-form.html" as template %}
