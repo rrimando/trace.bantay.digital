@@ -26,12 +26,16 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
 from wyvernuser.forms import WyvernUserForm
-from wyverntrace.forms import WyvernEstablishmentForm, WyvernResidentForm
+from wyverntrace.models import WyvernMedicalForm
+from wyverntrace.forms import WyvernEstablishmentForm, WyvernResidentForm, WyvernMedicalForms
 
 
 @wyvern_core
 def index(request, site=""):
     return redirect("/")
+
+
+
 
 
 @wyvern_core
@@ -47,7 +51,7 @@ def dashboard(request):
     context = {
         'user': user,
         'site': site,
-        'type': 'establishment' if user.is_location else 'resident'
+        'type': 'establishment' if user.is_location else 'resident',
     }
 
     # Load Registration Forms
@@ -58,9 +62,10 @@ def dashboard(request):
         auto_id="resident_%s",
     )
 
+
     context["medical_form"] = WyvernMedicalForms(
         request.POST or None,
-        instance=user if request.user.is_authenticated else None,
+        instance= user if request.user.is_authenticated else None,
         initial={"site": request.site.id},
         auto_id="resident_%s",
     )
@@ -72,12 +77,18 @@ def dashboard(request):
         auto_id="establishment_%s",
     )
 
+
+
     if request.POST:
+        if context['type'] == 'resident' and context["medical_form"].is_valid():
+            form = WyvernMedicalForms(request.POST)
+            if form.is_valid():
+                mdform = form.save()
+                mdform.user = request.user
+                mdform.save()
+
         if context['type'] == 'resident' and context["resident_form"].is_valid():
             context["resident_form"].save()
-
-        if context['type'] == 'resident' and context["medical_form"].is_valid():
-            context["medical_form"].save()
 
         if context['type'] == 'establishment' and context["establishment_form"].is_valid():
             context["establishment_form"].save()
@@ -93,6 +104,7 @@ def dashboard(request):
 
     site_template = "themes/trace/pages/dashboard.html"
     return render(request, site_template, context)
+
 
 @wyvern_core
 def register(request, type="resident"):
