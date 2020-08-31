@@ -27,7 +27,11 @@ from django.views.decorators.csrf import csrf_exempt
 
 from wyvernuser.forms import WyvernUserForm
 from wyverntrace.models import WyvernMedicalForm
-from wyverntrace.forms import WyvernEstablishmentForm, WyvernResidentForm, WyvernMedicalForms
+from wyverntrace.forms import (
+    WyvernEstablishmentForm,
+    WyvernResidentForm,
+    WyvernMedicalForms,
+)
 
 
 @wyvern_core
@@ -48,9 +52,9 @@ def dashboard(request):
 
     # Prepare Context
     context = {
-        'user': user,
-        'site': site,
-        'type': 'establishment' if user.is_location else 'resident',
+        "user": user,
+        "site": site,
+        "type": "establishment" if user.is_location else "resident",
     }
 
     # Load Registration Forms
@@ -69,28 +73,33 @@ def dashboard(request):
     )
 
     # Prepare Resident Exclusive Content - This Prevents Creating Health Declaration Forms for None Residents
-    if context['type'] == 'resident':
+    if context["type"] == "resident":
         # Fetch Latest Medical Form
         # https://docs.djangoproject.com/en/3.0/ref/models/querysets/#get-or-create
-        user_health_dec, created = WyvernMedicalForm.objects.get_or_create(wyvern_medical_form_user=user,wyvern_medical_form_date=datetime.date.today)
+        user_health_dec, created = WyvernMedicalForm.objects.get_or_create(
+            wyvern_medical_form_user=user, wyvern_medical_form_date=datetime.date.today
+        )
         context["user_health_dec"] = user_health_dec
         context["medical_form"] = WyvernMedicalForms(
             request.POST or None,
-            instance=user_health_dec, # We are pretty sure this isn't None because of get_or_create
+            instance=user_health_dec,  # We are pretty sure this isn't None because of get_or_create
         )
 
     if request.POST:
-        if context['type'] == 'resident' and context["medical_form"].is_valid():
+        if context["type"] == "resident" and context["medical_form"].is_valid():
             form = WyvernMedicalForms(request.POST)
             if form.is_valid():
                 mdform = form.save()
                 mdform.user = request.user
                 mdform.save()
 
-        if context['type'] == 'resident' and context["resident_form"].is_valid():
+        if context["type"] == "resident" and context["resident_form"].is_valid():
             context["resident_form"].save()
 
-        if context['type'] == 'establishment' and context["establishment_form"].is_valid():
+        if (
+            context["type"] == "establishment"
+            and context["establishment_form"].is_valid()
+        ):
             context["establishment_form"].save()
 
     if request.user.is_location:
@@ -109,7 +118,7 @@ def dashboard(request):
 @wyvern_core
 def register(request, type="resident"):
     """
-        Trace Custom Registration
+    Trace Custom Registration
     """
     if request.site and request.site.site_status == 1:
 
@@ -117,9 +126,7 @@ def register(request, type="resident"):
         site = WyvernSite.objects.get(pk=request.site.id) or None
 
         # Prepare Context
-        context = {
-            'site': site
-        }
+        context = {"site": site}
 
         # Load Registration Forms
         context["resident_form"] = WyvernResidentForm(
@@ -165,9 +172,7 @@ def register(request, type="resident"):
                 user = authenticate(username=username, password=password)
 
                 if user == None:
-                    messages.add_message(
-                        request, 20, "Your account has been created"
-                    )
+                    messages.add_message(request, 20, "Your account has been created")
                     return redirect("/accounts/login/")
 
                 else:
@@ -179,7 +184,7 @@ def register(request, type="resident"):
                         ),
                     )
                     login(request, user)
-                    return redirect(next_url )
+                    return redirect(next_url)
 
         site_template = "themes/trace/pages/signup.html"
         return render(request, site_template, context)
@@ -234,11 +239,11 @@ def fetch(request, uuid=""):
             {
                 "Authentication": "True",
                 "user": {
-                    'uuid': wyvern_user_data.uuid,
-                    'first_name': wyvern_user_data.first_name,
-                    'last_name': wyvern_user_data.last_name,
-                    'address': wyvern_user_data.address,
-                    'phone': wyvern_user_data.phone
+                    "uuid": wyvern_user_data.uuid,
+                    "first_name": wyvern_user_data.first_name,
+                    "last_name": wyvern_user_data.last_name,
+                    "address": wyvern_user_data.address,
+                    "phone": wyvern_user_data.phone,
                 },
             }
         )
@@ -261,7 +266,12 @@ def fetch_logs(request, user_id=""):
         return JsonResponse(
             {
                 "Authentication": "True",
-                "user": serializers.serialize("json", [wyvern_user_data,]),
+                "user": serializers.serialize(
+                    "json",
+                    [
+                        wyvern_user_data,
+                    ],
+                ),
             }
         )
 
@@ -281,7 +291,7 @@ def log(request, uuid=""):
 
     if wyvern_user_data:
         """
-            Create Location Log
+        Create Location Log
         """
         wyvern_location_uuid = request.POST.get("location_uuid")
 
@@ -298,7 +308,12 @@ def log(request, uuid=""):
 
             else:
 
-                return JsonResponse({"Authentication": "True", "error": "Cannot log resident as location"})
+                return JsonResponse(
+                    {
+                        "Authentication": "True",
+                        "error": "Cannot log resident as location",
+                    }
+                )
 
             trace = trace_log.save()
 
@@ -307,11 +322,15 @@ def log(request, uuid=""):
         else:
 
             return JsonResponse(
-                {"Authentication": "True", "error": "Could not save log",}
+                {
+                    "Authentication": "True",
+                    "error": "Could not save log",
+                }
             )
 
     else:
         return JsonResponse({"Authentication": "False"})
+
 
 def manual_log(request):
 

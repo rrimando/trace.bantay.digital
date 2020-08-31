@@ -12,10 +12,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(
-            model_name="wyvernthemesite", name="wyverntheme_site_site",
+            model_name="wyvernthemesite",
+            name="wyverntheme_site_site",
         ),
         migrations.RemoveField(
-            model_name="wyvernthemesite", name="wyverntheme_site_theme",
+            model_name="wyvernthemesite",
+            name="wyverntheme_site_theme",
         ),
         migrations.AddField(
             model_name="wyvernthemeconfig",
@@ -39,5 +41,7 @@ class Migration(migrations.Migration):
                 to="wyvernsite.WyvernSite",
             ),
         ),
-        migrations.DeleteModel(name="WyvernThemeSite",),
+        migrations.DeleteModel(
+            name="WyvernThemeSite",
+        ),
     ]

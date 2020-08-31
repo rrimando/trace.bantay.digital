@@ -157,7 +157,7 @@ TEMPLATES = [
     },
 ]
 
-FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -233,9 +233,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 AUTH_USER_MODEL = "wyvernuser.User"
@@ -278,7 +284,11 @@ CKEDITOR_BASEPATH = STATIC_URL + "/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/"
 CKEDITOR_FILENAME_GENERATOR = "wyvern.util.upload.get_ck_file_path"
 CKEDITOR_CONFIGS = {
-    "default": {"toolbar": "Advanced", "height": "300px", "width": "100%",},
+    "default": {
+        "toolbar": "Advanced",
+        "height": "300px",
+        "width": "100%",
+    },
 }
 # CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
 # CKEDITOR_BROWSE_SHOW_DIRS = True

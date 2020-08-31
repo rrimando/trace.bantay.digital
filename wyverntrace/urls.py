@@ -14,16 +14,12 @@ urlpatterns = [
     path("", views.index, name="trace-index"),
     path("map/", views.map, name="trace-map"),
     path("generated/", views.generated, name="trace-generated"),
-
     # Registration
     path("register/<str:type>/", views.register, name="trace-register-user"),
-
     # User Dashboard
     path("dashboard/", views.dashboard, name="trace-dashboard-user"),
-
     # API END POINTS
     # TODO: MOVE TO DRF
-
     # Fetch User Details
     path("fetch/<str:uuid>/", views.fetch, name="trace-fetch-user"),
     # Log User Location

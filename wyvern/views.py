@@ -47,7 +47,7 @@ def index(request):
 
     else:
         """
-            Serve the custom sites
+        Serve the custom sites
         """
         if request.site and request.site.site_status == 1:
             # Fetch Initial Data

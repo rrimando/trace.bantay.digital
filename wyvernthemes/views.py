@@ -39,7 +39,10 @@ def index(request, site=""):
 
         else:
             form = WyvernThemeConfigForm(
-                instance=theme_config, initial={"wyverntheme_site": request.site,}
+                instance=theme_config,
+                initial={
+                    "wyverntheme_site": request.site,
+                },
             )
 
         return render(

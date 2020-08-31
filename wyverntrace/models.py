@@ -53,11 +53,35 @@ class WyvernMedicalForm(models.Model):
     )
 
     wyvern_medical_form_date = models.DateField(default=datetime.date.today)
-    wyvern_have_sore_throat = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_have_body_pain = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_have_head_ache = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_have_fever = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_near_covid = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_contact_symptoms = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_travelled_outside_philippines = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_travelled_ncr = models.IntegerField(choices=wyvern_answer, default=0,)
+    wyvern_have_sore_throat = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_have_body_pain = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_have_head_ache = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_have_fever = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_near_covid = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_contact_symptoms = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_travelled_outside_philippines = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_travelled_ncr = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )

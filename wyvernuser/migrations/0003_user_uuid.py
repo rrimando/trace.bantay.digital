@@ -7,13 +7,15 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wyvernuser', '0002_auto_20200803_0435'),
+        ("wyvernuser", "0002_auto_20200803_0435"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='uuid',
-            field=models.CharField(blank=True, default=uuid.uuid4, max_length=100, null=True),
+            model_name="user",
+            name="uuid",
+            field=models.CharField(
+                blank=True, default=uuid.uuid4, max_length=100, null=True
+            ),
         ),
     ]
