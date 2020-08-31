@@ -1,7 +1,8 @@
 """
-Wyvern LMS - Views
+Wyvern Trace - Views
 
 """
+import datetime
 import wyvern.util.config as config
 
 from django.urls import reverse
@@ -60,15 +61,13 @@ def dashboard(request):
     # Load Registration Forms
     context["resident_form"] = WyvernResidentForm(
         request.POST or None,
-        instance=user if request.user.is_authenticated else None,
-        initial={"site": request.site.id},
+        instance=user,
         auto_id="resident_%s",
     )
 
     context["establishment_form"] = WyvernEstablishmentForm(
         request.POST or None,
-        instance=user if request.user.is_authenticated else None,
-        initial={"site": request.site.id},
+        instance=user,
         auto_id="establishment_%s",
     )
 
@@ -76,32 +75,48 @@ def dashboard(request):
     if context["type"] == "resident":
         # Fetch Latest Medical Form
         # https://docs.djangoproject.com/en/3.0/ref/models/querysets/#get-or-create
+        # https://stackoverflow.com/questions/7217811/query-datetime-by-todays-date-in-django
+        today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
+        today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
         user_health_dec, created = WyvernMedicalForm.objects.get_or_create(
-            wyvern_medical_form_user=user, wyvern_medical_form_date=datetime.date.today
+            wyvern_medical_form_user=user,
+            wyvern_medical_form_date__range=(today_min, today_max),
         )
         context["user_health_dec"] = user_health_dec
         context["medical_form"] = WyvernMedicalForms(
             request.POST or None,
             instance=user_health_dec,  # We are pretty sure this isn't None because of get_or_create
         )
+        context["today"] = datetime.date.today()
 
     if request.POST:
         if context["type"] == "resident" and context["medical_form"].is_valid():
-            form = WyvernMedicalForms(request.POST)
-            if form.is_valid():
-                mdform = form.save()
-                mdform.user = request.user
-                mdform.save()
+            if context["medical_form"].is_valid():
+                context["medical_form"].save()
+                messages.add_message(
+                    request, 20, "Thank you for filling up your health declaration form"
+                )
+            else:
+                messages.add_message(
+                    request, 20, "There was an error with your submission"
+                )
+            return redirect(reverse("trace-dashboard-user"))
+
 
         if context["type"] == "resident" and context["resident_form"].is_valid():
             context["resident_form"].save()
+            messages.add_message(request, 20, "Your details have been updated")
+            return redirect(reverse("trace-dashboard-user"))
 
+        
         if (
             context["type"] == "establishment"
             and context["establishment_form"].is_valid()
         ):
             context["establishment_form"].save()
-
+            messages.add_message(request, 20, "Your details have been updated")
+            return redirect(reverse("trace-dashboard-user"))
+        
     if request.user.is_location:
         context["logs"] = WyvernTraceLog.objects.filter(
             wyvern_location=request.user
@@ -184,7 +199,7 @@ def register(request, type="resident"):
                         ),
                     )
                     login(request, user)
-                    return redirect(next_url)
+                    return redirect(reverse("trace-dashboard-user"))
 
         site_template = "themes/trace/pages/signup.html"
         return render(request, site_template, context)

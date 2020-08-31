@@ -1,33 +1,15 @@
 {% load crispy_forms_tags %}
 <form method="post">
+    {% if resident_form.errors %}
+        {% for error in resident_form.errors %}
+            <div class="alert alert-primary mt-1" role="alert">
+                {{ error|escape }}
+            </div>
+        {% endfor %}
+        <hr/>
+    {% endif %}
     {% csrf_token %}
-      <div class="row">
-            <div class="col-md-12">
-                {{ resident_form.first_name|as_crispy_field }}
-            </div>
-            <div class="col-md-12">
-                {{ resident_form.last_name|as_crispy_field }}
-            </div>
-            <div class="col-md-6">
-                {{ resident_form.email|as_crispy_field }}
-            </div>
-            {% if not request.user.is_authenticated %}
-            <div class="col-md-6">
-                {{ resident_form.password|as_crispy_field }}
-            </div>
-            {% endif %}
-            <div class="col-md-6">
-                {{ resident_form.phone|as_crispy_field }}
-            </div>
-            <div class="col-md-12">
-                {{ resident_form.address|as_crispy_field }}
-            </div>
-            <div class="col-md-12">
-                {{ resident_form.accepted_terms|as_crispy_field }}
-            </div>
-        </div>
-          {{ resident_form.username.as_hidden }}
-          {{ resident_form.site_id.as_hidden }}
+    {{ resident_form | crispy }}
     <hr/>
     <input type="hidden" name="next" value="/trace/dashboard" />
     {% if not request.user.is_authenticated %}
