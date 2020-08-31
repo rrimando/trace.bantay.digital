@@ -5,10 +5,17 @@ logo =
 debug = True
 
 # Configure for yourself
+# [database]
+# database = bantaydigital
+# username = root
+# password =
+# hostname = localhost
+
 [database]
-database = bantaydigital
+database = wyvern
 username = root
-password =
+password = 
+# password = 
 hostname = localhost
 
 [modules]

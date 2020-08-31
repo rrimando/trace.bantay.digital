@@ -5,6 +5,8 @@ media
 .config
 config.cnf
 *.pyc
+__pycache__/
+*.py[cod]
 ./sftp-config.json
 *.DS_Store
 *alliedhospitalsupply*
