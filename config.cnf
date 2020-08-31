@@ -1,6 +1,6 @@
 [application]
 server = POD1
-server_url = 192.168.1.106:8000
+server_url = localhost:8000
 logo =
 debug = True
 
@@ -13,8 +13,8 @@ debug = True
 
 [database]
 database = wyvern
-username = root
-password = 
+username = wyvern
+password = wyvern
 # password = 
 hostname = localhost
 
@@ -24,8 +24,10 @@ modules = ('blog', 'shop')
 [hosts]
 allowed = 127.0.0.1
           127.0.0.1:8000
-					trace.local
-					trace.local:8000
+          localhost
+          localhost:8000
+          trace.local
+          trace.local:8000
           192.168.1.106
           192.168.1.106:8000
           b57c4538cf85.ngrok.io

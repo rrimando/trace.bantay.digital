@@ -35,15 +35,14 @@ def index(request, site=""):
     return redirect("/")
 
 
-
-
-
 @wyvern_core
 def dashboard(request):
 
+    # Redirect User to Landing Page If Not Logged In
     if not request.user.is_authenticated:
         return redirect("/")
 
+    # Fetch Initial Data From User Info in Request
     user = User.objects.get(pk=request.user.id) if (request.user.id) else None
     site = WyvernSite.objects.get(pk=request.site.id) or None
 
@@ -62,14 +61,6 @@ def dashboard(request):
         auto_id="resident_%s",
     )
 
-
-    context["medical_form"] = WyvernMedicalForms(
-        request.POST or None,
-        instance= user if request.user.is_authenticated else None,
-        initial={"site": request.site.id},
-        auto_id="resident_%s",
-    )
-
     context["establishment_form"] = WyvernEstablishmentForm(
         request.POST or None,
         instance=user if request.user.is_authenticated else None,
@@ -77,7 +68,16 @@ def dashboard(request):
         auto_id="establishment_%s",
     )
 
-
+    # Prepare Resident Exclusive Content - This Prevents Creating Health Declaration Forms for None Residents
+    if context['type'] == 'resident':
+        # Fetch Latest Medical Form
+        # https://docs.djangoproject.com/en/3.0/ref/models/querysets/#get-or-create
+        user_health_dec, created = WyvernMedicalForm.objects.get_or_create(wyvern_medical_form_user=user,wyvern_medical_form_date=datetime.date.today)
+        context["user_health_dec"] = user_health_dec
+        context["medical_form"] = WyvernMedicalForms(
+            request.POST or None,
+            instance=user_health_dec, # We are pretty sure this isn't None because of get_or_create
+        )
 
     if request.POST:
         if context['type'] == 'resident' and context["medical_form"].is_valid():
@@ -179,7 +179,7 @@ def register(request, type="resident"):
                         ),
                     )
                     login(request, user)
-                    return redirect(next_url)
+                    return redirect(next_url )
 
         site_template = "themes/trace/pages/signup.html"
         return render(request, site_template, context)

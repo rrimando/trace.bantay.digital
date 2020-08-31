@@ -1,24 +1,16 @@
-from django.db import models
+import datetime
 
-# Create your models here.
+from django.db import models
 
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser, Group
-import datetime
 
 from wyvern.util.upload import get_file_path
 
 from wyvernuser.models import User
 from wyvernsite.models import WyvernSite
 from wyvern.util.array import choices
-
-
-# class WyvernLocation(models.Model):
-#     pass
-
-# class WyvernTraceUserInfo(models.Model):
-#     pass
 
 
 class WyvernTraceLog(models.Model):
