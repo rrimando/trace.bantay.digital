@@ -52,7 +52,6 @@ class WyvernResidentForm(forms.ModelForm):
             "interests",
             "is_location",
             "uuid",
-            "password"
         ]
         labels = {
             "email": "Email/Username",
