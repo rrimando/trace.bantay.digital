@@ -2,9 +2,9 @@
     <div class="col-md-12">
         <div class="messages">
             {% for message in messages %}
-            <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            <div class="alert alert-info">
                 <strong>{{ message }}</strong>
-            </span>
+            </div>
             {% endfor %}
         </div>
     </div>

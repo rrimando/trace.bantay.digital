@@ -1,0 +1,9 @@
+{% load crispy_forms_tags %}
+<form method="post">
+    {% include 'themes/trace/partials/messages.html' with form=resident_form %}
+    {% csrf_token %}
+    {{ resident_form | crispy }}
+    <hr/>
+    <input type="hidden" name="next" value="/trace/dashboard" />
+    <button type="submit" class="btn btn-success float-right">Update</button>
+</form>

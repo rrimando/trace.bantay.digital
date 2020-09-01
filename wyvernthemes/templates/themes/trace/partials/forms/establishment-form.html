@@ -1,5 +1,6 @@
 {% load crispy_forms_tags %}
 <form method="post">
+    {% include 'themes/trace/partials/messages.html' with form=establishment_form %}
     {% csrf_token %}
     <div class="row">
         <div class="col-md-12">

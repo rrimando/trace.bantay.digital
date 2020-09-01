@@ -30,7 +30,9 @@ from wyvernuser.forms import WyvernUserForm
 from wyverntrace.models import WyvernMedicalForm
 from wyverntrace.forms import (
     WyvernEstablishmentForm,
+    WyvernEstablishmentDetailsForm,
     WyvernResidentForm,
+    WyvernResidentDetailsForm,
     WyvernMedicalForms,
 )
 
@@ -41,7 +43,7 @@ def index(request, site=""):
 
 
 @wyvern_core
-def dashboard(request):
+def dashboard(request): 
 
     # Redirect User to Landing Page If Not Logged In
     if not request.user.is_authenticated:
@@ -59,13 +61,13 @@ def dashboard(request):
     }
 
     # Load Registration Forms
-    context["resident_form"] = WyvernResidentForm(
+    context["resident_form"] = WyvernResidentDetailsForm(
         request.POST or None,
         instance=user,
         auto_id="resident_%s",
     )
 
-    context["establishment_form"] = WyvernEstablishmentForm(
+    context["establishment_form"] = WyvernEstablishmentDetailsForm(
         request.POST or None,
         instance=user,
         auto_id="establishment_%s",

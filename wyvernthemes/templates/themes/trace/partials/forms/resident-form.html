@@ -1,13 +1,6 @@
 {% load crispy_forms_tags %}
 <form method="post">
-    {% if resident_form.errors %}
-        {% for error in resident_form.errors %}
-            <div class="alert alert-primary mt-1" role="alert">
-                {{ error|escape }}
-            </div>
-        {% endfor %}
-        <hr/>
-    {% endif %}
+    {% include 'themes/trace/partials/messages.html' with form=resident_form %}
     {% csrf_token %}
     <div class="row">
         <div class="col-md-12">
