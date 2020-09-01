@@ -7,33 +7,33 @@
 
 
 def choices(em):
-    """ 
+    """
     Choices
-  
+
     returns value, name pair for dropdown options
-  
-    Parameters: 
+
+    Parameters:
     em (obj): Django Object
-  
-    Returns: 
+
+    Returns:
     dict: Dictionary for options
-  
+
     """
     return [(e.value, e.name) for e in em]
 
 
 def list_choices(fl):
-    """ 
+    """
     List Choices
-  
+
     creates a dict from a flat dict
-  
-    Parameters: 
+
+    Parameters:
     fl (list): List
-  
-    Returns: 
+
+    Returns:
     dict: Dictionary for options
-  
+
     """
 
     return [(str(val), str(val)) for val in fl]

@@ -35,7 +35,7 @@ def index(request):
 
     else:
         """
-            Serve the custom sites
+        Serve the custom sites
         """
 
         products = WyvernProduct.objects.filter(

@@ -11,6 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(
-            model_name="wyvernjobapplication", name="job_application_applicant_info",
+            model_name="wyvernjobapplication",
+            name="job_application_applicant_info",
         ),
     ]

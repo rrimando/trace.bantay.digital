@@ -102,7 +102,7 @@ def index(request):
 
     else:
         """
-            Serve the custom sites
+        Serve the custom sites
         """
         if request.site:
             site_template = "themes/{}/contact.html".format(request.site.site_template)
@@ -165,7 +165,7 @@ def survey(request):
 
     else:
         """
-            Serve the custom sites
+        Serve the custom sites
         """
         if request.site:
             site_template = "themes/{}/contact.html".format(request.site.site_template)
@@ -249,7 +249,7 @@ def form_submission(request):
 
     else:
         """
-            Serve the custom sites
+        Serve the custom sites
         """
         if request.site:
             site_template = "themes/{}/contact.html".format(request.site.site_template)

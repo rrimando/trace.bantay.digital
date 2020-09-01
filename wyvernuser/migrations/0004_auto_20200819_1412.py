@@ -7,23 +7,27 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wyvernuser', '0003_user_uuid'),
+        ("wyvernuser", "0003_user_uuid"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='accepted_terms',
+            model_name="user",
+            name="accepted_terms",
             field=models.BooleanField(default=False),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='first_name',
-            field=models.CharField(blank=True, max_length=150, verbose_name='first name'),
+            model_name="user",
+            name="first_name",
+            field=models.CharField(
+                blank=True, max_length=150, verbose_name="first name"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='uuid',
-            field=models.CharField(blank=True, default=uuid.uuid4, max_length=100, null=True, unique=True),
+            model_name="user",
+            name="uuid",
+            field=models.CharField(
+                blank=True, default=uuid.uuid4, max_length=100, null=True, unique=True
+            ),
         ),
     ]

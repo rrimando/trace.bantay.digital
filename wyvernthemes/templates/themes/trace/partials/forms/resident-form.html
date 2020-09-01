@@ -1,6 +1,8 @@
 {% load crispy_forms_tags %}
 <form method="post">
+    {% include 'themes/trace/partials/messages.html' with form=resident_form %}
     {% csrf_token %}
+<<<<<<< HEAD
       <div class="row">
             <div class="col-md-12">
                 {{ resident_form.first_name|as_crispy_field }}
@@ -28,6 +30,34 @@
         </div>
           {{ resident_form.username.as_hidden }}
           {{ resident_form.site_id.as_hidden }}
+=======
+    <div class="row">
+        <div class="col-md-12">
+            {{ resident_form.email | as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+            {{ resident_form.first_name | as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+            {{ resident_form.last_name | as_crispy_field }}
+        </div>
+        {% if not request.user.is_authenticated %}
+        <div class="col-md-6">
+            {{ resident_form.password | as_crispy_field }}
+        </div>
+        {% endif %}
+        <div class="col-md-6">
+            {{ resident_form.phone | as_crispy_field }}
+        </div>
+        <div class="col-md-12">
+            {{ resident_form.address | as_crispy_field }}
+        </div>
+        <div class="col-md-12">
+            {{ resident_form.accepted_terms|as_crispy_field }}
+        </div>
+        {% autoescape off %}{{ resident_form.username.as_hidden }}{% endautoescape %}
+    </div>
+>>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
     <hr/>
     <input type="hidden" name="next" value="/trace/dashboard" />
     {% if not request.user.is_authenticated %}

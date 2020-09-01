@@ -6,6 +6,7 @@
 
 <div class="container dashboard">
     <div class="row">
+        {% include 'themes/trace/partials/messages.html' %}
         <input type="hidden" id="user_type" value="{% if request.user.is_location%}LOCATION{% else %}USER{% endif %}"/>
         <input type="hidden" id="user_uuid" value="{{ request.user.uuid }}"/>
         <input type="hidden" id="user_first_name" value="{{ request.user.first_name }}"/>
@@ -30,6 +31,7 @@
             </div>
         </div>
 
+        <!-- Consider Making Establishment Dashboard and Resident Dashboard Separate -->
         <div class="col-md-8 col-sm-12">
             <h5 class="pt-3 pb-2">
                 Dashboard
@@ -81,13 +83,24 @@
                     </table>
                 </div>
                 <div id="medical-form" class="tab-pane fade">
+<<<<<<< HEAD
                   <h4>Important: Always update this medical form before going outside for medical convenience.</h4>
                   {% with "themes/trace/partials/forms/medical-form.html" as medicalForm %}
                       {% include medicalForm %}
                   {% endwith %}
+=======
+                    <h4>Medical Health Declaration for {{ today }}</h4>
+                    <div class="alert alert-danger">
+                        <i class="fa fa-exclamation-triangle"></i>
+                        Important: Always update this medical form before going outside for medical convenience.
+                    </div>
+                    {% with "themes/trace/partials/forms/medical-form.html" as medicalForm %}
+                        {% include medicalForm %}
+                    {% endwith %}
+>>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
                 </div>
                 <div id="details" class="tab-pane fade">
-                    {% with "themes/trace/partials/forms/"|add:type|add:"-form.html" as template %}
+                    {% with "themes/trace/partials/forms/"|add:type|add:"-details-form.html" as template %}
                         {% include template %}
                     {% endwith %}
                 </div>

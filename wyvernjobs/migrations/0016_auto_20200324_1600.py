@@ -10,7 +10,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(model_name="wyvernjobs", name="job_frequency",),
+        migrations.RemoveField(
+            model_name="wyvernjobs",
+            name="job_frequency",
+        ),
         migrations.AddField(
             model_name="wyvernjobs",
             name="job_hours",

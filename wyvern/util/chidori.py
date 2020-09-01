@@ -38,8 +38,8 @@ def wyvern_core(func):
             """If we're managing through the wyvern dashboard"""
             if request.site_url == config.get("application", "server_url"):
                 """
-                    Oh you may be managing from the dashboard, let's check if you own it 
-                    TODO: Add check if you have permissions
+                Oh you may be managing from the dashboard, let's check if you own it
+                TODO: Add check if you have permissions
                 """
                 request.wyvern = True
                 if request.user.is_authenticated:

@@ -134,7 +134,8 @@ class Migration(migrations.Migration):
             new_name="job_applicant_user",
         ),
         migrations.RemoveField(
-            model_name="wyvernjobapplicant", name="job_application_job",
+            model_name="wyvernjobapplicant",
+            name="job_application_job",
         ),
         migrations.AddField(
             model_name="wyvernjobapplicant",

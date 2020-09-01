@@ -11,9 +11,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(
-            model_name="wyvernlmsstudent", name="wyvernlms_prev_school",
+            model_name="wyvernlmsstudent",
+            name="wyvernlms_prev_school",
         ),
         migrations.RemoveField(
-            model_name="wyvernlmsstudent", name="wyvernlms_year_graduated",
+            model_name="wyvernlmsstudent",
+            name="wyvernlms_year_graduated",
         ),
     ]
