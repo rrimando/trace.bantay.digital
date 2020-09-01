@@ -10,18 +10,18 @@ import unidecode
 
 
 def file_slug(slug):
-    """ 
+    """
     Slugify
-  
+
     returns a slug
-  
-    Parameters: 
-    string (str): plain text string 
+
+    Parameters:
+    string (str): plain text string
     # TODO: unicode fixes
-  
-    Returns: 
+
+    Returns:
     return: slug of string
-  
+
     """
     slug = unidecode.unidecode(slug).lower()
     return re.sub(r"[\W_]+", "_", slug)

@@ -1,5 +1,6 @@
 {% load crispy_forms_tags %}
 <form method="post">
+    {% include 'themes/trace/partials/messages.html' with form=establishment_form %}
     {% csrf_token %}
     <div class="row">
         <div class="col-md-12">
@@ -23,11 +24,13 @@
             {{ establishment_form.address|as_crispy_field }}
         </div>
         <div class="col-md-12">
-            {{ resident_form.accepted_terms|as_crispy_field }}
+            {{ establishment_form.accepted_terms|as_crispy_field }}
         </div>
         <input type="hidden" name="is_location" value="true" />
-        {{ establishment_form.username.as_hidden }}
-        {{ establishment_form.site_id.as_hidden }}
+        {% autoescape off %}
+            {{ establishment_form.username.as_hidden }}
+            {{ establishment_form.site_id.as_hidden }}
+        {% endautoescape %}
     </div>
     <hr/>
     <input type="hidden" name="next" value="/trace/dashboard" />

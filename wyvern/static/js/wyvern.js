@@ -23,7 +23,7 @@ $(document).ready(function(){
     });
 
     /* Resident */
-    $('#resident_username').val($('#establishment_email').val());
+    $('#resident_username').val($('#resident_email').val());
     $('#resident_email').on('keyup', function(){
         // Autofill Username
         var username = $(this).val();

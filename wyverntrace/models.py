@@ -1,6 +1,6 @@
-from django.db import models
+import datetime
 
-# Create your models here.
+from django.db import models
 
 from django.db import models
 from django.utils import timezone
@@ -10,13 +10,7 @@ from wyvern.util.upload import get_file_path
 
 from wyvernuser.models import User
 from wyvernsite.models import WyvernSite
-
-
-# class WyvernLocation(models.Model):
-#     pass
-
-# class WyvernTraceUserInfo(models.Model):
-#     pass
+from wyvern.util.array import choices
 
 
 class WyvernTraceLog(models.Model):
@@ -45,4 +39,49 @@ class WyvernTraceLog(models.Model):
 
 
 class WyvernMedicalForm(models.Model):
-    pass
+    wyvern_answer = (
+        (0, ("No")),
+        (1, ("Yes")),
+    )
+
+    wyvern_medical_form_user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="wyvern_user",
+    )
+
+    wyvern_medical_form_date = models.DateField(default=datetime.date.today)
+    wyvern_have_sore_throat = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_have_body_pain = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_have_head_ache = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_have_fever = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_near_covid = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_contact_symptoms = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_travelled_outside_philippines = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )
+    wyvern_travelled_ncr = models.IntegerField(
+        choices=wyvern_answer,
+        default=0,
+    )

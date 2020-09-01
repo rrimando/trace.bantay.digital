@@ -23,7 +23,11 @@ def index(request, site=""):
         return render(
             request,
             "blog.html",
-            {"page": "blog", "template_action": "blog/list.html", "sites": user_sites,},
+            {
+                "page": "blog",
+                "template_action": "blog/list.html",
+                "sites": user_sites,
+            },
         )
     else:
         site_template = "themes/{}/blog/pages/index.html".format(
@@ -84,7 +88,7 @@ def view(request, slug=""):
 def edit(request, slug="", site=""):
     # TODO: Slug has to be unique --- Fix either add site url to params or modify slug
     """
-        Bug the correct way to fetch this is with the site url/id -- but doing so will return a blank
+    Bug the correct way to fetch this is with the site url/id -- but doing so will return a blank
     """
     post_site = WyvernSite.objects.get(site_url=site)
     post = WyvernPost.objects.filter(post_slug=slug, post_site=post_site).first()

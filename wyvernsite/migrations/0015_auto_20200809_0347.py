@@ -7,28 +7,48 @@ import wyvern.util.upload
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wyvernsite', '0014_wyvernsite_site_redirect'),
+        ("wyvernsite", "0014_wyvernsite_site_redirect"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='wyvernsite',
-            name='site_favicon',
-            field=models.ImageField(blank=True, default=None, null=True, upload_to=wyvern.util.upload.get_file_path),
+            model_name="wyvernsite",
+            name="site_favicon",
+            field=models.ImageField(
+                blank=True,
+                default=None,
+                null=True,
+                upload_to=wyvern.util.upload.get_file_path,
+            ),
         ),
         migrations.AlterField(
-            model_name='wyvernsite',
-            name='site_logo',
-            field=models.ImageField(blank=True, default=None, null=True, upload_to=wyvern.util.upload.get_file_path),
+            model_name="wyvernsite",
+            name="site_logo",
+            field=models.ImageField(
+                blank=True,
+                default=None,
+                null=True,
+                upload_to=wyvern.util.upload.get_file_path,
+            ),
         ),
         migrations.AlterField(
-            model_name='wyvernsite',
-            name='site_logo_dark',
-            field=models.ImageField(blank=True, default=None, null=True, upload_to=wyvern.util.upload.get_file_path),
+            model_name="wyvernsite",
+            name="site_logo_dark",
+            field=models.ImageField(
+                blank=True,
+                default=None,
+                null=True,
+                upload_to=wyvern.util.upload.get_file_path,
+            ),
         ),
         migrations.AlterField(
-            model_name='wyvernsite',
-            name='site_meta_image',
-            field=models.ImageField(blank=True, default=None, null=True, upload_to=wyvern.util.upload.get_file_path),
+            model_name="wyvernsite",
+            name="site_meta_image",
+            field=models.ImageField(
+                blank=True,
+                default=None,
+                null=True,
+                upload_to=wyvern.util.upload.get_file_path,
+            ),
         ),
     ]
