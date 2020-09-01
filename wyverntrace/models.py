@@ -12,7 +12,7 @@ from wyvern.util.upload import get_file_path
 from wyvernuser.models import User
 from wyvernsite.models import WyvernSite
 from wyvern.util.array import choices
-<<<<<<< HEAD
+
 
 
 # class WyvernLocation(models.Model):
@@ -20,8 +20,7 @@ from wyvern.util.array import choices
 
 # class WyvernTraceUserInfo(models.Model):
 #     pass
-=======
->>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
+
 
 
 class WyvernTraceLog(models.Model):
@@ -64,16 +63,6 @@ class WyvernMedicalForm(models.Model):
     )
 
     wyvern_medical_form_date = models.DateField(default=datetime.date.today)
-<<<<<<< HEAD
-    wyvern_have_sore_throat = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_have_body_pain = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_have_head_ache = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_have_fever = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_near_covid = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_contact_symptoms = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_travelled_outside_philippines = models.IntegerField(choices=wyvern_answer, default=0,)
-    wyvern_travelled_ncr = models.IntegerField(choices=wyvern_answer, default=0,)
-=======
     wyvern_have_sore_throat = models.IntegerField(
         choices=wyvern_answer,
         default=0,
@@ -106,4 +95,3 @@ class WyvernMedicalForm(models.Model):
         choices=wyvern_answer,
         default=0,
     )
->>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197

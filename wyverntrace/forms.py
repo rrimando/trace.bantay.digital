@@ -4,11 +4,6 @@ from wyverntrace.models import WyvernMedicalForm
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-class WyvernMedicalForms(forms.ModelForm):
-    class Meta:
-        model = WyvernMedicalForm
-        fields = '__all__'
-
 
 class WyvernMedicalForms(forms.ModelForm):
     class Meta:
@@ -60,7 +55,7 @@ class WyvernResidentForm(forms.ModelForm):
         ]
         labels = {
             "email": "Email/Username",
-            "accepted_terms": 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>',            
+            "accepted_terms": 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>',
         }
         widgets = {
             "username": forms.HiddenInput(),
@@ -103,7 +98,7 @@ class WyvernResidentDetailsForm(forms.ModelForm):
         ]
         labels = {
             "email": "Email/Username",
-            "accepted_terms": 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>',            
+            "accepted_terms": 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>',
         }
         widgets = {
             "username": forms.HiddenInput(),

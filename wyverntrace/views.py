@@ -28,9 +28,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from wyvernuser.forms import WyvernUserForm
 from wyverntrace.models import WyvernMedicalForm
-<<<<<<< HEAD
-from wyverntrace.forms import WyvernEstablishmentForm, WyvernResidentForm, WyvernMedicalForms
-=======
+
 from wyverntrace.forms import (
     WyvernEstablishmentForm,
     WyvernEstablishmentDetailsForm,
@@ -38,7 +36,7 @@ from wyverntrace.forms import (
     WyvernResidentDetailsForm,
     WyvernMedicalForms,
 )
->>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
+
 
 
 @wyvern_core
@@ -50,7 +48,7 @@ def index(request, site=""):
 
 
 @wyvern_core
-def dashboard(request): 
+def dashboard(request):
 
     # Redirect User to Landing Page If Not Logged In
     if not request.user.is_authenticated:
@@ -62,15 +60,9 @@ def dashboard(request):
 
     # Prepare Context
     context = {
-<<<<<<< HEAD
-        'user': user,
-        'site': site,
-        'type': 'establishment' if user.is_location else 'resident',
-=======
         "user": user,
         "site": site,
         "type": "establishment" if user.is_location else "resident",
->>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
     }
 
     # Load Registration Forms
@@ -80,38 +72,12 @@ def dashboard(request):
         auto_id="resident_%s",
     )
 
-<<<<<<< HEAD
-
-    context["medical_form"] = WyvernMedicalForms(
-        request.POST or None,
-        instance= user if request.user.is_authenticated else None,
-        initial={"site": request.site.id},
-        auto_id="resident_%s",
-    )
-
-    context["establishment_form"] = WyvernEstablishmentForm(
-=======
     context["establishment_form"] = WyvernEstablishmentDetailsForm(
->>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
         request.POST or None,
         instance=user,
         auto_id="establishment_%s",
     )
 
-<<<<<<< HEAD
-
-
-    if request.POST:
-        if context['type'] == 'resident' and context["medical_form"].is_valid():
-            form = WyvernMedicalForms(request.POST)
-            if form.is_valid():
-                mdform = form.save()
-                mdform.user = request.user
-                mdform.save()
-
-        if context['type'] == 'resident' and context["resident_form"].is_valid():
-            context["resident_form"].save()
-=======
     # Prepare Resident Exclusive Content - This Prevents Creating Health Declaration Forms for None Residents
     if context["type"] == "resident":
         # Fetch Latest Medical Form
@@ -142,7 +108,7 @@ def dashboard(request):
                     request, 20, "There was an error with your submission"
                 )
             return redirect(reverse("trace-dashboard-user"))
->>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
+
 
 
         if context["type"] == "resident" and context["resident_form"].is_valid():
@@ -150,7 +116,7 @@ def dashboard(request):
             messages.add_message(request, 20, "Your details have been updated")
             return redirect(reverse("trace-dashboard-user"))
 
-        
+
         if (
             context["type"] == "establishment"
             and context["establishment_form"].is_valid()
@@ -158,7 +124,7 @@ def dashboard(request):
             context["establishment_form"].save()
             messages.add_message(request, 20, "Your details have been updated")
             return redirect(reverse("trace-dashboard-user"))
-        
+
     if request.user.is_location:
         context["logs"] = WyvernTraceLog.objects.filter(
             wyvern_location=request.user
@@ -390,10 +356,9 @@ def log(request, uuid=""):
 
 
 def manual_log(request):
-
-    # TODO
-
     pass
+    
+
 
 
 """ End wyvernmetamorph/views.py """

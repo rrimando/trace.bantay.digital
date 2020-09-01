@@ -1,32 +1,13 @@
 [application]
 server = POD1
-<<<<<<< HEAD
 server_url = 192.168.1.106:8000
-=======
-server_url = localhost:8000
->>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
 logo =
 debug = True
 
-# Configure for yourself
-<<<<<<< HEAD
 [database]
 database = bantaydigital
 username = root
 password =
-=======
-# [database]
-# database = bantaydigital
-# username = root
-# password =
-# hostname = localhost
-
-[database]
-database = wyvern
-username = wyvern
-password = wyvern
-# password = 
->>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
 hostname = localhost
 
 [modules]
@@ -35,18 +16,12 @@ modules = ('blog', 'shop')
 [hosts]
 allowed = 127.0.0.1
           127.0.0.1:8000
-<<<<<<< HEAD
 					trace.local
 					trace.local:8000
-=======
           localhost
           localhost:8000
-          trace.local
-          trace.local:8000
->>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
           192.168.1.106
           192.168.1.106:8000
-          b57c4538cf85.ngrok.io
 
 
 
@@ -96,9 +71,3 @@ post_type=job,articles,gallery
 [192.168.1.106:8000]
 sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
 post_type=job,articles,gallery
-
-
-
-
-
-######

@@ -43,13 +43,18 @@
                     {% endif %}
                 </span>
             </h5>
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" >
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#logs">Recent Logs</a>
                 </li>
                 {% if not request.user.is_location %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#medical-form">Medical Form</a>
+                </li>
+                {% endif %}
+                {% if request.user.is_location %}
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#manual-log">Manual Log</a>
                 </li>
                 {% endif %}
                 <li class="nav-item">
@@ -83,12 +88,6 @@
                     </table>
                 </div>
                 <div id="medical-form" class="tab-pane fade">
-<<<<<<< HEAD
-                  <h4>Important: Always update this medical form before going outside for medical convenience.</h4>
-                  {% with "themes/trace/partials/forms/medical-form.html" as medicalForm %}
-                      {% include medicalForm %}
-                  {% endwith %}
-=======
                     <h4>Medical Health Declaration for {{ today }}</h4>
                     <div class="alert alert-danger">
                         <i class="fa fa-exclamation-triangle"></i>
@@ -97,7 +96,11 @@
                     {% with "themes/trace/partials/forms/medical-form.html" as medicalForm %}
                         {% include medicalForm %}
                     {% endwith %}
->>>>>>> 3de99836b2575f4764bfb1fad4c5fd191c282197
+                </div>
+                <div id="manual-log" class="tab-pane fade">
+                  {% with "themes/trace/partials/forms/manual-log-in.html" as manualLog %}
+                      {% include manualLog %}
+                  {% endwith %}
                 </div>
                 <div id="details" class="tab-pane fade">
                     {% with "themes/trace/partials/forms/"|add:type|add:"-details-form.html" as template %}
