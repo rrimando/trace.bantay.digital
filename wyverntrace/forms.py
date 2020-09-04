@@ -1,8 +1,25 @@
 from django import forms
 from wyvernuser.models import User
-from wyverntrace.models import WyvernMedicalForm
+from wyverntrace.models import WyvernMedicalForm, WyvernTraceLog
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
+class WyvernTraceLogForm(forms.ModelForm):
+    class Meta:
+        model = WyvernTraceLog
+        fields = "__all__"
+        labels = {
+            "wyvern_first_name": "Resident First Name",
+            "wyvern_last_name": "Resident Last Name",
+            "wyvern_phone_number": "Resident Phone Number",
+            "wyvern_resident_address": "Resident Address",
+            "wyvern_temperature": "Resident Temperature",
+        }
+        widgets = {
+            "wyvern_user": forms.HiddenInput(),
+            "wyvern_location": forms.HiddenInput(),
+        }
+
 
 
 class WyvernMedicalForms(forms.ModelForm):
@@ -55,7 +72,7 @@ class WyvernResidentForm(forms.ModelForm):
         ]
         labels = {
             "email": "Email/Username",
-            "accepted_terms": 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>',            
+            "accepted_terms": 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>',
         }
         widgets = {
             "username": forms.HiddenInput(),
@@ -98,7 +115,7 @@ class WyvernResidentDetailsForm(forms.ModelForm):
         ]
         labels = {
             "email": "Email/Username",
-            "accepted_terms": 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>',            
+            "accepted_terms": 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>',
         }
         widgets = {
             "username": forms.HiddenInput(),
