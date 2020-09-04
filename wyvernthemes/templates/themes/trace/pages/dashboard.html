@@ -78,9 +78,9 @@
                             <tr>
                                 <td>{{ log.wyvern_trace_date|localtime }}</td>
                                 <td>{{ log.wyvern_location.first_name }} </td>
-                                <td>{{ log.wyvern_user.first_name }} {{ log.wyvern_user.last_name|make_list|slice:':1'|join:''  }}.</td>
-                                <td>{{ log.wyvern_user.phone }}</td>
-                                <td>{{ log.wyvern_user.address }}</td>
+                                <td>{{ log.get_first_name }} {{ log.get_last_name|make_list|slice:':1'|join:''  }}.</td>
+                                <td>{{ log.get_phone_number }}</td>
+                                <td>{{ log.get_resident_address }}</td>
                                 <td>{{ log.wyvern_temperature }}</td>
                             </tr>
                             {% endfor %}

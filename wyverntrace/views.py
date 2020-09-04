@@ -22,6 +22,7 @@ from wyvern.util.chidori import wyvern_core
 from wyvernuser.models import User
 from wyvernsite.models import WyvernSite
 from wyverntrace.models import WyvernTraceLog
+from wyverntrace.forms import WyvernTraceLogForm
 
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
@@ -78,6 +79,14 @@ def dashboard(request):
         auto_id="establishment_%s",
     )
 
+
+
+    if context["type"] == "establishment":
+        context["manual_log"] = WyvernTraceLogForm(
+            request.POST or None,
+            auto_id="manual_%s",
+        )
+
     # Prepare Resident Exclusive Content - This Prevents Creating Health Declaration Forms for None Residents
     if context["type"] == "resident":
         # Fetch Latest Medical Form
@@ -97,6 +106,19 @@ def dashboard(request):
         context["today"] = datetime.date.today()
 
     if request.POST:
+        if context["type"] == "establishment" and context["manual_log"].is_valid():
+            if context["manual_log"].is_valid():
+                context["manual_log"].save()
+                messages.add_message(
+                    request, 20, "You have successfully log a resident."
+                )
+            else:
+                messages.add_message(
+                    request, 20, "There was an error with your submission"
+                )
+            return redirect(reverse("trace-dashboard-user"))
+
+
         if context["type"] == "resident" and context["medical_form"].is_valid():
             if context["medical_form"].is_valid():
                 context["medical_form"].save()
@@ -165,6 +187,8 @@ def register(request, type="resident"):
             initial={"site": request.site.id},
             auto_id="establishment_%s",
         )
+
+
 
         # Registration
         if request.method == "POST":
@@ -357,7 +381,7 @@ def log(request, uuid=""):
 
 def manual_log(request):
     pass
-    
+
 
 
 
