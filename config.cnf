@@ -1,15 +1,8 @@
 [application]
 server = POD1
-server_url = localhost:8000
+server_url = pod2.wyverncms.com
 logo =
-debug = True
-
-# Configure for yourself
-# [database]
-# database = bantaydigital
-# username = root
-# password =
-# hostname = localhost
+debug = False
 
 [database]
 database = wyvern
@@ -18,31 +11,81 @@ password = wyvern
 # password = 
 hostname = localhost
 
+# [database]
+# database = kerplunk
+# username = root
+# password = 
+# password = JA^r<ey3:[tvgKh,
+# hostname = localhost
+
 [modules]
 modules = ('blog', 'shop')
 
 [hosts]
-allowed = 127.0.0.1
-          127.0.0.1:8000
-          localhost
-          localhost:8000
-          trace.local
-          trace.local:8000
-          192.168.1.106
-          192.168.1.106:8000
-          b57c4538cf85.ngrok.io
-
-
+allowed = localhost
+          wyvern.kerplunkstudios.com
+          casting.kerplunkstudios.com
+          pod2.wyverncms.com
+          trace.bantay.digital
+          trace-vigan.bantay.digital
+          trace-sangabriel.bantay.digital
+          trace-solano.bantay.digital
 
 # SPAM FILTER
 [filter]
-filters = talkwithwebvisitor.com
+filters =  talkwithwebvisitor.com
           anna@hotmail.com
           yourbestcustomer.top
           buy@newscrypto.io
           'Emory Reye'
           @hilkom-digital.de
           susanellis5686@gmail.com
+          aon.at
+          sms.at
+          flashnet.at
+          getz.donnie@gmail.com
+          david@graphicdesigns.site
+          coronavaccine@hotmail.com
+          arletha.edmund@yahoo.com
+          'RUNS OUT ON'
+          summer.781@live.at
+          ovalle.c@monet.k12.ca.us
+          josh.keys@horizonnb.ca
+          coffin.russ20@gmail.com
+          'I've only been a member of Bitcoin Profit for 47 days'
+          'Now I earn six numbers every month'
+          'I really struggled to survive earlier this year'
+          'After only 30 days, I still have to pinch myself to make sure I'm not dreaming'
+          'CryptoCode'
+          'The analysis of the critical situation in the world may help Your business'
+          barbaratysonhw@yahoo.com
+          'You Can DOUBLE Your Productivity For Life In Under 48 Hours'
+          natasha.chaplin@yahoo.co.uk
+          WaynePaf
+          noreply@get-more-leads-now.com
+          carlos.gavin14@gmail.com
+          ash@techknowspace.com
+          'Tech Know Space'
+          'https://www.no-site.com'
+          fortenberry.princess@gmail.com
+          'Do you want completely free advertising for your website'
+          'http://Get-More-Leads-Now.com'
+          duncander@gmail.com
+          Duncanher
+          'We analyzed your site'
+          johnbowen6531@gmail.com
+          'Ratings King'
+          'FORWARD THIS EMAIL TO SOMEONE IN YOUR COMPANY WHO IS ALLOWED TO MAKE IMPORTANT'
+          'Dorris Fassbinder'
+          'We have hacked your website'
+          'jasminedey@hotmail.co.uk'
+          'Marc Climpson'
+          'Hacker'
+          'Hack'
+          verajohn@fanclub.pm
+          atrixxtrix@gmail.com
+          'Professional surveillance'
+
 
 
 [uploads]
@@ -51,38 +94,32 @@ folder = users/images
 # CONFIGURE SITE SPECIFIC MANAGEMENT SECTIONS
 # TODO NoSectionError is erroring out requiring this section to be required
 
-# SITES IN DEVELOPMENT
+# DEVELOPMENT
 
-[site.com]
-sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
-post_type=job,articles,gallery
+[demo]
+sections=orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=articles,gallery
 
-[127.0.0.1:8000]
-sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
-post_type=job,articles,gallery
+# PRODUCTION
 
-[localhost:8000]
-sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
-post_type=job,articles,gallery
+[trace.bantay.digital]
+sections=orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=articles,gallery
 
-[trace.local]
-sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
-post_type=job,articles,gallery
+[trace-vigan.bantay.digital]
+sections=orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=articles,gallery
 
-[trace.local:8000]
-sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
-post_type=job,articles,gallery
+[trace-solano.bantay.digital]
+sections=orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=articles,gallery
 
-[192.168.1.106]
-sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
-post_type=job,articles,gallery
+[trace-sangabriel.bantay.digital]
+sections=orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=articles,gallery
 
-[192.168.1.106:8000]
-sections=jobs_section,orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
-post_type=job,articles,gallery
-
-
-
-
+[casting.kerplunkstudios.com]
+sections=orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=articles,gallery
 
 ######

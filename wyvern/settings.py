@@ -48,7 +48,7 @@ ALLOWED_HOSTS = config.get("hosts", "allowed").split("\n")
 
 INSTALLED_APPS = [
     "wyvernuser",
-    "django.contrib.admin",
+    # "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
