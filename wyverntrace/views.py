@@ -22,12 +22,14 @@ from wyvern.util.chidori import wyvern_core
 from wyvernuser.models import User
 from wyvernsite.models import WyvernSite
 from wyverntrace.models import WyvernTraceLog
+from wyverntrace.forms import WyvernTraceLogForm
 
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
 from wyvernuser.forms import WyvernUserForm
 from wyverntrace.models import WyvernMedicalForm
+
 from wyverntrace.forms import (
     WyvernEstablishmentForm,
     WyvernEstablishmentDetailsForm,
@@ -37,13 +39,17 @@ from wyverntrace.forms import (
 )
 
 
+
 @wyvern_core
 def index(request, site=""):
     return redirect("/")
 
 
+
+
+
 @wyvern_core
-def dashboard(request): 
+def dashboard(request):
 
     # Redirect User to Landing Page If Not Logged In
     if not request.user.is_authenticated:
@@ -73,6 +79,14 @@ def dashboard(request):
         auto_id="establishment_%s",
     )
 
+
+
+    if context["type"] == "establishment":
+        context["manual_log"] = WyvernTraceLogForm(
+            request.POST or None,
+            auto_id="manual_%s",
+        )
+
     # Prepare Resident Exclusive Content - This Prevents Creating Health Declaration Forms for None Residents
     if context["type"] == "resident":
         # Fetch Latest Medical Form
@@ -92,6 +106,21 @@ def dashboard(request):
         context["today"] = datetime.date.today()
 
     if request.POST:
+        if context["type"] == "establishment" and context["manual_log"].is_valid():
+            if context["manual_log"].is_valid():
+                manualLog = context["manual_log"].save(commit=False)
+                manualLog.wyvern_location = request.user
+                manualLog.save()
+                messages.add_message(
+                    request, 20, "You have successfully log a resident."
+                )
+            else:
+                messages.add_message(
+                    request, 20, "There was an error with your submission"
+                )
+            return redirect(reverse("trace-dashboard-user"))
+
+
         if context["type"] == "resident" and context["medical_form"].is_valid():
             if context["medical_form"].is_valid():
                 context["medical_form"].save()
@@ -105,12 +134,13 @@ def dashboard(request):
             return redirect(reverse("trace-dashboard-user"))
 
 
+
         if context["type"] == "resident" and context["resident_form"].is_valid():
             context["resident_form"].save()
             messages.add_message(request, 20, "Your details have been updated")
             return redirect(reverse("trace-dashboard-user"))
 
-        
+
         if (
             context["type"] == "establishment"
             and context["establishment_form"].is_valid()
@@ -118,7 +148,7 @@ def dashboard(request):
             context["establishment_form"].save()
             messages.add_message(request, 20, "Your details have been updated")
             return redirect(reverse("trace-dashboard-user"))
-        
+
     if request.user.is_location:
         context["logs"] = WyvernTraceLog.objects.filter(
             wyvern_location=request.user
@@ -159,6 +189,8 @@ def register(request, type="resident"):
             initial={"site": request.site.id},
             auto_id="establishment_%s",
         )
+
+
 
         # Registration
         if request.method == "POST":
@@ -350,10 +382,9 @@ def log(request, uuid=""):
 
 
 def manual_log(request):
-
-    # TODO
-
     pass
+
+
 
 
 """ End wyvernmetamorph/views.py """

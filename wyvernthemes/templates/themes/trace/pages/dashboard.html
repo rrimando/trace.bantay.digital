@@ -43,13 +43,18 @@
                     {% endif %}
                 </span>
             </h5>
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" >
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#logs">Recent Logs</a>
                 </li>
                 {% if not request.user.is_location %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#medical-form">Medical Form</a>
+                </li>
+                {% endif %}
+                {% if request.user.is_location %}
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#manual-log">Manual Log</a>
                 </li>
                 {% endif %}
                 <li class="nav-item">
@@ -73,9 +78,9 @@
                             <tr>
                                 <td>{{ log.wyvern_trace_date|localtime }}</td>
                                 <td>{{ log.wyvern_location.first_name }} </td>
-                                <td>{{ log.wyvern_user.first_name }} {{ log.wyvern_user.last_name|make_list|slice:':1'|join:''  }}.</td>
-                                <td>{{ log.wyvern_user.phone }}</td>
-                                <td>{{ log.wyvern_user.address }}</td>
+                                <td>{{ log.get_first_name }} {{ log.get_last_name|make_list|slice:':1'|join:''  }}.</td>
+                                <td>{{ log.get_phone_number }}</td>
+                                <td>{{ log.get_resident_address }}</td>
                                 <td>{{ log.wyvern_temperature }}</td>
                             </tr>
                             {% endfor %}
@@ -91,6 +96,11 @@
                     {% with "themes/trace/partials/forms/medical-form.html" as medicalForm %}
                         {% include medicalForm %}
                     {% endwith %}
+                </div>
+                <div id="manual-log" class="tab-pane fade">
+                  {% with "themes/trace/partials/forms/manual-log-in.html" as manualLog %}
+                      {% include manualLog %}
+                  {% endwith %}
                 </div>
                 <div id="details" class="tab-pane fade">
                     {% with "themes/trace/partials/forms/"|add:type|add:"-details-form.html" as template %}
