@@ -108,7 +108,9 @@ def dashboard(request):
     if request.POST:
         if context["type"] == "establishment" and context["manual_log"].is_valid():
             if context["manual_log"].is_valid():
-                context["manual_log"].save()
+                manualLog = context["manual_log"].save(commit=False)
+                manualLog.wyvern_location = request.user
+                manualLog.save()
                 messages.add_message(
                     request, 20, "You have successfully log a resident."
                 )
