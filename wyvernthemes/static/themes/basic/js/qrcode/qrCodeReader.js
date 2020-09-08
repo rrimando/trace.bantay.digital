@@ -114,6 +114,9 @@
     }
 
     btnScanQR.onclick = () => {
+      video.setAttribute('autoplay', '');
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
       console.log('Start video');
       navigator.mediaDevices
         .getUserMedia({ video: { facingMode: "environment" } })
@@ -131,6 +134,9 @@
     };
 
     btnScanClose.onclick = () => {
+      video.setAttribute('autoplay', '');
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
       console.log('Stop video')
       navigator.mediaDevices
         .getUserMedia({ video: { facingMode: "environment" } })

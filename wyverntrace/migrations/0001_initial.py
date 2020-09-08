@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
             name='WyvernTraceLog',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('wyvern_email_address', models.CharField(default='name@name.com', max_length=255)),
                 ('wyvern_first_name', models.CharField(default='', max_length=255)),
                 ('wyvern_last_name', models.CharField(default='', max_length=255)),
                 ('wyvern_phone_number', models.CharField(default='', max_length=13)),
