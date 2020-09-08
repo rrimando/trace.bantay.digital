@@ -11,13 +11,13 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('wyvernsite', '0001_initial'),
+        ('wyvernlms', '0002_wyvernlmsstudent_wyvernlms_wyvern_site'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='wyvernsite',
-            name='site_owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name='wyvernlmsstudent',
+            name='wyvernlms_wyvern_user',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),
     ]
