@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html data-wf-page="5f1ea85c4ee78143b789f9b3" data-wf-site="5f1ea85c4ee7817c3289f9b2">
+<html data-wf-page="5f51904739ee4b13f6e5f997" data-wf-site="5f1ea85c4ee7817c3289f9b2">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
@@ -15,20 +15,20 @@
   {% if page == 'post' %}
   <title>
       {{ site.site_name }}
-      {% if post.post_title %} 
+      {% if post.post_title %}
           | {{ post.post_title }}
-      {% endif %} 
+      {% endif %}
           {% if site.site_subtitle %} | {{ site.site_subtitle }}
       {% endif %}
   </title>
   {% else %}
   <title>
       {{ site.site_name }}
-      {% if site.site_subtitle %} 
+      {% if site.site_subtitle %}
           | {{ site.site_subtitle }}
       {% endif %}
   </title>
-  
+
   {% endif %}
   {% if page == 'post' %}
     {% include 'themes/basic/includes/post-meta.html' %}
@@ -73,7 +73,7 @@
         {% endblock %}
     </main>
     <!-- END MAIN CONTENT -->
-   
+
     {% include 'themes/trace/partials/footer.html' %}
 
     <!-- Page Back To Top Button-->
