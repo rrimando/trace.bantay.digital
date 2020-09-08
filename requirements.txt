@@ -7,7 +7,7 @@ configparser==5.0.0
 dataclasses==0.7
 datefinder==0.7.1
 distlib==0.3.1
-Django==3.1
+Django==3.1.1
 django-appconf==1.0.4
 django-bs4==0.0.3
 django-ckeditor==5.9.0
@@ -17,8 +17,7 @@ django-countries==6.1.3
 django-crispy-forms==1.9.2
 django-js-asset==1.2.2
 django-money==1.1
-django-qr-code==1.2.0
-django-qrcode==0.3
+django-qr-code==1.3.0
 django-user-agents-last==0.3.1
 djangorestframework==3.11.1
 filelock==3.0.12
@@ -33,11 +32,11 @@ protobuf==3.12.2
 py-moneyed==0.8.0
 python-dateutil==2.8.1
 pytz==2020.1
-qrcode==6.1
+qrcode==6.0
 rcssmin==1.0.6
 regex==2020.7.14
 rjsmin==1.1.0
-six==1.15.0
+six==1.12.0
 soupsieve==2.0.1
 sqlparse==0.3.1
 toml==0.10.1

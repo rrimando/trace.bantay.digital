@@ -1,28 +1,32 @@
 [application]
 server = POD1
-server_url = pod2.wyverncms.com
+# server_url = pod2.wyverncms.com
+server_url = localhost:8000
 logo =
-debug = False
-
-# [database]
-# database = wyvernpod2
-# username = root
-# password = 
-# password = 
-# hostname = localhost
+debug = True
 
 [database]
-database = kerplunk
-username = root
-# password = 
-password = JA^r<ey3:[tvgKh,
+database = wyvern
+username = wyvern
+password = wyvern
+# password = wyvern
 hostname = localhost
+
+# [database]
+# database = kerplunk
+# username = root
+# password = 
+# password = JA^r<ey3:[tvgKh,
+# hostname = localhost
 
 [modules]
 modules = ('blog', 'shop')
 
 [hosts]
 allowed = localhost
+          localhost:8000
+          trace.local
+          trace.local:8000
           wyvern.kerplunkstudios.com
           casting.kerplunkstudios.com
           pod2.wyverncms.com
@@ -97,6 +101,10 @@ folder = users/images
 # DEVELOPMENT
 
 [demo]
+sections=orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
+post_type=articles,gallery
+
+[trace.local:8000]
 sections=orders_section,products_section,product_categories_section,pages_section,inventory_section,shipping_section,payment_method_section
 post_type=articles,gallery
 
