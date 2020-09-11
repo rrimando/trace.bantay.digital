@@ -4,6 +4,7 @@ server = POD1
 server_url = localhost:8000
 logo =
 debug = True
+<<<<<<< Updated upstream
 
 [database]
 database = wyvern
@@ -11,6 +12,8 @@ username = wyvern
 password = wyvern
 # password = wyvern
 hostname = localhost
+=======
+>>>>>>> Stashed changes
 
 # [database]
 # database = kerplunk
