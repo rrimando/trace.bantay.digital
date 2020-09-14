@@ -1,8 +1,11 @@
 from django import forms
+from django.core.exceptions import ValidationError
+from django.contrib.auth import password_validation
 from wyvernuser.models import User
 from wyverntrace.models import WyvernMedicalForm, WyvernTraceLog
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
 
 class WyvernTraceLogForm(forms.ModelForm):
     class Meta:
@@ -18,8 +21,16 @@ class WyvernTraceLogForm(forms.ModelForm):
         widgets = {
             "wyvern_user": forms.HiddenInput(),
             "wyvern_location": forms.HiddenInput(),
+            "wyvern_first_name": forms.TextInput(attrs={"placeholder": "First Name"}),
+            "wyvern_last_name": forms.TextInput(attrs={"placeholder": "Last Name"}),
+            "wyvern_phone_number": forms.TextInput(
+                attrs={"placeholder": "Phone Number"}
+            ),
+            "wyvern_temperature": forms.TextInput(attrs={"placeholder": "Temperature"}),
+            "wyvern_resident_address": forms.Textarea(
+                attrs={"placeholder": "Resident Full Address", "rows": 5}
+            ),
         }
-
 
 
 class WyvernMedicalForms(forms.ModelForm):
@@ -45,6 +56,13 @@ class WyvernMedicalForms(forms.ModelForm):
 
 
 class WyvernResidentForm(forms.ModelForm):
+    error_messages = {
+        "password_mismatch": "The two password fields didn’t match.",
+    }
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"}),
+    )
+
     class Meta:
 
         # TODO: https://stackoverflow.com/questions/13482753/use-field-label-as-placeholder-in-django-crispy-forms
@@ -69,6 +87,7 @@ class WyvernResidentForm(forms.ModelForm):
             "interests",
             "is_location",
             "uuid",
+            "resident_establishment_filter",
         ]
         labels = {
             "email": "Email/Username",
@@ -84,6 +103,16 @@ class WyvernResidentForm(forms.ModelForm):
             "phone": forms.TextInput(attrs={"placeholder": "Phone Number"}),
             "address": forms.Textarea(attrs={"placeholder": "Full Address", "rows": 5}),
         }
+
+    def clean_password2(self):
+        password = self.cleaned_data.get("password")
+        password2 = self.cleaned_data.get("password2")
+        if password and password2 and password != password2:
+            raise ValidationError(
+                self.error_messages["password_mismatch"],
+                code="password_mismatch",
+            )
+        return password2
 
 
 class WyvernResidentDetailsForm(forms.ModelForm):
@@ -111,7 +140,9 @@ class WyvernResidentDetailsForm(forms.ModelForm):
             "interests",
             "is_location",
             "uuid",
-            "password"
+            "password",
+            "confirm_password",
+            "resident_establishment_filter",
         ]
         labels = {
             "email": "Email/Username",
@@ -128,8 +159,26 @@ class WyvernResidentDetailsForm(forms.ModelForm):
             "address": forms.Textarea(attrs={"placeholder": "Full Address", "rows": 5}),
         }
 
+    def clean_password2(self):
+        password = self.cleaned_data.get("password")
+        password2 = self.cleaned_data.get("password2")
+        if password and password2 and password != password2:
+            raise ValidationError(
+                self.error_messages["password_mismatch"],
+                code="password_mismatch",
+            )
+        return password2
+
 
 class WyvernEstablishmentForm(forms.ModelForm):
+    error_messages = {
+        "password_mismatch": "The two password fields didn’t match.",
+    }
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"}),
+    )
+    is_location = forms.BooleanField(initial=True)
+
     class Meta:
 
         # TODO: https://stackoverflow.com/questions/13482753/use-field-label-as-placeholder-in-django-crispy-forms
@@ -152,6 +201,7 @@ class WyvernEstablishmentForm(forms.ModelForm):
             "website",
             "gender",
             "interests",
+            "resident_establishment_filter",
         ]
         labels = {
             "first_name": "Establishment Name",
@@ -168,6 +218,7 @@ class WyvernEstablishmentForm(forms.ModelForm):
             "phone": forms.TextInput(attrs={"placeholder": "Phone Number"}),
             "address": forms.Textarea(attrs={"placeholder": "Full Address", "rows": 5}),
         }
+
 
 class WyvernEstablishmentDetailsForm(forms.ModelForm):
     class Meta:
@@ -192,7 +243,10 @@ class WyvernEstablishmentDetailsForm(forms.ModelForm):
             "website",
             "gender",
             "interests",
-            "password"
+            "uuid",
+            "password",
+            "confirm_password",
+            "resident_establishment_filter",
         ]
         labels = {
             "first_name": "Establishment Name",

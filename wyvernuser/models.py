@@ -43,6 +43,10 @@ class User(AbstractUser):
 
     REQUIRED_FIELDS = ["groups_id", "email"]
 
+    # LGU Fields
+    # Not the best way to filter users that fall under but for now
+    resident_establishment_filter = models.TextField(null=True, blank=True)
+
     class Meta:
         verbose_name = "user"
         verbose_name_plural = "users"

@@ -38,14 +38,12 @@ from wyverntrace.forms import (
     WyvernMedicalForms,
 )
 
+from wyverntrace.lgu import *
 
 
 @wyvern_core
 def index(request, site=""):
     return redirect("/")
-
-
-
 
 
 @wyvern_core
@@ -54,6 +52,9 @@ def dashboard(request):
     # Redirect User to Landing Page If Not Logged In
     if not request.user.is_authenticated:
         return redirect("/")
+
+    if request.user.is_staff:
+        return redirect(reverse("trace-lgu-logs"))
 
     # Fetch Initial Data From User Info in Request
     user = User.objects.get(pk=request.user.id) if (request.user.id) else None
@@ -78,8 +79,6 @@ def dashboard(request):
         instance=user,
         auto_id="establishment_%s",
     )
-
-
 
     if context["type"] == "establishment":
         context["manual_log"] = WyvernTraceLogForm(
@@ -120,7 +119,6 @@ def dashboard(request):
                 )
             return redirect(reverse("trace-dashboard-user"))
 
-
         if context["type"] == "resident" and context["medical_form"].is_valid():
             if context["medical_form"].is_valid():
                 context["medical_form"].save()
@@ -133,13 +131,10 @@ def dashboard(request):
                 )
             return redirect(reverse("trace-dashboard-user"))
 
-
-
         if context["type"] == "resident" and context["resident_form"].is_valid():
             context["resident_form"].save()
             messages.add_message(request, 20, "Your details have been updated")
             return redirect(reverse("trace-dashboard-user"))
-
 
         if (
             context["type"] == "establishment"
@@ -152,11 +147,15 @@ def dashboard(request):
     if request.user.is_location:
         context["logs"] = WyvernTraceLog.objects.filter(
             wyvern_location=request.user
-        ).order_by("-id")[:10]
+        ).order_by(
+            "-id"
+        )  # [:10]
     else:
         context["logs"] = WyvernTraceLog.objects.filter(
             wyvern_user=request.user
-        ).order_by("-id")[:10]
+        ).order_by(
+            "-id"
+        )  # [:10]
 
     site_template = "themes/trace/pages/dashboard.html"
     return render(request, site_template, context)
@@ -186,11 +185,9 @@ def register(request, type="resident"):
         context["establishment_form"] = WyvernEstablishmentForm(
             request.POST or None,
             instance=request.user if request.user.is_authenticated else None,
-            initial={"site": request.site.id},
+            initial={"site": request.site.id, "is_establishmen": True},
             auto_id="establishment_%s",
         )
-
-
 
         # Registration
         if request.method == "POST":
@@ -209,6 +206,9 @@ def register(request, type="resident"):
             if form.is_valid():
 
                 user = form.save(commit=False)
+
+                if type == "establishment":
+                    user.is_location = True
 
                 # Cleaned(normalized) data
                 username = form.cleaned_data["username"]
@@ -383,8 +383,6 @@ def log(request, uuid=""):
 
 def manual_log(request):
     pass
-
-
 
 
 """ End wyvernmetamorph/views.py """

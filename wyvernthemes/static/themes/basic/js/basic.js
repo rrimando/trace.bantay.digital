@@ -42,3 +42,12 @@ $(function(){
   });
 });
 /* Active Tabs */ 
+
+
+/* Submissions Table */
+  $('.data-table').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+        'print', 'copy', 'csv', 
+      ]
+  } );

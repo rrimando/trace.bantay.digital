@@ -15,7 +15,8 @@ main {
     color: #000000;
 }
 
-main .container {
+main .container,
+main .container-fluid {
     background-color: #FFFFFF;
     border-radius: 5px;
     -moz-border-radius: 5px;
@@ -52,3 +53,8 @@ main .container {
 }
 /* END FOOTER */
 
+/* LGU PAGES */
+.dt-buttons.btn-group.flex-wrap {
+    margin-bottom: 10px;
+}
+/* END LGU PAGES */

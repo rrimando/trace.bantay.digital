@@ -24,4 +24,13 @@ urlpatterns = [
     path("fetch/<str:uuid>/", views.fetch, name="trace-fetch-user"),
     # Log User Location
     path("log/<str:uuid>/", views.log, name="trace-log-user"),
+
+    # LGU Views
+    path("lgu/logs/", views.view_logs, name="trace-lgu-logs"),
+    path("lgu/register/", views.create_user, name="trace-lgu-register"),
+    path("lgu/view/<str:type>", views.view_users, name="trace-lgu-view-users"),
+    path("lgu/user/<str:uuid>", views.view_user, name="trace-lgu-view-user"),
+    path("lgu/print/<str:uuid>", views.print_user, name="trace-lgu-print-user"),
+    path("lgu/map/", views.view_map, name="trace-lgu-map"),
+    path("lgu/details/", views.view_details, name="trace-lgu-details"),
 ]

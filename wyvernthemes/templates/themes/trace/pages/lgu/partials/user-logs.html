@@ -1,0 +1,21 @@
+{% load static qr_code crispy_forms_tags tz %}
+<h5>{{ lgu_table_label }}</h5>
+<hr/>
+<table class="data-table table">
+    <thead>
+        <th>Name</th>
+        <th>Contact Number</th>
+        <th>Email</th>
+        <th>Address</th>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.address }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

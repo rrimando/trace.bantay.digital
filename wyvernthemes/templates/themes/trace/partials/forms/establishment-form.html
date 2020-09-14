@@ -1,5 +1,5 @@
 {% load crispy_forms_tags %}
-<form method="post">
+<form method="post" action="{% url 'trace-register-user' 'establishment' %}">
     {% include 'themes/trace/partials/messages.html' with form=establishment_form %}
     {% csrf_token %}
     <div class="row">
@@ -9,18 +9,19 @@
         <div class="col-md-12">
             {{ establishment_form.last_name|as_crispy_field }}
         </div>
-        <div class="col-md-6">
-            {{ establishment_form.email|as_crispy_field }}
-        </div>
         {% if not request.user.is_authenticated %}
         <div class="col-md-6">
             {{ establishment_form.password|as_crispy_field }}
         </div>
+        <div class="col-md-6">
+            {{ establishment_form.password2|as_crispy_field }}
+        </div>
         {% endif %}
         <div class="col-md-6">
-            {{ establishment_form.phone|as_crispy_field }}
+            {{ establishment_form.email|as_crispy_field }}
         </div>
         <div class="col-md-12">
+            {{ establishment_form.phone|as_crispy_field }}
             {{ establishment_form.address|as_crispy_field }}
         </div>
         <div class="col-md-12">

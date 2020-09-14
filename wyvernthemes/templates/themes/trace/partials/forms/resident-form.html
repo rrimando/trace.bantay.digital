@@ -1,5 +1,5 @@
 {% load crispy_forms_tags %}
-<form method="post">
+<form method="post" action="{% url 'trace-register-user' 'resident' %}">
     {% include 'themes/trace/partials/messages.html' with form=resident_form %}
     {% csrf_token %}
     <div class="row">
@@ -15,6 +15,9 @@
         {% if not request.user.is_authenticated %}
         <div class="col-md-6">
             {{ resident_form.password | as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+            {{ resident_form.password2 | as_crispy_field }}
         </div>
         {% endif %}
         <div class="col-md-6">

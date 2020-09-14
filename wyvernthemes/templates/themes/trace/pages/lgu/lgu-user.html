@@ -1,0 +1,15 @@
+{% extends theme_config.wyverntheme_base_layout %}
+{% load static qr_code crispy_forms_tags tz %}
+{% block content %}
+<div class="container-fluid dashboard pt-5 pb-5">
+    <div class="row">
+        {% include 'themes/trace/pages/lgu/partials/header.html'%}
+        <div class="col-md-2">
+            {% include 'themes/trace/pages/lgu/partials/sidebar.html'%}
+        </div>
+        <div class="col-md-10">
+            {% include 'themes/trace/pages/lgu/partials/location-logs.html' with logs=lgu_user_logs%}
+        </div>
+    </div>
+</div>
+{% endblock %}

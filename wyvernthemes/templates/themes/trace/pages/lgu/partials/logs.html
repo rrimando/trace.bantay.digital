@@ -1,0 +1,25 @@
+{% load static qr_code crispy_forms_tags tz %}
+<h5>{{ lgu_table_label }}</h5>
+<hr/>
+<table class="data-table table">
+    <thead>
+        <th>Datetime</th>
+        <th>Location</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Temperature</th>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.wyvern_trace_date|localtime }}</td>
+            <td>{{ log.wyvern_location.first_name }} </td>
+            <td>{{ log.get_first_name }} {{ log.get_last_name|make_list|slice:':1'|join:''  }}.</td>
+            <td>{{ log.get_phone_number }}</td>
+            <td>{{ log.get_resident_address }}</td>
+            <td>{{ log.wyvern_temperature }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
