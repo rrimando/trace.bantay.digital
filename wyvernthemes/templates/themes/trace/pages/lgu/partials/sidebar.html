@@ -1,4 +1,17 @@
+{% load static qr_code crispy_forms_tags tz %}
 <ul class="list-group">
+    <li class="list-group-item">
+        <h5 class="mt-4">This is your LGU QR Code</h5>
+        <hr/>
+        <div class="qr-container">
+            {% if request.user.is_location %}
+                {% qr_from_text request.user.uuid size=20 border=6 %}
+            {% endif %}
+            <h4>{{ request.user.first_name }}</h4>
+            <hr/>
+            <p>{{ request.user.address }}</p>
+        </div>
+    </li>
     <li class="list-group-item">
         <a href="{% url 'trace-lgu-logs' %}">
             View  Logs
