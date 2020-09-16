@@ -10,6 +10,9 @@
             <h4>{{ request.user.first_name }}</h4>
             <hr/>
             <p>{{ request.user.address }}</p>
+            <hr/>
+            <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#qr-code-reader">Launch QR reader</a>
+            {% include 'themes/basic/includes/qr-code/qr-code-reader-modal.html' %}
         </div>
     </li>
     <li class="list-group-item">
