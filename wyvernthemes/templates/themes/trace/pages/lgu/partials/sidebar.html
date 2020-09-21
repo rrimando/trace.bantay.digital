@@ -1,4 +1,28 @@
+{% load static qr_code crispy_forms_tags tz %}
+
+<input type="hidden" id="user_type" value="{% if request.user.is_location%}LOCATION{% else %}USER{% endif %}"/>
+<input type="hidden" id="user_uuid" value="{{ request.user.uuid }}"/>
+<input type="hidden" id="user_first_name" value="{{ request.user.first_name }}"/>
+<input type="hidden" id="user_last_name" value="{{ request.user.last_name }}"/>
+<input type="hidden" id="user_phone" value="{{ request.user.phone }}"/>
+<input type="hidden" id="user_address" value="{{ request.user.address }}"/>
+
 <ul class="list-group">
+    <li class="list-group-item">
+        <h5 class="mt-4">This is your LGU QR Code</h5>
+        <hr/>
+        <div class="qr-container">
+            {% if request.user.is_location %}
+                {% qr_from_text request.user.uuid size=20 border=6 %}
+            {% endif %}
+            <h4>{{ request.user.first_name }}</h4>
+            <hr/>
+            <p>{{ request.user.address }}</p>
+            <hr/>
+            <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#qr-code-reader">Launch QR reader</a>
+            {% include 'themes/basic/includes/qr-code/qr-code-reader-modal.html' %}
+        </div>
+    </li>
     <li class="list-group-item">
         <a href="{% url 'trace-lgu-logs' %}">
             View  Logs
