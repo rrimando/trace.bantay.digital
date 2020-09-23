@@ -176,7 +176,7 @@ def register(request, type="resident"):
 
         # Load Registration Forms
         context["resident_form"] = WyvernResidentForm(
-            request.POST and request.FILES or None,
+            request.POST or None,
             instance=request.user if request.user.is_authenticated else None,
             initial={"site": request.site.id},
             auto_id="resident_%s",
