@@ -46,7 +46,7 @@ class User(AbstractUser):
     # LGU Fields
     # Not the best way to filter users that fall under but for now
     resident_establishment_filter = models.TextField(null=True, blank=True)
-    attachment = models.FileField(upload_to='attachments/', null=True)
+    attachment = models.FileField(upload_to='attachments/', null=True, blank=True)
 
     class Meta:
         verbose_name = "user"
