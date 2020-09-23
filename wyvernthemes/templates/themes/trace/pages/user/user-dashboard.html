@@ -11,6 +11,10 @@
             </div>
             <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#qr-code-reader">Launch QR reader</a>
             {% include 'themes/basic/includes/qr-code/qr-code-reader-modal.html' %}
+            {% if not request.user.is_location %}
+            <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#print-resident-id">Print Resident ID</a>
+            {% include 'themes/basic/includes/resident-id/resident-id-modal.html' %}
+            {% endif %}
             <hr/>
             <div class="alert alert-primary" role="alert">
                 <strong>Trace.bantay.digital</strong> is a very small team of professionals and artists, volunteering time and effort to create an absolutely free log book replacement app for easy contact tracing.
