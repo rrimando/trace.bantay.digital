@@ -42,7 +42,7 @@ class WyvernMedicalForms(forms.ModelForm):
         labels = {
             "wyvern_have_sore_throat": "Do you have a sore throat?",
             "wyvern_have_body_pain": "Are you experiencing any body pain?",
-            "wyvern_have_head_ache": "Do you have a head throat?",
+            "wyvern_have_head_ache": "Do you have a head ache?",
             "wyvern_have_fever": "Do you have a fever?",
             "wyvern_near_covid": "Have you been in contact with any diagnosed with COVID19?",
             "wyvern_contact_symptoms": "Have you been in contact with anyone showing any symptoms of COVID19?",
@@ -92,7 +92,7 @@ class WyvernResidentForm(forms.ModelForm):
         ]
         labels = {
             "email": "Email/Username",
-            "attachment": "Valid ID",
+            #"attachment": "Valid ID",
             "accepted_terms": 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>',
         }
         widgets = {
