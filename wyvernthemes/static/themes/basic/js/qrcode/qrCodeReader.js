@@ -1,17 +1,16 @@
   if(document.getElementById("qr-canvas")) {
 
+    var _qrcode = window.qrcode;
 
-    const _qrcode = window.qrcode;
+    var video = document.createElement("video");
+    var canvasElement = document.getElementById("qr-canvas");
+    var canvas = canvasElement.getContext("2d");
 
-    const video = document.createElement("video");
-    const canvasElement = document.getElementById("qr-canvas");
-    const canvas = canvasElement.getContext("2d");
-
-    const qrResult = document.getElementById("qr-result");
-    const outputData = document.getElementById("outputData");
-    const btnScanQR = document.getElementById("btn-scan-qr");
-    const btnScanClose = document.getElementById("btn-scan-close");
-    const btnSubmitLog = document.getElementById("btn-log-data");
+    var qrResult = document.getElementById("qr-result");
+    var outputData = document.getElementById("outputData");
+    var btnScanQR = document.getElementById("btn-scan-qr");
+    var btnScanClose = document.getElementById("btn-scan-close");
+    var btnSubmitLog = document.getElementById("btn-log-data");
 
     var user_id = 0
     var user_name = '';
@@ -23,11 +22,7 @@
     var location_address = '';
     var location_phone = '';
 
-
-
-
-
-    let scanning = false;
+    var scanning = false;
 
     $(document).ready(function(){
       btnSubmitLog.hidden = true;
@@ -117,16 +112,22 @@
       video.setAttribute('autoplay', '');
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
+      var constraints = {
+            audio: false,
+            video: {
+                facingMode: 'environment'
+            }
+      }
       console.log('Start video');
       navigator.mediaDevices
-        .getUserMedia({ video: { facingMode: "environment" } })
-        .then(function(stream) {
+        .getUserMedia(constraints)
+        .then(function success(stream) {
           scanning = true;
           qrResult.hidden = true;
           btnScanQR.hidden = true;
           canvasElement.hidden = false;
-          // video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
           video.srcObject = stream;
+          video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
           video.play();
           tick();
           scan();
@@ -137,9 +138,15 @@
       video.setAttribute('autoplay', '');
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
+      var constraints = {
+            audio: false,
+            video: {
+                facingMode: 'environment'
+            }
+      }
       console.log('Stop video')
       navigator.mediaDevices
-        .getUserMedia({ video: { facingMode: "environment" } })
+        .getUserMedia(constraints)
         .then(function(stream) {
           scanning = false;
           qrResult.hidden = true;
