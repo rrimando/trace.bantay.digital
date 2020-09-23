@@ -2,14 +2,12 @@
 <!-- Modal -->
 
 <div id="printThis">
-  <div class="modal fade" id="print-lgu-id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="print-id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                {% if request.user.is_location %}
+                {% if user.is_staff %}
                   <h5 class="modal-title" id="exampleModalLabel">Trace Bantay Digital LGU ID</h5>
-                {% else %}
-                  <h5 class="modal-title" id="exampleModalLabel">Trace Bantay Digital Resident ID</h5>
                 {% endif %}
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -18,22 +16,18 @@
               </div>
               <div class="modal-body">
                 <div class="qr-container">
-                  {% if request.user.is_location %}
-                    {% qr_from_text request.user.uuid size=20 border=6 %}
+                  {% if user.is_location %}
+                    {% qr_from_text user.uuid size=20 border=6 %}
                   {% endif %}
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <fieldset disabled="disabled">
                           <label for="{{ request.user.first_name }}">LGU Administrator:</label>
-                          <b>{{ request.user.first_name }}</b>
-                        </fieldset>
+                          <b>{{ user.first_name }}</b>
                     </div>
                     <div class="col-md-6">
-                      <fieldset disabled="disabled">
                         <label for="{{ request.user.address }}">LGU Address:</label>
-                        <b>{{ request.user.address }}</b>
-                      </fieldset>
+                        <b>{{ user.address }}</b>
                     </div>
                 </div>
               </div>
