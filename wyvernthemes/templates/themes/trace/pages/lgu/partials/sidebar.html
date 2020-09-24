@@ -9,6 +9,35 @@
 
 <ul class="list-group">
     <li class="list-group-item">
+      {% if isuser_view %}
+        <h5 class="mt-4"> This is the user's QR code</h5>
+      {% else %}
+        <h5 class="mt-4">This is your LGU QR code</h5>
+      {% endif %}
+        <hr/>
+        <div class="qr-container">
+            {% if isuser_view %}
+            {% qr_from_text lgu_user.uuid size=20 border=6 %}
+            <h4>{{ lgu_user.first_name }}</h4>
+            <hr/>
+            <p>{{ lgu_user.address }}</p>
+            <hr/>
+            {% else %}
+            {% qr_from_text user.uuid size=20 border=6 %}
+            <h4>{{ user.first_name }}</h4>
+            <hr/>
+            <p>{{ user.address }}</p>
+            <hr/>
+            {% endif %}
+            <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#qr-code-reader">Launch QR reader</a>
+            {% include 'themes/basic/includes/qr-code/qr-code-reader-modal.html' %}
+            {% if isuser_view %}
+            <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#print-id">Print User ID</a>
+            {% include 'themes/basic/includes/resident-id/resident-id-modal.html' with user=lgu_user %}
+            {% else %}
+            <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#print-id">Print LGU ID</a>
+            {% include 'themes/basic/includes/lgu-id/lgu-id-modal.html' %}
+            {% endif %}
         <h5 class="mt-4">This is your LGU QR Code</h5>
         <hr/>
         <div class="qr-container">

@@ -42,7 +42,7 @@ class WyvernMedicalForms(forms.ModelForm):
         labels = {
             "wyvern_have_sore_throat": "Do you have a sore throat?",
             "wyvern_have_body_pain": "Are you experiencing any body pain?",
-            "wyvern_have_head_ache": "Do you have a head throat?",
+            "wyvern_have_head_ache": "Do you have a head ache?",
             "wyvern_have_fever": "Do you have a fever?",
             "wyvern_near_covid": "Have you been in contact with any diagnosed with COVID19?",
             "wyvern_contact_symptoms": "Have you been in contact with anyone showing any symptoms of COVID19?",
@@ -61,6 +61,7 @@ class WyvernResidentForm(forms.ModelForm):
     }
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"}),
+        label='Confirm Password',
     )
 
     class Meta:
@@ -91,6 +92,7 @@ class WyvernResidentForm(forms.ModelForm):
         ]
         labels = {
             "email": "Email/Username",
+            #"attachment": "Valid ID",
             "accepted_terms": 'I have read and accept the <a href="/page/terms-and-conditions/">Terms and Conditions</a>',
         }
         widgets = {
@@ -116,6 +118,13 @@ class WyvernResidentForm(forms.ModelForm):
 
 
 class WyvernResidentDetailsForm(forms.ModelForm):
+    error_messages = {
+        "password_mismatch": "The two password fields didn’t match.",
+    }
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"}),
+        label='Confirm Password',
+    )
     class Meta:
 
         # TODO: https://stackoverflow.com/questions/13482753/use-field-label-as-placeholder-in-django-crispy-forms
@@ -141,7 +150,7 @@ class WyvernResidentDetailsForm(forms.ModelForm):
             "is_location",
             "uuid",
             "password",
-            "confirm_password",
+            "password2",
             "resident_establishment_filter",
         ]
         labels = {
@@ -176,6 +185,7 @@ class WyvernEstablishmentForm(forms.ModelForm):
     }
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"}),
+        label='Confirm Password',
     )
     is_location = forms.BooleanField(initial=True)
 
@@ -221,6 +231,13 @@ class WyvernEstablishmentForm(forms.ModelForm):
 
 
 class WyvernEstablishmentDetailsForm(forms.ModelForm):
+    error_messages = {
+        "password_mismatch": "The two password fields didn’t match.",
+    }
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"}),
+        label='Confirm Password',
+    )
     class Meta:
 
         # TODO: https://stackoverflow.com/questions/13482753/use-field-label-as-placeholder-in-django-crispy-forms
@@ -264,3 +281,12 @@ class WyvernEstablishmentDetailsForm(forms.ModelForm):
             "phone": forms.TextInput(attrs={"placeholder": "Phone Number"}),
             "address": forms.Textarea(attrs={"placeholder": "Full Address", "rows": 5}),
         }
+    def clean_password2(self):
+        password = self.cleaned_data.get("password")
+        password2 = self.cleaned_data.get("password2")
+        if password and password2 and password != password2:
+            raise ValidationError(
+                self.error_messages["password_mismatch"],
+                code="password_mismatch",
+            )
+        return password2

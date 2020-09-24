@@ -36,7 +36,7 @@ class User(AbstractUser):
     site_id = models.IntegerField(null=True, blank=True)
     address = models.TextField(null=True, blank=True)
     is_location = models.BooleanField(default=False)
-    accepted_terms = models.BooleanField(default=False)
+    accepted_terms = models.BooleanField(default=True)
     uuid = models.CharField(
         max_length=100, unique=True, blank=True, null=True, default=uuid.uuid4
     )
@@ -46,6 +46,7 @@ class User(AbstractUser):
     # LGU Fields
     # Not the best way to filter users that fall under but for now
     resident_establishment_filter = models.TextField(null=True, blank=True)
+    #attachment = models.FileField(upload_to='attachments/', null=True, blank=True)
 
     class Meta:
         verbose_name = "user"
