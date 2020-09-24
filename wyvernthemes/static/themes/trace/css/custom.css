@@ -1,27 +1,3 @@
-@media screen {
-  #printSection {
-      display: none;
-  }
-}
-
-@media print {
-  body * {
-    visibility:hidden;
-
-  }
-  #printSection, #printSection * {
-    visibility:visible;
-  }
-  #printSection {
-    overflow: visible !important;
-     float:none !important;
-     position: absolute;
-     left: 0px;
-     top: 0px;
-     display:block !important;
-  }
-}
-
 body {
     /* Consumer */
     background-color: #ed1e79;
