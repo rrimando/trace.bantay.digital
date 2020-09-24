@@ -15,7 +15,7 @@ debug = False
 [database]
 database = kerplunk
 username = root
-# password = 
+# password =
 password = JA^r<ey3:[tvgKh,
 hostname = localhost
 

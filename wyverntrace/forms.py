@@ -121,10 +121,6 @@ class WyvernResidentDetailsForm(forms.ModelForm):
     error_messages = {
         "password_mismatch": "The two password fields didn’t match.",
     }
-    password2 = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"}),
-        label='Confirm Password',
-    )
     class Meta:
 
         # TODO: https://stackoverflow.com/questions/13482753/use-field-label-as-placeholder-in-django-crispy-forms
@@ -234,10 +230,7 @@ class WyvernEstablishmentDetailsForm(forms.ModelForm):
     error_messages = {
         "password_mismatch": "The two password fields didn’t match.",
     }
-    password2 = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"}),
-        label='Confirm Password',
-    )
+
     class Meta:
 
         # TODO: https://stackoverflow.com/questions/13482753/use-field-label-as-placeholder-in-django-crispy-forms

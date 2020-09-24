@@ -12,7 +12,7 @@
             <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#qr-code-reader">Launch QR reader</a>
             {% include 'themes/basic/includes/qr-code/qr-code-reader-modal.html' %}
             {% if not request.user.is_location %}
-            <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#print-resident-id">Print Resident ID</a>
+            <a href="#" class="btn btn-primary mt-3" data-toggle="modal" data-target="#print-id">Print Resident ID</a>
             {% include 'themes/basic/includes/resident-id/resident-id-modal.html' %}
             {% endif %}
             <hr/>
