@@ -96,7 +96,9 @@ def view_user(request, uuid="", site=""):
     if not request.user.is_staff:
         return redirect("/")
 
-    context = {}
+    context = {
+        "isuser_view": True
+    }
 
     context["lgu_user"] = User.objects.get(pk=request.user.id)
 

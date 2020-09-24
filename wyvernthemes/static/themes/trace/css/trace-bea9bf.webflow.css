@@ -1,3 +1,27 @@
+@media screen {
+  #printSection {
+      display: none;
+  }
+}
+
+@media print {
+  body * {
+    visibility:hidden;
+
+  }
+  #printSection, #printSection * {
+    visibility:visible;
+  }
+  #printSection {
+     overflow: hidden !important;
+     float:none !important;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     display:block !important;
+  }
+}
+
 .w-layout-grid {
   display: -ms-grid;
   display: grid;
@@ -1755,4 +1779,3 @@ h3 {
     grid-column-end: span 2;
   }
 }
-

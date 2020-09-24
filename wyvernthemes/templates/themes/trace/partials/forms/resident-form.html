@@ -1,5 +1,5 @@
 {% load crispy_forms_tags %}
-<form method="post" action="{% url 'trace-register-user' 'resident' %}">
+<form method="post" action="{% url 'trace-register-user' 'resident' %}" enctype="multipart/form-data">
     {% include 'themes/trace/partials/messages.html' with form=resident_form %}
     {% csrf_token %}
     <div class="row">
