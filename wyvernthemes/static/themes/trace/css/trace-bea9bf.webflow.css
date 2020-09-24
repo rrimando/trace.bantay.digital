@@ -13,12 +13,12 @@
     visibility:visible;
   }
   #printSection {
-     overflow: hidden !important;
-     float:none !important;
+     overflow: hidden;
+     float:none;
      position: absolute;
      left: 0px;
      top: 0px;
-     display:block !important;
+     display:block;
   }
 }
 
