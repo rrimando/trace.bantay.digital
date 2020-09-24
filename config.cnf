@@ -1,8 +1,9 @@
 [application]
 server = POD2
-server_url = localhost:8000
+server_url = pod2.wyverncms.com
+# server_url = localhost:8000
 logo =
-debug = True
+debug = False
 
 # [database]
 # database = wyvern
@@ -12,9 +13,10 @@ debug = True
 # stname = localhost
 
 [database]
-database = bantaydigital
+database = kerplunk
 username = root
-password =
+# password =
+password = JA^r<ey3:[tvgKh,
 hostname = localhost
 
 [modules]
