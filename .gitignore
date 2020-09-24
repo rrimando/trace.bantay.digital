@@ -11,9 +11,8 @@ __pycache__/
 *.DS_Store
 *alliedhospitalsupply*
 *lifelineunited*
-
+config.cnf
 wyvernmetamorph
-
 wyvernthemes/templates/themes/backlinersph/
 wyvernthemes/templates/themes/bobburnett/
 wyvernthemes/templates/themes/jobs/

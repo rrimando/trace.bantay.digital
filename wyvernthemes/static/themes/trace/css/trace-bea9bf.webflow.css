@@ -4,21 +4,54 @@
   }
 }
 
-@media print {
-  body * {
-    visibility:hidden;
-
+@media print and (min-width: 768px){
+  html, body {
+    height:100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    visibility: hidden;
   }
   #printSection, #printSection * {
-    visibility:visible;
+    visibility: visible;
   }
   #printSection {
-     overflow: hidden;
-     float:none;
-     position: absolute;
+     margin: 0;
      left: 0px;
      top: 0px;
-     display:block;
+  }
+  .modal-dialog {
+          width: 700px; /* New width for default modal */
+        }
+  .modal-sm {
+    width: 350px; /* New width for small modal */
+  }
+  .modal-footer{
+    display: none;
+  }
+}
+
+@media print and (min-width: 992px){
+  html, body {
+    height:100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    visibility: hidden;
+  }
+  #printSection, #printSection * {
+    visibility: visible;
+  }
+  #printSection {
+     margin: 0;
+     left: 0px;
+     top: 0px;
+  }
+  .modal-lg {
+    width: 950px; /* New width for large modal */
+  }
+  .modal-footer{
+    display: none;
   }
 }
 
