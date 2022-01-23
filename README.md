@@ -12,7 +12,7 @@ To all of you who have spent time and effort to try to get Trace out thank you, 
 
 TO THE TEAM:
 
-Thanks you all for your time and effort! We can never repay you for the countless meetings and discussions to shape Trace. We are eternally grateful! Much love! It was a privilege working with you guys!
+Thank you all for your time and effort! We can never repay you for the countless meetings and discussions to shape Trace. We are eternally grateful! Much love! It was a privilege working with you guys!
 
 # django-wyvern
 
