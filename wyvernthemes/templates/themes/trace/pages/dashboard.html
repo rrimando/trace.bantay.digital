@@ -1,0 +1,20 @@
+{% extends theme_config.wyverntheme_base_layout %} {% load static qr_code
+crispy_forms_tags tz %} {% timezone "Asia/Manila" %} {% block content %}
+
+<input
+  type="hidden"
+  id="user_type"
+  value="{% if request.user.is_location%}LOCATION{% else %}USER{% endif %}"
+/>
+<input type="hidden" id="user_uuid" value="{{ request.user.uuid }}" />
+<input
+  type="hidden"
+  id="user_first_name"
+  value="{{ request.user.first_name }}"
+/>
+<input type="hidden" id="user_last_name" value="{{ request.user.last_name }}" />
+<input type="hidden" id="user_phone" value="{{ request.user.phone }}" />
+<input type="hidden" id="user_address" value="{{ request.user.address }}" />
+
+{% include 'themes/trace/pages/user/user-dashboard.html' %} {% endblock %} {%
+endtimezone %}

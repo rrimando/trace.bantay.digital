@@ -1,0 +1,9 @@
+env
+media
+.vscode
+/static
+.config
+config.cnf
+*.pyc
+__pycache__/
+*.py[cod]

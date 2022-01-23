@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="row">
+  <div class="col-10 offset-1">
+    <img
+      src="{% static 'images/wyvern-logo.png' %}"
+      class="logo img-fluid"
+      alt="Wyvern"
+    />
+  </div>
+</div>
+<div class="row">
+  <div class="col-4 offset-5">
+    <a
+      href="/accounts/login"
+      class="btn btn-outline-secondary waves-effect login"
+      >Client Login</a
+    >
+  </div>
+</div>
+{% endblock %}

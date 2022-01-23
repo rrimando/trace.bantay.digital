@@ -1,0 +1,5 @@
+{% load crispy_forms_tags %}
+<form method="post">
+  {% csrf_token %} {{ manual_log | crispy }}
+  <button type="submit" class="btn btn-success float-right">Submit</button>
+</form>

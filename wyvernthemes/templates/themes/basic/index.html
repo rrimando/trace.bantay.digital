@@ -1,0 +1,10 @@
+{% extends theme_config.wyverntheme_base_layout %} {% load static %} {% block
+content %} {% if theme_config.wyverntheme_index_template %} {% include
+theme_config.wyverntheme_index_template with theme_config=theme_config site=site
+%} {% else %}
+
+<div class="container-fluid">
+  {% include 'themes/basic/partials/demo-alert.html' %}
+</div>
+
+{% endif %} {% endblock %}

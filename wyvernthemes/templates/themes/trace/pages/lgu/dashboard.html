@@ -1,0 +1,145 @@
+{% extends theme_config.wyverntheme_base_layout %} {% load static qr_code
+crispy_forms_tags tz %} {% timezone "Asia/Manila" %} {% block content %}
+
+<div class="container dashboard">
+  <div class="row">
+    {% if request.user.is_staff %} {% endif %} {% include
+    'themes/trace/partials/messages.html' %}
+    <input
+      type="hidden"
+      id="user_type"
+      value="{% if request.user.is_location%}LOCATION{% else %}USER{% endif %}"
+    />
+    <input type="hidden" id="user_uuid" value="{{ request.user.uuid }}" />
+    <input
+      type="hidden"
+      id="user_first_name"
+      value="{{ request.user.first_name }}"
+    />
+    <input
+      type="hidden"
+      id="user_last_name"
+      value="{{ request.user.last_name }}"
+    />
+    <input type="hidden" id="user_phone" value="{{ request.user.phone }}" />
+    <input type="hidden" id="user_address" value="{{ request.user.address }}" />
+
+    <div class="col-md-4 text-center">
+      <h5 class="mt-4">This is your personal QR Code</h5>
+      <hr />
+      <div class="qr-container">
+        {% qr_from_text request.user.uuid size=20 border=6 %}
+      </div>
+      <a
+        href="#"
+        class="btn btn-primary mt-3"
+        data-toggle="modal"
+        data-target="#qr-code-reader"
+        >Launch QR reader</a
+      >
+      {% include 'themes/basic/includes/qr-code/qr-code-reader-modal.html' %}
+      <hr />
+      <div class="alert alert-primary" role="alert">
+        <strong>Trace.bantay.digital</strong> is a very small team of
+        professionals and artists, volunteering time and effort to create an
+        absolutely free log book replacement app for easy contact tracing. We
+        would appreciate any bug reports and suggestions. Volunteers are also
+        welcome!
+        <hr />
+        <a href="/contact/" class="btn btn-success"
+          ><i class="fa fa-email" aria-hidden="true"></i>Contact Us</a
+        >
+      </div>
+    </div>
+
+    <!-- Consider Making Establishment Dashboard and Resident Dashboard Separate -->
+    <div class="col-md-8 col-sm-12">
+      <h5 class="pt-3 pb-2">
+        Dashboard
+        <span class="float-right">
+          {% if request.user.is_location %}
+          <strong>ESTABLISHMENT: {{ request.user.first_name }}</strong>
+          {% else %}
+          <strong
+            >USER: {{ request.user.first_name }} {{ request.user.last_name }}
+          </strong>
+          {% endif %}
+        </span>
+      </h5>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#logs"
+            >Recent Logs</a
+          >
+        </li>
+        {% if not request.user.is_location %}
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#medical-form"
+            >Medical Form</a
+          >
+        </li>
+        {% endif %} {% if request.user.is_location %}
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#manual-log"
+            >Manual Log</a
+          >
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#details">Details</a>
+        </li>
+      </ul>
+      <div class="tab-content mt-3">
+        <div id="logs" class="tab-pane fade show active">
+          <h5>Your recent logs</h5>
+          <table class="table table-striped table-responsive">
+            <thead>
+              <th>Datetime</th>
+              <th>Location</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Temperature</th>
+            </thead>
+            <tbody>
+              {% for log in logs %}
+              <tr>
+                <td>{{ log.wyvern_trace_date|localtime }}</td>
+                <td>{{ log.wyvern_location.first_name }}</td>
+                <td>
+                  {{ log.get_first_name }} {{
+                  log.get_last_name|make_list|slice:':1'|join:'' }}.
+                </td>
+                <td>{{ log.get_phone_number }}</td>
+                <td>{{ log.get_resident_address }}</td>
+                <td>{{ log.wyvern_temperature }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div id="medical-form" class="tab-pane fade">
+          <h4>Medical Health Declaration for {{ today }}</h4>
+          <div class="alert alert-danger">
+            <i class="fa fa-exclamation-triangle"></i>
+            Important: Always update this medical form before going outside for
+            medical convenience.
+          </div>
+          {% with "themes/trace/partials/forms/medical-form.html" as medicalForm
+          %} {% include medicalForm %} {% endwith %}
+        </div>
+        <div id="manual-log" class="tab-pane fade">
+          {% with "themes/trace/partials/forms/manual-log-in.html" as manualLog
+          %} {% include manualLog %} {% endwith %}
+        </div>
+        <div id="details" class="tab-pane fade">
+          {% with
+          "themes/trace/partials/forms/"|add:type|add:"-details-form.html" as
+          template %} {% include template %} {% endwith %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% endtimezone %}

@@ -1,0 +1,83 @@
+{% if request.site %}
+
+<meta
+  name="description"
+  content="{{ request.site.site_name }}{% if request.site.site_subtitle %} | {{ request.site.site_subtitle }}{% endif %}"
+/>
+<link rel="canonical" href="https://{{ request.site.site_url }}" />
+
+<meta name="robots" content="index" />
+
+<meta
+  property="og:title"
+  content="{{ request.site.site_name }}{% if request.site.site_subtitle %} | {{ request.site.site_subtitle }}{% endif %}"
+/>
+
+<meta property="og:description" content="{{ request.site.site_description }}" />
+
+{% if request.site.site_meta_image %}
+<meta
+  property="og:image"
+  content="https://{{ request.site.site_url }}{{ request.site.site_logo.url }}"
+/>
+{% elif request.site.site_logo %}
+<meta
+  property="og:image"
+  content="https://{{ request.site.site_url }}{{ request.site.site_logo.url }}"
+/>
+{% endif %}
+
+<meta property="og:url" content="https://{{ request.site.site_url }}" />
+
+<meta property="og:site_name" content="{{ request.site.site_name }}" />
+
+<meta property="og:type" content="website" />
+
+<meta name="fb_admins_meta_tag" content="" />
+
+<meta name="google-site-verification" content="" />
+
+<meta property="fb:admins" content="" />
+
+{% else %}
+
+<meta
+  name="description"
+  content="{{ site.site_name }}{% if site.site_subtitle %} | {{ site.site_subtitle }}{% endif %}"
+/>
+<link rel="canonical" href="https://{{ site.site_url }}" />
+
+<meta name="robots" content="index" />
+
+<meta
+  property="og:title"
+  content="{{ site.site_name }}{% if site.site_subtitle %} | {{ site.site_subtitle }}{% endif %}"
+/>
+
+<meta property="og:description" content="{{ site.site_description }}" />
+
+{% if site.site_meta_image %}
+<meta
+  property="og:image"
+  content="https://{{ site.site_url }}{{ site.site_logo.url }}"
+/>
+{% elif site.site_logo %}
+<meta
+  property="og:image"
+  content="https://{{ site.site_url }}{{ site.site_logo.url }}"
+/>
+{% endif %}
+
+<meta property="og:url" content="https://{{ site.site_url }}" />
+
+<meta property="og:site_name" content="{{ site.site_name }}" />
+
+<meta property="og:type" content="website" />
+
+<meta name="fb_admins_meta_tag" content="" />
+
+<meta name="google-site-verification" content="" />
+
+<meta property="fb:admins" content="" />
+
+{% endif %}

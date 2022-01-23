@@ -1,0 +1,37 @@
+{% load static qr_code crispy_forms_tags tz %}
+<h5>{{ lgu_table_label }}</h5>
+<hr/>
+<table class="data-table table">
+    <thead>
+        <th>Name</th>
+        <th>Contact Number</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Actions</th>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>
+                <a href="{% url 'trace-lgu-view-user' user.uuid %}"></a>
+                    {{ user.first_name }} {{ user.last_name }}
+                </a>
+            </td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.address }}</td>
+            <td>
+                <a href="{% url 'trace-lgu-view-user' user.uuid %}">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <a href="#">
+                    <i class="fa fa-check-square-o"></i>
+                </a>
+                <a href="#">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,9 @@
+<ul class="list-group mt-5">
+  {% for post in posts %}
+  <li class="list-group-item">
+    <a href="{% url 'post-view' slug=post.post_slug %}"
+      >{{ post.post_title }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>

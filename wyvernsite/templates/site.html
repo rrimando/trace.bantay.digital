@@ -1,0 +1,15 @@
+{% extends 'base-full-width.html' %} {% load static %} {% block content %}
+<div class="dashboard">
+  <div class="row" id="nav-top">
+    {% include 'partials/dashboard/nav.html' %}
+  </div>
+  <div class="row">
+    <div class="col-md-2" id="sidebar">
+      {% include 'partials/dashboard/sidebar.html' with sites=sites %}
+    </div>
+    <div class="col-md-10" id="main-content">
+      {% include template_action with sites=sites %}
+    </div>
+  </div>
+</div>
+{% endblock %}

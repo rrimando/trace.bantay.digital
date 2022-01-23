@@ -1,0 +1,100 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+}
+
+header {
+  border-bottom: 1px solid #efefef;
+}
+
+main {
+  min-height: 78vh;
+}
+
+footer {
+  border-top: 1px solid #efefef;
+}
+
+footer ul,
+footer ul li {
+  width: 100%;
+  text-align: center;
+}
+
+/* QR Code Reader */
+#qr-canvas {
+  margin: auto;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+}
+
+#btn-scan-qr {
+  cursor: pointer;
+}
+
+#btn-scan-qr img {
+  height: 10em;
+  padding: 15px;
+  margin: 15px;
+  background: white;
+}
+
+#qr-result {
+  font-size: 1.2em;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 700px;
+  background-color: white;
+}
+/* End QR Code Reader */
+
+/* QR Container */
+.qr-container {
+  text-align: center;
+  align-items: center;
+}
+
+.qr-container svg {
+  min-width: 100%;
+  max-width: 100%;
+}
+/* End QR Container */
+
+/* GDPR */
+#gdpr-cookie-message {
+  position: fixed;
+  bottom: 0;
+  background: #fff;
+  width: 100%;
+  padding: 15px 25px;
+  -webkit-box-shadow: 5px 5px 10px 5px #cccccc;
+  -moz-box-shadow: 5px 5px 10px 5px #cccccc;
+  box-shadow: 5px 5px 10px 5px #cccccc;
+}
+
+#gdpr-cookie-message ul,
+#gdpr-cookie-message ul li {
+  list-style: none;
+}
+/* End GDPR */
+
+/* Back to Top Button */
+#back-to-top {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px 20px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+  border: 0 none;
+}
+/* End Back to Top Button */

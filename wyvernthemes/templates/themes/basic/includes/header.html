@@ -1,0 +1,60 @@
+<!-- Navigation -->
+<header class="mb-3">
+  <nav class="navbar navbar-expand-lg static-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        {% if site.site_logo %}
+        <img
+          width="200"
+          class="img-responsive"
+          src="{{ site.site_logo.url }}"
+          alt="{{ site.site_name }}"
+        />
+        {% else %} {{ site.site_name }} {% endif %}
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarResponsive"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/"
+              >Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {% for page in pages %} {% if "Contact" in page.post_title %}
+          <li class="nav-item">
+            <a class="nav-link" href="/contact"
+              >{{ page.post_title }}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/page/{{ page.post_slug }}"
+              >{{ page.post_title }}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {% endif %} {% endfor %} {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="/logout/"
+              >Logout
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
